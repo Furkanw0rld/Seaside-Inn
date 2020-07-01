@@ -30,6 +30,6 @@ public class WanderAround : GAction
             point += this.transform.position;
             node = AstarData.active.data.recastGraph.PointOnNavmesh(point, NNConstraint.Default);
         }
-        return (Vector3)node.RandomPointOnSurface();
+        return node.RandomPointOnSurface();
     }
 }

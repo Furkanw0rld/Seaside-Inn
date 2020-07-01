@@ -28,7 +28,7 @@ public class HiddenMenu : MonoBehaviour
         {
             vsyncText.text = "vSync enabled.";
         }
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = PlayerManager.Instance.player;
 
         currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(0) + "x";
     }
@@ -93,5 +93,19 @@ public class HiddenMenu : MonoBehaviour
     public void SlowDownTime()
     {
         currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(-1f) + "x";
+    }
+
+    public void AddCoins()
+    {
+        PlayerInventory.Instance.AddCoins(25f);
+    }
+
+    public void RemoveCoins()
+    {
+        if(PlayerInventory.Instance.GetCoins() < 25f)
+        {
+            return;
+        }
+        PlayerInventory.Instance.AddCoins(-25f);
     }
 }
