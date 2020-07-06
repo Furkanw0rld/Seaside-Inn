@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -17,7 +14,9 @@ public class HoverOverAI : MonoBehaviour
         actionText.enabled = false;
         characterNameText.enabled = false;
         agent = this.GetComponent<GAgent>();
+
     }
+
     public void OnMouseEnter()
     {
         actionText.enabled = true;

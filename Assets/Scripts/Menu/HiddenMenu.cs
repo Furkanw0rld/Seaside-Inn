@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class HiddenMenu : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class HiddenMenu : MonoBehaviour
     public TextMeshProUGUI vsyncText;
     public TextMeshProUGUI currentTimeMultiplierText;
     public TextMeshProUGUI currentEntityCountText;
+
     [Header("NPC Spawner")]
     public GameObject npcToSpawn;
 
@@ -73,6 +75,11 @@ public class HiddenMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void SetTimeToMidnight()

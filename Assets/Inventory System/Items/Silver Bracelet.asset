@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c856c27dc0c2b44888ece9e4f017f18, type: 3}
+  m_Name: Silver Bracelet
+  m_EditorClassIdentifier: 
+  name: Silver Bracelet
+  itemType: 4
+  icon: {fileID: 21300000, guid: 666c6e3d9677749cd81ee8baeffdd184, type: 3}
+  description: Has been worn, slight damaged and badly casted, but people won't care.
+  prefab: {fileID: 0}
+  itemPrice: 28.25
+  itemQuality: 2
+  itemAmountLimit: 6

@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce11ea984e202491d9271f53021d8b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 3
   radius: 0.3
   height: 1.8
   repathRate: 0.5
@@ -413,6 +413,14 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  endReachedDistance: 0.01
+  whenCloseToDestination: 0
+  rvoDensityBehavior:
+    enabled: 1
+    densityThreshold: 0.5
+    returnAfterBeingPushedAway: 1
+    progressAverage: 0
+    lastJobDensityResult: 0
   centerOffsetCompatibility: NaN
   orientation: 0
   enableRotation: 1
@@ -420,11 +428,11 @@ MonoBehaviour:
   acceleration: 5
   rotationSpeed: 360
   slowdownTime: 0.5
-  endReachedDistance: 0.01
   wallForce: 3
   wallDist: 1
   funnelSimplification: 1
   slowWhenNotFacingTarget: 1
+  preventMovingBackwards: 0
   animCompatibility: {fileID: 0}
 --- !u!114 &104821320845249950
 MonoBehaviour:

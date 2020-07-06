@@ -45,7 +45,7 @@ public class DayNightCycle : MonoBehaviour
 	public static DayNightCycle Instance;
 
 	public delegate void OnNightTime();
-	public OnNightTime onNightTime;
+	public OnNightTime onNightTimeCallback;
 
 	public delegate void OnDayTime();
 	public OnDayTime onDayTime;
@@ -139,7 +139,7 @@ public class DayNightCycle : MonoBehaviour
 					moonSource.SetActive(true);
 					RenderSettings.skybox = nightTimeSkybox;
 					DynamicGI.UpdateEnvironment();
-					onNightTime?.Invoke();
+					onNightTimeCallback?.Invoke();
 				}
 
 				if(currentTime > 1320f) // 10PM and Midnight

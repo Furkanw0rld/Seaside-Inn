@@ -3,24 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(RichAI))]
+[RequireComponent(typeof(RichAI), typeof(HoverOverAI))]
 public class InteractableBaker : Interactable
 {
-    RichAI interactableAI;
+    private RichAI interactableAI; //Cached AI Component
+    private HoverOverAI hoverOverAI;
+    [SerializeField] private ConversationController conversationController;
     new private void Start()
     {
         interactableAI = GetComponent<RichAI>();
+        hoverOverAI = GetComponent<HoverOverAI>();
     }
 
     public override void Interact()
     {
+        PlayerManager.Instance.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
         interactableAI.enabled = false;
+
         StartCoroutine(SmoothLookAt(target));
+
         base.Interact();
+        //conversationController.ConversationStarted();
+        StartCoroutine(conversationController.ConversationBegan());
     }
 
     public override void OnDeFocus()
     {
+        PlayerManager.Instance.onInteractablePlayerUnFocusedCallback?.Invoke();
+        conversationController.ConversationEnded();
         base.OnDeFocus();
         interactableAI.enabled = true;
     }
@@ -29,16 +39,17 @@ public class InteractableBaker : Interactable
     {
         float inTime = 0.33f;
         //Vector3 lookDirection = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
-        Vector3 lookDirection = targetTransform.position - transform.position;
+        Vector3 lookDirection = targetTransform.position - this.transform.position;
 
         //Quaternion toRotation = Quaternion.FromToRotation(transform.forward, lookDirection);
         Quaternion toRotation = Quaternion.LookRotation(lookDirection);
-        Quaternion fromRotation = transform.rotation;
+        Quaternion fromRotation = this.transform.rotation;
 
         for(float t=0; t < inTime; t+= Time.deltaTime)
         {
-            transform.rotation = Quaternion.Lerp(fromRotation, toRotation, t / inTime);
+            this.transform.rotation = Quaternion.Lerp(fromRotation, toRotation, t / inTime);
             yield return null;
         }
+
     }
 }

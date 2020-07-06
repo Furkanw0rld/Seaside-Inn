@@ -13,6 +13,12 @@ public class PlayerManager : MonoBehaviour
     [Header("Player UI Components")]
     public TextMeshProUGUI coinsText;
     public Image coinsFill;
+
+    public delegate void OnInteractablePlayerFocused(Transform lookTarget);
+    public OnInteractablePlayerFocused onInteractablePlayerFocusedCallback;
+
+    public delegate void OnInteractablePlayerUnFocused();
+    public OnInteractablePlayerUnFocused onInteractablePlayerUnFocusedCallback;
     
     private void Awake()
     {
