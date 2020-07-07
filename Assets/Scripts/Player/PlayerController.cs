@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void RemoveFocus()
+    public void RemoveFocus()
     {
         if(focus != null)
         {

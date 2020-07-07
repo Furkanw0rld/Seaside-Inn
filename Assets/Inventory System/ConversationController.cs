@@ -13,12 +13,8 @@ public abstract class ConversationController : MonoBehaviour
     [SerializeField][Tooltip("Contains TextMeshProUGUI for text on the same gameObject. Bottom choice.")] protected Button answerOptionC;
 
     protected abstract void Start();
-
     protected abstract void OnEnable();
-
     protected abstract void OnDisable();
-
-    public abstract IEnumerator ConversationBegan();
-
+    public abstract IEnumerator ConversationBegan(Interactable interactable);
     public abstract void ConversationEnded();
 }

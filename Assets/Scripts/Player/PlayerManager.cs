@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject player;
     public PlayerAIMotor playerMotor;
     public PlayerAnimator playerAnimator;
+    public PlayerController playerController;
 
     [Header("Player UI Components")]
     public TextMeshProUGUI coinsText;

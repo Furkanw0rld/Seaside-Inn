@@ -8,7 +8,9 @@ public class InteractableBaker : Interactable
 {
     private RichAI interactableAI; //Cached AI Component
     private HoverOverAI hoverOverAI;
+#pragma warning disable 0649 
     [SerializeField] private ConversationController conversationController;
+#pragma warning restore 0649 
     new private void Start()
     {
         interactableAI = GetComponent<RichAI>();
@@ -23,8 +25,7 @@ public class InteractableBaker : Interactable
         StartCoroutine(SmoothLookAt(target));
 
         base.Interact();
-        //conversationController.ConversationStarted();
-        StartCoroutine(conversationController.ConversationBegan());
+        StartCoroutine(conversationController.ConversationBegan(this));
     }
 
     public override void OnDeFocus()

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BakerConversationController : ConversationController
 {
-    protected string[] buyBreadDialogues = new string[5]
+    private Interactable _interactable;
+    protected string[] boughtBreadDialogues = new string[]
     {
         "One fresh bread coming right up.",
         "Sure, that'll be one coin.",
@@ -13,7 +15,17 @@ public class BakerConversationController : ConversationController
         "Fresh bread, straight out of the stone oven!"
     };
 
-    public Item breadItem; //Item the character sells
+    protected string[] notEnoughCoinDialogues = new string[]
+    {
+        "You've got no coin to buy bread, dear.",
+        "You need coin to buy bread.",
+        "Come back and find me when you've got coin.",
+        "I do not give bread for free.",
+        "Bread isn't free you know?"
+    };
+
+
+    public Item breadItem;
 
     protected override void Start()
     {
@@ -23,28 +35,40 @@ public class BakerConversationController : ConversationController
     protected override void OnEnable()
     {
         answerOptionA.onClick.AddListener(BuyBreadItem);
+        answerOptionB.gameObject.SetActive(false);
+        answerOptionC.gameObject.SetActive(false);
     }
 
     protected override void OnDisable()
     {
         answerOptionA.onClick.RemoveAllListeners();
+        answerOptionB.onClick.RemoveAllListeners();
+        answerOptionC.onClick.RemoveAllListeners();
     }
 
     public void BuyBreadItem()
     {
         if (PlayerInventory.Instance.BuyItem(breadItem, breadItem.itemPrice, 1))
         {
-            int randomChoice = Random.Range(0, buyBreadDialogues.Length);
-            characterDialogue.text = buyBreadDialogues[randomChoice];
+            characterDialogue.text = boughtBreadDialogues[GetRandomDialogue(boughtBreadDialogues.Length)];
+            answerOptionB.gameObject.SetActive(true);
+            answerOptionB.GetComponent<TextMeshProUGUI>().text = "- Thank you. (Exit Conversation)";
+            answerOptionB.onClick.AddListener(PlayerManager.Instance.playerController.RemoveFocus);
         }
         else
         {
-            characterDialogue.text = "You've got no coin to buy bread, dear.";
+            characterDialogue.text = notEnoughCoinDialogues[GetRandomDialogue(notEnoughCoinDialogues.Length)];
         }
     }
 
-    public override IEnumerator ConversationBegan()
+    private int GetRandomDialogue(int count)
     {
+        return Random.Range(0, count);
+    }
+
+    public override IEnumerator ConversationBegan(Interactable interactable)
+    {
+        _interactable = interactable;
         yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(true);
         characterDialogue.text = "Hello, there! What can I do for you?";
@@ -54,6 +78,7 @@ public class BakerConversationController : ConversationController
 
     public override void ConversationEnded()
     {
+        _interactable = null;
         this.gameObject.SetActive(false);
         Debug.Log("Conversation Ended.");
     }
