@@ -21,11 +21,9 @@ public class InteractableBaker : Interactable
     {
         PlayerManager.Instance.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
         interactableAI.enabled = false;
-
         StartCoroutine(SmoothLookAt(target));
-
         base.Interact();
-        StartCoroutine(conversationController.ConversationBegan(this));
+        StartCoroutine(conversationController.ConversationBegan());
     }
 
     public override void OnDeFocus()

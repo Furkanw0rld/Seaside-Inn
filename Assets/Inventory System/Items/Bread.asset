@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45e3b6762111e14fab11786300620ff, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  name: Fresh Bread
+  name: Bread
   itemType: 0
-  icon: {fileID: 21300000, guid: 25b6b275757df4f589d23b542f236cb0, type: 3}
-  description: Looks like Meat, tastes and costs like Bread. How unfortunate.
+  icon: {fileID: 21300000, guid: 9f5c7efd08c683543ac907d8134eef98, type: 3}
+  description: 'The perfect medieval food for anyone and any occasion.Make sure to
+    eat it before it goes stale. Made by the towns baker, Isabel. '
   prefab: {fileID: 6397487871127557207, guid: 561d93084fe95724381ddaa053674baf, type: 3}
   itemPrice: 1
   itemQuality: 0

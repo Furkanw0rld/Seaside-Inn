@@ -28,6 +28,7 @@ public class CMPlayerMotor : MonoBehaviour
     public void ZoomedInView(Transform lookTarget) // When we interact with player, switch cam
     {
         _zoomedInCamera.LookAt = lookTarget;
+        _zoomedInCamera.Follow = lookTarget;
         _zoomedInCamera.Priority = 15;
     }
 

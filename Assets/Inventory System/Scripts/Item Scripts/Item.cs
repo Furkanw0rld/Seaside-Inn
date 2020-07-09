@@ -25,11 +25,12 @@ public abstract class Item : ScriptableObject
     [Tooltip("Name of the Item.")] new public string name = "New Item";
     [Tooltip("Type of Item.")] [ReadOnly] public ItemType itemType;
     [Tooltip("Icon shown in player inventory.")] public Sprite icon = null;
-    [TextArea(2, 10)] public string description;
+    [TextArea(2, 3)] public string description;
     [Tooltip("Model of the item.")] public GameObject prefab;
     [Tooltip("Price of the item.")] [Min(0f)] public float itemPrice = 0; 
     [Tooltip("Quality of the item.")] public ItemQuality itemQuality;
     [Tooltip("How many should be allowed in the players inventory?")] [Min(1)] public int itemAmountLimit = 5;
+    [HideInInspector] public int itemPurchaseDate = 0;
 
 }
 

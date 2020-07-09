@@ -19,12 +19,20 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             informationWindow.gameObject.SetActive(true);
             informationWindow.gameObject.transform.position = Input.mousePosition;
-
             informationWindow.itemName.text = item.name;
             informationWindow.itemIcon.sprite = item.icon;
             informationWindow.itemDescription.text = item.description;
             informationWindow.itemPrice.text = item.itemPrice.ToString();
             informationWindow.itemQuality.text = item.itemQuality.ToString();
+            if (item.GetType() == typeof(Food_Item))
+            {
+                Food_Item fItem = (Food_Item)item;
+                informationWindow.itemQuality.text = fItem.freshness.ToString();
+            }
+            else
+            {
+
+            }
             informationWindow.itemAmountLimit.text = amountText.text + "/" + item.itemAmountLimit.ToString();
         }
         else
