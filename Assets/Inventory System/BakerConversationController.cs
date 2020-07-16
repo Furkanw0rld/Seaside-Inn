@@ -3,26 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(BakerInventory))]
 public class BakerConversationController : ConversationController
 {
-    protected readonly string[] boughtBreadDialogues = new string[]
-    {
-        "One fresh bread coming right up.",
-        "Sure, that'll be one coin.",
-        "Here is your bread.",
-        "If you've got the coin, I've got the bread.",
-        "Fresh bread, straight out of the stone oven!"
-    };
-
-    protected readonly string[] notEnoughCoinDialogues = new string[]
-    {
-        "You've got no coin to buy bread, dear.",
-        "You need coin to buy bread.",
-        "Come back and find me when you've got coin.",
-        "I do not give bread for free.",
-        "Bread isn't free you know?"
-    };
-
     protected readonly string[] greetingsDialogues = new string[]
     {
         "Hello there!",
@@ -31,25 +14,11 @@ public class BakerConversationController : ConversationController
         "Nice to see you."
     };
 
+    private BakerInventory bakerInventory;
 
-    public Item breadItem;
-
-    public void BuyBreadItem()
+    private void Start()
     {
-        if (PlayerInventory.Instance.BuyItem(breadItem, breadItem.itemPrice, 1))
-        {
-            characterDialogue.text = boughtBreadDialogues[GetRandomDialogue(boughtBreadDialogues.Length)];
-            answerOptionB.gameObject.SetActive(true);
-            answerOptionBText.text = "- Thank you. (Exit Conversation)";
-            answerOptionB.onClick.AddListener(PlayerManager.Instance.playerController.RemoveFocus);
-        }
-        else
-        {
-            characterDialogue.text = notEnoughCoinDialogues[GetRandomDialogue(notEnoughCoinDialogues.Length)];
-            answerOptionB.gameObject.SetActive(true);
-            answerOptionBText.text = "- Thank you. (Exit Conversation)";
-            answerOptionB.onClick.AddListener(PlayerManager.Instance.playerController.RemoveFocus);
-        }
+        bakerInventory = GetComponent<BakerInventory>();
     }
 
     private int GetRandomDialogue(int count)
@@ -59,7 +28,9 @@ public class BakerConversationController : ConversationController
 
     public override IEnumerator ConversationBegan()
     {
-        answerOptionA.onClick.AddListener(BuyBreadItem);
+        answerOptionA.onClick.AddListener(bakerInventory.OpenShop);
+        answerOptionA.onClick.AddListener(CloseShopConversation);
+        answerOptionAText.text = "Open Shop.";
         answerOptionB.gameObject.SetActive(false);
         answerOptionC.gameObject.SetActive(false);
 
@@ -67,15 +38,21 @@ public class BakerConversationController : ConversationController
 
         conversationPanel.SetActive(true);
         characterDialogue.text = greetingsDialogues[GetRandomDialogue(greetingsDialogues.Length)];
-        //To be overwritten by inherited children
-        Debug.Log("Conversation Began. Enumerator.");
+    }
+
+    public void CloseShopConversation()
+    {
+        ClearAllListeners();
+        answerOptionAText.text = "Close Shop (Exits Conversation).";
+        answerOptionA.onClick.AddListener(this.GetComponent<InteractableBaker>().OnDeFocus);
+        answerOptionA.onClick.AddListener(PlayerManager.Instance.playerController.RemoveFocus);
     }
 
     public override void ConversationEnded()
     {
         conversationPanel.SetActive(false);
         ClearAllListeners();
-        Debug.Log("Conversation Ended.");
+        bakerInventory.CloseShop();
     }
 
     public void ClearAllListeners()
@@ -84,4 +61,6 @@ public class BakerConversationController : ConversationController
         answerOptionB.onClick.RemoveAllListeners();
         answerOptionC.onClick.RemoveAllListeners();
     }
+
+    
 }

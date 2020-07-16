@@ -1,43 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class InventorySlotItem
 {
     public Item item;
-    public int amount;
+    [Min(1)] public int amount;
 
     public InventorySlotItem(Item _item, int _amount)
     {
         item = _item;
+        amount = _amount;
+    }
 
-        if (_amount > item.itemAmountLimit) //If the amount we are trying to add is more than the limit, then just add up to the limit.
+    public void AddAmount(int _amount)
+    {
+        amount += _amount;
+        if(amount > item.itemAmountLimit)
         {
             amount = item.itemAmountLimit;
         }
-        else //Otherwise add amount
-        {
-            amount = _amount;
-        }
-
     }
 
-    public bool AddAmount(int _amount)
+    public void RemoveAmount(int _amount)
     {
-        amount += _amount;
-        return true;
-
-    }
-
-    public bool RemoveAmount(int _amount)
-    {
-        if (amount - _amount > 0)
-        {
-            amount -= _amount;
-            return true;
-        }
-        return false;
+        amount -= _amount;
     }
 
     public int InventorySpaceRemaining()

@@ -48,8 +48,12 @@ public class DayNightCycle : MonoBehaviour
 	public OnNightTime onNightTimeCallback;
 
 	public delegate void OnDayTime();
-	public OnDayTime onDayTime;
+	public OnDayTime onDayTimeCallback;
 
+	public int GetCurrentDay()
+    {
+		return currentDay;
+    }
 
 	public bool IsDayTime()
     {
@@ -124,7 +128,7 @@ public class DayNightCycle : MonoBehaviour
 					sunSource.SetActive(true);
 					RenderSettings.skybox = dayTimeSkybox;
 					DynamicGI.UpdateEnvironment();
-					onDayTime?.Invoke();
+					onDayTimeCallback?.Invoke();
 					
 				}
 

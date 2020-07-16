@@ -15,9 +15,11 @@ MonoBehaviour:
   name: Bread
   itemType: 0
   icon: {fileID: 21300000, guid: 9f5c7efd08c683543ac907d8134eef98, type: 3}
-  description: 'The perfect medieval food for anyone and any occasion.Make sure to
-    eat it before it goes stale. Made by the towns baker, Isabel. '
+  description: The perfect medieval food for anyone and any occasion.Make sure to
+    eat it before it goes stale.
   prefab: {fileID: 6397487871127557207, guid: 561d93084fe95724381ddaa053674baf, type: 3}
   itemPrice: 1
   itemQuality: 0
   itemAmountLimit: 5
+  FoodDecayModifier: 1
+  freshness: 0

@@ -4,11 +4,89 @@
 public class Food_Item : Item
 {
     [Header("Food Item Related")]
-    [Range(0f,5f)][Tooltip("0 implies no freshness decay.\n 1 implies 1 freshness decay per day.\n 2 implies 2 freshness decay per day.\n 5 implies food becomes spoilt the next day.")] public float FoodDecayModifier = 1f;
+    [Range(0f,5f)][Tooltip("0 implies no freshness decay.\n 1 implies 1 freshness decay per day.\n 2 implies 2 freshness decay per day.\n 5 implies food becomes spoilt the next day. " +
+        "\n Values between 0-1 imply decay that takes longer than 1 day.\n For Example: 0.5f means food decays every other day or 0.25 implies every 4 days to go down one tier. ")] public float FoodDecayModifier = 1f;
     [Tooltip("Starting Freshness for the item.")] public FoodFreshness freshness = FoodFreshness.VeryFresh;
+
+    [HideInInspector] public float currentDecay = 0f;
+
     private void Awake()
     {
         itemType = ItemType.Food;
+        if (DayNightCycle.Instance)
+        {
+            DayNightCycle.Instance.onDayTimeCallback += UpdateDecay;
+        }
+    }
+
+    public void UpdateDecay()
+    {
+        currentDecay += FoodDecayModifier;
+        DecayQuality();
+
+        if(freshness == FoodFreshness.Spoilt)
+        {
+            PlayerInventory.Instance.RemoveSpoiltFoodFromInventory();
+        }
+    }
+    public void OnDestroy()
+    {
+        DayNightCycle.Instance.onDayTimeCallback -= UpdateDecay;
+    }
+
+    private FoodFreshness DecayQuality() {
+        switch (Mathf.FloorToInt(currentDecay))
+        {
+            case (0):
+                freshness = FoodFreshness.VeryFresh;
+                break;
+            case (1):
+                freshness = FoodFreshness.Fresh;
+                break;
+            case (2):
+                freshness = FoodFreshness.Edible;
+                break;
+            case (3):
+                freshness = FoodFreshness.Stale;
+                break;
+            case (4):
+                freshness = FoodFreshness.Spoilt;
+                break;
+            default:
+                break;
+        }
+
+        return freshness;
+    }
+    public override string GetQuality()
+    {
+        if(freshness == FoodFreshness.VeryFresh)
+        {
+            return "Very Fresh";
+        }
+        else
+        {
+            return freshness.ToString();
+        }
+    }
+
+    public override Color32 GetQualityColor()
+    {
+        switch (freshness)
+        {
+            case FoodFreshness.VeryFresh:
+                return new Color32(72, 208, 24, 255); //Very Green
+            case FoodFreshness.Fresh:
+                return new Color32(61, 170, 22, 255); //Green
+            case FoodFreshness.Edible:
+                return new Color32(47, 114, 23, 255); //Deep Green
+            case FoodFreshness.Stale:
+                return new Color32(150, 142, 15, 255); //Musty Yellow
+            case FoodFreshness.Spoilt:
+                return new Color32(143, 61, 12, 255); // Redish Orange
+            default:
+                return new Color32(72, 208, 24, 255); //Very Green
+        }
     }
 }
 

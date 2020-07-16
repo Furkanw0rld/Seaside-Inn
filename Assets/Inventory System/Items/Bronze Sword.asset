@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04231a3e78fa1249a112aa73f0bca78, type: 3}
   m_Name: Bronze Sword
   m_EditorClassIdentifier: 
-  name: Bronze Hammer
+  name: Bronze Sword
   itemType: 3
-  icon: {fileID: 21300000, guid: b6adf1cf14f6d464194562461987edf1, type: 3}
-  description: Might be able to break some stones..
+  icon: {fileID: 21300000, guid: 422ce2ba344177449a97fe0f91d36fe7, type: 3}
+  description: I'd be surprised if it managed to cut anything.
   prefab: {fileID: 0}
   itemPrice: 25
-  itemQuality: 1
+  itemQuality: 0
   itemAmountLimit: 3

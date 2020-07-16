@@ -15,6 +15,10 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public Image coinsFill;
 
+    [Header("Accessible Player Conditions")]
+    public bool isPlayerAtInnInventoryArea = false;
+    public bool isPlayerAtTradeInventoryArea = false;
+
     public delegate void OnInteractablePlayerFocused(Transform lookTarget);
     public OnInteractablePlayerFocused onInteractablePlayerFocusedCallback;
 
@@ -32,4 +36,5 @@ public class PlayerManager : MonoBehaviour
             Destroy(this);
         }
     }
+
 }

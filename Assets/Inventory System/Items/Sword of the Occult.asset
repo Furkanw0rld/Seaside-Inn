@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sword of the Occult
   itemType: 3
-  icon: {fileID: 21300000, guid: c06cfb1e7670b4c5aab444df933905b7, type: 3}
-  description: Kills you. Multiple times. Maybe...
+  icon: {fileID: 21300000, guid: 5298b16f07fdc254882392d213933f28, type: 3}
+  description: Kills you. Multiple times. Possibly.
   prefab: {fileID: 0}
   itemPrice: 111.6
   itemQuality: 4

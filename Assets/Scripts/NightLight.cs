@@ -29,13 +29,13 @@ public class NightLight : MonoBehaviour
 		}
 
 		_cycle.onNightTimeCallback += ChangeLightStateWrapper;
-		_cycle.onDayTime += ChangeLightStateWrapper;
+		_cycle.onDayTimeCallback += ChangeLightStateWrapper;
 		
 	}
 
 	private void OnDisable()
 	{
-		_cycle.onDayTime -= ChangeLightStateWrapper;
+		_cycle.onDayTimeCallback -= ChangeLightStateWrapper;
 		_cycle.onNightTimeCallback -= ChangeLightStateWrapper;
 	}
 

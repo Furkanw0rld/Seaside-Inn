@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Silver Bracelet
   itemType: 4
-  icon: {fileID: 21300000, guid: 666c6e3d9677749cd81ee8baeffdd184, type: 3}
+  icon: {fileID: 21300000, guid: 8f00f51210d06c5488a75e84c8739c8f, type: 3}
   description: Has been worn, slight damaged and badly casted, but people won't care.
   prefab: {fileID: 0}
   itemPrice: 28.25
   itemQuality: 2
-  itemAmountLimit: 6
+  itemAmountLimit: 2
