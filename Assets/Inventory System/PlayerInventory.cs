@@ -609,8 +609,12 @@ public class PlayerInventory : MonoBehaviour
 				if (food.freshness == FoodFreshness.Spoilt)
 				{
 					RemoveItemAtIndex(i, InventoryType.InnInventory);
-					return;
-				}
+					continue;
+                }
+                else
+                {
+					continue;
+                }
 			}
 		}
 
@@ -622,7 +626,11 @@ public class PlayerInventory : MonoBehaviour
                 if (food.freshness == FoodFreshness.Spoilt)
                 {
                     RemoveItemAtIndex(i, InventoryType.PlayerInventory);
-                    return;
+					continue;
+                }
+                else
+                {
+					continue;
                 }
             }
         }
