@@ -31,7 +31,7 @@
     "com.unity.test-framework": "1.1.14",
     "com.unity.test-framework.performance": "2.3.1-preview",
     "com.unity.textmeshpro": "2.1.0",
-    "com.unity.timeline": "1.4.0",
+    "com.unity.timeline": "1.4.1",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualeffectgraph": "7.4.1",
     "nuget.mono-cecil": "0.1.6-preview",
