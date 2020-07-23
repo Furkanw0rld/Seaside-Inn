@@ -15,8 +15,9 @@ MonoBehaviour:
   name: Cider
   itemType: 1
   icon: {fileID: 21300000, guid: 4deadbb08c6259647b75a23da32ca25f, type: 3}
-  description: Made with apples.
+  description: Refreshing drink made with apples, for those who can't handle the
+    bitterness of Ale.
   prefab: {fileID: 0}
-  itemPrice: 5
+  itemPrice: 3
   itemQuality: 0
   itemAmountLimit: 50

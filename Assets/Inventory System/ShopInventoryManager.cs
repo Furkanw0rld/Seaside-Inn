@@ -27,10 +27,10 @@ public class ShopInventoryManager : MonoBehaviour
         NPC_ItemSlotInformationData itemData = createdSlot.GetComponent<NPC_ItemSlotInformationData>();
         slots.Add(itemData);
 
-        itemData.itemName.text = slot.item.name;
+        itemData.itemName.text = slot.item.GetLocalizedName();
         itemData.itemName.color = slot.item.GetQualityColor();
         itemData.itemIcon.sprite = slot.item.icon;
-        itemData.itemDescription.text = slot.item.description;
+        itemData.itemDescription.text = slot.item.GetLocalizedDescription();
         itemData.itemPrice.text = slot.item.itemPrice.ToString();
         itemData.itemQuality.text = slot.item.GetQuality().ToUpper();
         itemData.itemQuality.color = slot.item.GetQualityColor();

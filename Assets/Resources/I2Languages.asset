@@ -16,7 +16,252 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: Version
+      TermType: 0
+      Description: 
+      Languages:
+      - Version {[VERSION_TAG]}
+      - Versiyon {[VERSION_TAG]}
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Day
+      TermType: 0
+      Description: 
+      Languages:
+      - Day {[CURRENT_DAY]}
+      - "G\xFCn {[CURRENT_DAY]}"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Inventory
+      TermType: 0
+      Description: 
+      Languages:
+      - Inventory
+      - Envanter
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Player
+      TermType: 0
+      Description: 
+      Languages:
+      - Player
+      - Oyuncu
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Inn
+      TermType: 0
+      Description: 
+      Languages:
+      - Inn
+      - Han
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Trade
+      TermType: 0
+      Description: 
+      Languages:
+      - Trade
+      - Takas
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Shop
+      TermType: 0
+      Description: 
+      Languages:
+      - Shop
+      - "D\xFCkkan"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Ale
+      TermType: 0
+      Description: 
+      Languages:
+      - Ale
+      - Bira
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Cider
+      TermType: 0
+      Description: 
+      Languages:
+      - Cider
+      - "Elma \u015Earab\u0131"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Mead
+      TermType: 0
+      Description: 
+      Languages:
+      - Mead
+      - "Bal Lik\xF6r\xFC"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Wine
+      TermType: 0
+      Description: 
+      Languages:
+      - Wine
+      - "\u015Earap"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Ale/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Decent drink for cheap price.
+      - "Ucuz fiyata iyi i\xE7ki."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Cider/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Refreshing drink made with apples, for those who can't handle the bitterness
+        of Ale.
+      - "Biran\u0131n ac\u0131l\u0131\u011F\u0131n\u0131 kald\u0131ramayanlar i\xE7in
+        elma ile yap\u0131lan serinletici i\xE7ecek."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Mead/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Stronger than beer, but made with honey and water, also known as honey-wine.
+      - "Biradan daha g\xFC\xE7l\xFC, ancak bal ve su ile yap\u0131lm\u0131\u015Ft\u0131r,
+        ayn\u0131 zamanda bal \u015Farab\u0131 olarak da bilinir."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Drinks/Wine/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Wine, the best available drink for purchase. Goes well with everything, but
+        it is not cheap.
+      - "\u015Earap, sat\u0131n al\u0131nabilecek en iyi i\xE7ecektir. Her \u015Feyle
+        iyi gider, ancak ucuz de\u011Fildir."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/General/Quality/Common
+      TermType: 0
+      Description: 
+      Languages:
+      - Common
+      - "Yayg\u0131n"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/General/Quality/Uncommon
+      TermType: 0
+      Description: 
+      Languages:
+      - Uncommon
+      - Nadir
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/General/Quality/Rare
+      TermType: 0
+      Description: 
+      Languages:
+      - Rare
+      - Ender
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/General/Quality/Epic
+      TermType: 0
+      Description: 
+      Languages:
+      - Epic
+      - Epik
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/General/Quality/Legendary
+      TermType: 0
+      Description: 
+      Languages:
+      - Legendary
+      - Efsanevi
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Quality/Fresh
+      TermType: 0
+      Description: 
+      Languages:
+      - Fresh
+      - Taze
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Quality/Edible
+      TermType: 0
+      Description: 
+      Languages:
+      - Edible
+      - Yenilebilir
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Quality/Stale
+      TermType: 0
+      Description: 
+      Languages:
+      - Stale
+      - Bayat
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Quality/Spoilt
+      TermType: 0
+      Description: 
+      Languages:
+      - Spoilt
+      - "Bozulmu\u015F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Quality
+      TermType: 0
+      Description: 
+      Languages:
+      - Quality
+      - Kalite
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Price
+      TermType: 0
+      Description: 
+      Languages:
+      - Price
+      - Fiyat
+      Flags: 0000
+      Languages_Touch: []
+    - Term: 'Price:'
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Price:'
+      - 'Fiyat:'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: 'Quality:'
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Quality:'
+      - 'Kalite:'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Quality/VeryFresh
+      TermType: 0
+      Description: 
+      Languages:
+      - Very Fresh
+      - "\xC7ok Taze"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Buy
+      TermType: 0
+      Description: 
+      Languages:
+      - Buy
+      - "Sat\u0131n Al"
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Mead
   itemType: 1
   icon: {fileID: 21300000, guid: 097ba6e19cca1ce4e8af523b072c59c7, type: 3}
-  description: Mead.
+  description: Stronger than beer, but made with honey and water, also known as honey-wine.
   prefab: {fileID: 0}
   itemPrice: 3.5
   itemQuality: 0

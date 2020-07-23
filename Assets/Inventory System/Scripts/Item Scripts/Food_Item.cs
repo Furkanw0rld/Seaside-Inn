@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using I2.Loc;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Food", menuName = "Inventory/New Food")]
 public class Food_Item : Item
@@ -60,13 +61,31 @@ public class Food_Item : Item
     }
     public override string GetQuality()
     {
-        if(freshness == FoodFreshness.VeryFresh)
+        return LocalizationManager.GetTranslation("Items/Foods/Quality/" + freshness.ToString());
+    }
+
+    public override string GetLocalizedName()
+    {
+        if (LocalizationManager.TryGetTranslation("Items/Foods/" + name, out string localized))
         {
-            return "Very Fresh";
+            return localized;
         }
         else
         {
-            return freshness.ToString();
+            return name;
+        }
+    }
+
+    public override string GetLocalizedDescription()
+    {
+
+        if (LocalizationManager.TryGetTranslation("Items/Foods/" + name + "/Description", out string localized))
+        {
+            return localized;
+        }
+        else
+        {
+            return description;
         }
     }
 

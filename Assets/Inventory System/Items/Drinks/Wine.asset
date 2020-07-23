@@ -15,7 +15,8 @@ MonoBehaviour:
   name: Wine
   itemType: 1
   icon: {fileID: 21300000, guid: e29211f8eb7e38f4888787eb93748f6f, type: 3}
-  description: Wine for me, twine for you.
+  description: Wine, the best available drink for purchase. Goes well with everything,
+    but it is not cheap.
   prefab: {fileID: 0}
   itemPrice: 7.5
   itemQuality: 0

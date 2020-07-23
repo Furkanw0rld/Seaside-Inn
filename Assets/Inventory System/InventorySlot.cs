@@ -35,10 +35,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             informationWindow.gameObject.SetActive(true);
             informationWindow.gameObject.transform.position = this.transform.position;
-            informationWindow.itemName.text = item.name;
+            informationWindow.itemName.text = item.GetLocalizedName();
             informationWindow.itemName.color = item.GetQualityColor();
             informationWindow.itemIcon.sprite = item.icon;
-            informationWindow.itemDescription.text = item.description;
+            informationWindow.itemDescription.text = item.GetLocalizedDescription();
             informationWindow.itemPrice.text = item.itemPrice.ToString();
             informationWindow.itemQuality.text = item.GetQuality().ToUpper();
             informationWindow.itemQuality.color = item.GetQualityColor();

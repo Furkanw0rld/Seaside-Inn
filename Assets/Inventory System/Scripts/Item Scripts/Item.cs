@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using I2.Loc;
 public enum ItemType
 {
     Food,
@@ -33,7 +33,7 @@ public abstract class Item : ScriptableObject
 
     public virtual string GetQuality()
     {
-        return itemQuality.ToString();
+        return LocalizationManager.GetTranslation("Items/General/Quality/" + itemQuality.ToString());
     }
 
     public virtual Color32 GetQualityColor()
@@ -54,5 +54,8 @@ public abstract class Item : ScriptableObject
                 return new Color32(187, 190, 195, 255); // common color.
         }
     }
+
+    public abstract string GetLocalizedName();
+    public abstract string GetLocalizedDescription();
 }
 

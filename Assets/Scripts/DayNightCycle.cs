@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using I2.Loc;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class DayNightCycle : MonoBehaviour
 	[Range(0, 1440)] [Tooltip("6AM is 360. 8AM is 480. 12PM is 720. 6PM is 1080. 10PM is 1320. 11:59PM is 1439. Midnight is 0.")] [SerializeField] private float currentTime = 480f;
 	[Tooltip("1X is 24 minutes per day.")] [SerializeField] private float timeMultiplier = 1f;
 	[Header("UI Elements")]
+
+	[Header("Localization")]
+	public LocalizationParamsManager localDayParamManager;
 
 
 	/* Midnight - 0f
@@ -169,7 +173,8 @@ public class DayNightCycle : MonoBehaviour
 		currentHour = Mathf.FloorToInt(currentTime / 60);
 		currentMinute = Mathf.FloorToInt(currentTime - (currentHour * 60));
 		timeText.text = currentHour.ToString().PadLeft(2, '0') + ":" + currentMinute.ToString().PadLeft(2, '0');
-		dayText.text = "Day " + currentDay.ToString().PadLeft(2, '0');
+		//dayText.text = "Day " + currentDay.ToString().PadLeft(2, '0');
+		localDayParamManager.SetParameterValue("CURRENT_DAY", currentDay.ToString().PadLeft(2, '0'));
 		
 		//Rotating skybox here, might need to move if realtime cycle is adjusted.
 		RenderSettings.skybox.SetFloat("_Rotation", skyboxRotationSpeed * Time.time);
