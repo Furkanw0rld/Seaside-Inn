@@ -262,6 +262,54 @@ MonoBehaviour:
       - "Sat\u0131n Al"
       Flags: 0000
       Languages_Touch: []
+    - Term: Items/Foods/Bread
+      TermType: 0
+      Description: 
+      Languages:
+      - Bread
+      - Ekmek
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Bread/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - The staple of any dinner. Also, very affordable.
+      - "Herhangi bir yeme\u011Fin elyaf\u0131. Ayr\u0131ca, \xE7ok uygun."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Potatoes
+      TermType: 0
+      Description: 
+      Languages:
+      - Potatoes
+      - Patates
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Potatoes/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Po-ta-toes. Boil them, mash them, stick them in a stew.
+      - "Pa-ta-tes. Kaynat\u0131n, ezin, g\xFCve\xE7e koyun."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Onions
+      TermType: 0
+      Description: 
+      Languages:
+      - Onions
+      - "So\u011Fan"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Onions/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Probably best to cook with it, rather than eating it raw.
+      - "Muhtemelen \xE7i\u011F yemek yerine pi\u015Firmek en mant\u0131kl\u0131s\u0131d\u0131r."
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
