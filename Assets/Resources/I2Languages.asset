@@ -214,22 +214,6 @@ MonoBehaviour:
       - "Bozulmu\u015F"
       Flags: 0000
       Languages_Touch: []
-    - Term: Quality
-      TermType: 0
-      Description: 
-      Languages:
-      - Quality
-      - Kalite
-      Flags: 0000
-      Languages_Touch: []
-    - Term: Price
-      TermType: 0
-      Description: 
-      Languages:
-      - Price
-      - Fiyat
-      Flags: 0000
-      Languages_Touch: []
     - Term: 'Price:'
       TermType: 0
       Description: 
@@ -308,6 +292,211 @@ MonoBehaviour:
       Languages:
       - Probably best to cook with it, rather than eating it raw.
       - "Muhtemelen \xE7i\u011F yemek yerine pi\u015Firmek en mant\u0131kl\u0131s\u0131d\u0131r."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: 'Amount:'
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Amount:'
+      - 'Miktar:'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Tomatoes
+      TermType: 0
+      Description: 
+      Languages:
+      - Tomatoes
+      - Domates
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Tomatoes/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - A vine of tomatoes. Diced or chunky, either way will go great in a stew.
+      - "Bir domates asmas\u0131. Do\u011Franm\u0131\u015F veya t\u0131knaz, her
+        iki \u015Fekilde de g\xFCve\xE7te harika olacakt\u0131r."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Peppers
+      TermType: 0
+      Description: 
+      Languages:
+      - Peppers
+      - Biberler
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Peppers/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - A tad bit of spice to add flavor to any soup.
+      - "Herhangi bir \xE7orbaya lezzet katmak i\xE7in biraz baharat."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Cabbage
+      TermType: 0
+      Description: 
+      Languages:
+      - Cabbage
+      - Lahana
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Cabbage/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Yuck! I doubt many people like cabbage.
+      - "\u0130\u011Fren\xE7! Lahanay\u0131 pek \xE7ok insan\u0131n sevece\u011Finden
+        \u015F\xFCpheliyim."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Parsley
+      TermType: 0
+      Description: 
+      Languages:
+      - Parsley
+      - Maydanoz
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Parsley/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Will last a long time, and can be used in many different foods.
+      - "Uzun s\xFCre dayan\u0131r ve bir\xE7ok farkl\u0131 yemekte de kullan\u0131labilir."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Salmon
+      TermType: 0
+      Description: 
+      Languages:
+      - Salmon
+      - Somon
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Salmon/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Caught straight from the ocean, perfect for fillet.
+      - "Do\u011Frudan okyanustan yakaland\u0131, fileto i\xE7in m\xFCkemmel."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Seabass
+      TermType: 0
+      Description: 
+      Languages:
+      - Seabass
+      - Levrek
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Seabass/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Smaller than salmon, however these are great for grilling.
+      - "Somondan daha k\xFC\xE7\xFCkt\xFCr, ancak bunlar \u0131zgara i\xE7in m\xFCkemmeldir."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Whiting
+      TermType: 0
+      Description: 
+      Languages:
+      - Whiting
+      - Mezgit
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Whiting/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - A small ocean fish, sweet and very delicate, similar to cod, but cheaper.
+        Don't cook it slowly.
+      - "Morina'ya benzer, ancak daha ucuzdur, tatl\u0131 ve \xE7ok hassast\u0131r.
+        K\xFC\xE7\xFCk bir okyanus bal\u0131\u011F\u0131. Yava\u015F pi\u015Firmeyin."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Trout
+      TermType: 0
+      Description: 
+      Languages:
+      - Trout
+      - "Alabal\u0131k"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Trout/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Mainly found in freshwaters and rivers, it is one of the go-to fish for many.
+      - "Esas olarak tatl\u0131 sularda ve nehirlerde bulunur, bir\xE7ok ki\u015Fi
+        i\xE7in g\xFCnl\xFCk bal\u0131klardan biridir."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Mushrooms
+      TermType: 0
+      Description: 
+      Languages:
+      - Mushrooms
+      - Mantarlar
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Items/Foods/Mushrooms/Description
+      TermType: 0
+      Description: 
+      Languages:
+      - Be careful to not eat the poisonous ones.
+      - "Zehirli olanlar\u0131 yememeye dikkat edin."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/Greetings_0
+      TermType: 0
+      Description: 
+      Languages:
+      - Hello!
+      - Merhaba!
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/Greetings_1
+      TermType: 0
+      Description: 
+      Languages:
+      - Hello, darling.
+      - "Merhaba tatl\u0131m."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/Greetings_2
+      TermType: 0
+      Description: 
+      Languages:
+      - What can I do for you?
+      - "Senin i\xE7in ne yapabilirim?"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/Greetings_3
+      TermType: 0
+      Description: 
+      Languages:
+      - Nice to see you.
+      - "Seni g\xF6rd\xFC\u011F\xFCme sevindim."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/OpenShop
+      TermType: 0
+      Description: 
+      Languages:
+      - Open shop.
+      - "D\xFCkkan'\u0131 a\xE7."
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Characters/Baker/Dialogues/CloseShop
+      TermType: 0
+      Description: 
+      Languages:
+      - Close shop. (Exit Conversation)
+      - "D\xFCkkan'\u0131 kapat. (Konu\u015Fmadan ayr\u0131l)"
       Flags: 0000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

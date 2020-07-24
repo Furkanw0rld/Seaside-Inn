@@ -35,7 +35,7 @@ public class Food_Item : Item
         DayNightCycle.Instance.onDayTimeCallback -= UpdateDecay;
     }
 
-    private FoodFreshness DecayQuality() {
+    private void DecayQuality() {
         switch (Mathf.FloorToInt(currentDecay))
         {
             case (0):
@@ -54,10 +54,12 @@ public class Food_Item : Item
                 freshness = FoodFreshness.Spoilt;
                 break;
             default:
+                if(currentDecay >= 4)
+                {
+                    freshness = FoodFreshness.Spoilt;
+                }
                 break;
         }
-
-        return freshness;
     }
     public override string GetQuality()
     {

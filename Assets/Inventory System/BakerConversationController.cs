@@ -1,19 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using I2.Loc;
 
 [RequireComponent(typeof(BakerInventory))]
 public class BakerConversationController : ConversationController
 {
-    protected readonly string[] greetingsDialogues = new string[]
-    {
-        "Hello there!",
-        "Hello, darling.",
-        "What can I do for you?",
-        "Nice to see you."
-    };
-
+    private readonly string bakerGreetingsLocation = "Characters/Baker/Dialogues/Greetings_";
+    private readonly int amountOfGreetings = 4; //Starts at 0
     private BakerInventory bakerInventory;
 
     private void Start()
@@ -21,29 +14,38 @@ public class BakerConversationController : ConversationController
         bakerInventory = GetComponent<BakerInventory>();
     }
 
-    private int GetRandomDialogue(int count)
-    {
-        return Random.Range(0, count);
-    }
-
     public override IEnumerator ConversationBegan()
     {
         answerOptionA.onClick.AddListener(bakerInventory.OpenShop);
         answerOptionA.onClick.AddListener(CloseShopConversation);
-        answerOptionAText.text = "Open Shop.";
+        answerOptionAText.text = LocalizationManager.GetTranslation("Characters/Baker/Dialogues/OpenShop");
         answerOptionB.gameObject.SetActive(false);
         answerOptionC.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f); //Delay from camera transition
 
         conversationPanel.SetActive(true);
-        characterDialogue.text = greetingsDialogues[GetRandomDialogue(greetingsDialogues.Length)];
+        characterDialogue.text = GetGreetingsMessage();
+    }
+
+
+    private string GetGreetingsMessage()
+    {
+        int randomChoice = Random.Range(0, amountOfGreetings);
+        if(LocalizationManager.TryGetTranslation(bakerGreetingsLocation + randomChoice, out string localization))
+        {
+            return localization;
+        }
+        else
+        {
+            return "Hello!";
+        }
     }
 
     public void CloseShopConversation()
     {
         ClearAllListeners();
-        answerOptionAText.text = "Close Shop (Exits Conversation).";
+        answerOptionAText.text = LocalizationManager.GetTranslation("Characters/Baker/Dialogues/CloseShop");
         answerOptionA.onClick.AddListener(this.GetComponent<InteractableBaker>().OnDeFocus);
         answerOptionA.onClick.AddListener(PlayerManager.Instance.playerController.RemoveFocus);
     }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45e3b6762111e14fab11786300620ff, type: 3}
+  m_Name: Tomatoes
+  m_EditorClassIdentifier: 
+  name: Tomatoes
+  itemType: 0
+  icon: {fileID: 21300000, guid: 016f691aff9dbeb4b8aa3dc9b299af28, type: 3}
+  description: A vine of tomatoes. Diced or chunky, either way will go great in a
+    stew.
+  prefab: {fileID: 3850438653281240398, guid: 9718a320649be0a468b6f84130938c2b, type: 3}
+  itemPrice: 2
+  itemQuality: 0
+  itemAmountLimit: 6
+  FoodDecayModifier: 1.25
+  freshness: 0
+  currentDecay: 0

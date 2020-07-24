@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 
 public class InnInventoryArea : MonoBehaviour
@@ -20,9 +19,11 @@ public class InnInventoryArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerManager.isPlayerAtInnInventoryArea = true;
-            kitchenRoof.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-            kitchenRoof.gameObject.layer = 2;
-
+            if (kitchenRoof)
+            {
+                kitchenRoof.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                kitchenRoof.gameObject.layer = 2;
+            }
         }
 
     }
@@ -32,9 +33,11 @@ public class InnInventoryArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerManager.isPlayerAtInnInventoryArea = false;
-            kitchenRoof.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.On;
-            kitchenRoof.gameObject.layer = 0;
-
+            if (kitchenRoof)
+            {
+                kitchenRoof.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.On;
+                kitchenRoof.gameObject.layer = 0;
+            }
         }
 
     }
