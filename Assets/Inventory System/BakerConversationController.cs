@@ -2,16 +2,18 @@
 using UnityEngine;
 using I2.Loc;
 
-[RequireComponent(typeof(BakerInventory))]
+[RequireComponent(typeof(BakerInventory), typeof(InteractableBaker))]
 public class BakerConversationController : ConversationController
 {
     private readonly string bakerGreetingsLocation = "Characters/Baker/Dialogues/Greetings_";
     private readonly int amountOfGreetings = 4; //Starts at 0
     private BakerInventory bakerInventory;
+    private InteractableBaker interactableBaker;
 
     private void Start()
     {
         bakerInventory = GetComponent<BakerInventory>();
+        interactableBaker = GetComponent<InteractableBaker>();
     }
 
     public override IEnumerator ConversationBegan()
@@ -24,8 +26,16 @@ public class BakerConversationController : ConversationController
 
         yield return new WaitForSeconds(2f); //Delay from camera transition
 
-        conversationPanel.SetActive(true);
-        characterDialogue.text = GetGreetingsMessage();
+        if (interactableBaker.IsInteracting())
+        {
+            conversationPanel.SetActive(true);
+            characterDialogue.text = GetGreetingsMessage();
+        }
+        else
+        {
+            conversationPanel.SetActive(false);
+        }
+
     }
 
 
