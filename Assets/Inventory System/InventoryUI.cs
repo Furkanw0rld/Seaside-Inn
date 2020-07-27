@@ -21,12 +21,6 @@ public class InventoryUI : MonoBehaviour
     public Sprite activeButtonSprite;
     public Sprite inactiveButtonSprite;
 
-    [Header("Inn Inventory Starting Items")]
-    public Item ale;
-    public Item cider;
-    public Item mead;
-    public Item wine;
-
     private PlayerInventory playerInventory; //Cached inventory system
     private InventorySlot[] slots; // Player Inventory UI
     private InventorySlot[] innSlots; // Inn Inventory UI
@@ -82,12 +76,7 @@ public class InventoryUI : MonoBehaviour
         innInventoryButton.onClick.AddListener(delegate { ChangeInventoryTabs(InventoryType.InnInventory); });
         tradeInventoryButton.onClick.AddListener(delegate { ChangeInventoryTabs(InventoryType.TradeInventory); });
 
-        // Add the starting items to inventory.
-        playerInventory.innInventory.Add(new InventorySlotItem(Instantiate(ale), 5));
-        playerInventory.innInventory.Add(new InventorySlotItem(Instantiate(cider), 5));
-        playerInventory.innInventory.Add(new InventorySlotItem(Instantiate(mead), 5));
-        playerInventory.innInventory.Add(new InventorySlotItem(Instantiate(wine), 5));
-        UpdateUI(InventoryType.InnInventory);
+        UpdateUI(InventoryType.InnInventory); //Update inn inventory, since there are starting items within it
 
     }
 

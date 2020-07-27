@@ -499,6 +499,22 @@ MonoBehaviour:
       - "D\xFCkkan'\u0131 kapat. (Konu\u015Fmadan ayr\u0131l)"
       Flags: 0000
       Languages_Touch: []
+    - Term: Pints
+      TermType: 0
+      Description: 
+      Languages:
+      - Pints
+      - Pint
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Pint
+      TermType: 0
+      Description: 
+      Languages:
+      - Pint
+      - Pint
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

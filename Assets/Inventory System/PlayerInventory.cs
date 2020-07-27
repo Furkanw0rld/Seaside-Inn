@@ -15,9 +15,22 @@ public class PlayerInventory : MonoBehaviour
 	[Tooltip("How many slots does the INN have")] private const int INN_INVENTORY_SPACE = 20;
 	[Tooltip("How many slots does the TRADE have")] private const int TRADE_INVENTORY_SPACE = 20;
 
+	[Header("Inventories")]
 	[Tooltip("Player Inventory.")] public List<InventorySlotItem> inventory = new List<InventorySlotItem>();
 	[Tooltip("Inn Inventory.")] public List<InventorySlotItem> innInventory = new List<InventorySlotItem>();
 	[Tooltip("Trade Inventory.")] public List<InventorySlotItem> tradeInventory = new List<InventorySlotItem>();
+
+	[Header("Inn Inventory Starting Items")]
+	public Item ale;
+	public Item cider;
+	public Item mead;
+	public Item wine;
+
+	[Header("Shelf System")]
+#pragma warning disable 0649
+	[SerializeField] private Transform innInventoryShelfSystem;
+#pragma warning restore 0649
+	private Transform[] innInventoryShelves;
 
 	// PUBLIC METHODS:
 	public float GetCoins()
@@ -636,6 +649,60 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+
+
+
+	//TODO: Improve the Inn Inventory Shelving System.
+	// This base system lacks rotation,
+	// and can probably made more efficient by caching subsystems and the GO's. 
+	// Also, can improve this by incrementing the amount shown when there is multiple copies of item.
+	// It might make sense to move this to a more performant class of it's own. 
+	// Thereby, we can control each object, it's amount prefab, and it won't be derivately linked to the UI.
+	// Currently, this system, basically copies the Inventory UI System, to replicate it to the screen.
+	// This is unneccessary and uses performance when it does not need to
+	// We delete each object each time and instantiate it again, we could save a lot of cycles, if this system
+	// was more of a Dictionary, that kept each item at it's position until it was emptied. Thus, we don't have to call GC 
+	// everytime there is a UI Callback. The performance impact as is can be up to 1 ms, which can probably be reduced down to few cycles, if we used a Data Oriented Approach. 
+
+	private GameObject[] shelfItems = new GameObject[16];
+	private void DisplayItemsAtShelf(InventoryType inventoryType)
+    {
+		if(inventoryType == InventoryType.InnInventory) // A Change occurred in inn inventory
+        {
+			for(int i = 0; i < innInventoryShelves.Length; i++)
+            {
+				if(i + 4 < innInventory.Count) // This is an item we can display
+                {
+                    if (innInventory[i+4].item.prefab)
+                    {
+                        if (shelfItems[i] != null)
+                        {
+							Destroy(shelfItems[i].gameObject);
+							shelfItems[i] = null;
+                        }
+						shelfItems[i] = Instantiate(innInventory[i+4].item.prefab, innInventoryShelves[i].position, Quaternion.identity);
+                    }
+                    else
+                    {
+						Debug.Log("Item: " + innInventory[i+4].item.name + "has no gameObject skipping!");
+                    }
+                }
+                else //Empty this shelf slot
+                {
+                    if (shelfItems[i] != null)
+                    {
+						Destroy(shelfItems[i]);
+						shelfItems[i] = null;
+                    }
+                }
+            }
+        }
+        else
+        {
+			return;
+        }
+    }
+
     //PRIVATE METHODS:
 
     private void Awake()
@@ -648,6 +715,12 @@ public class PlayerInventory : MonoBehaviour
 		{
 			Destroy(this);
 		}
+
+		// Add the starting items to inventory.
+		innInventory.Add(new InventorySlotItem(Instantiate(ale), 1));
+		innInventory.Add(new InventorySlotItem(Instantiate(cider), 10));
+		innInventory.Add(new InventorySlotItem(Instantiate(mead), 20));
+		innInventory.Add(new InventorySlotItem(Instantiate(wine), 38));
 	}
 
 	private void Start()
@@ -655,6 +728,17 @@ public class PlayerInventory : MonoBehaviour
 		manager = PlayerManager.Instance;
 		manager.coinsText.text = coins.ToString();
 		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
+
+
+		//Shelf System, add all shelf areas to the array.
+		innInventoryShelves = new Transform[innInventoryShelfSystem.childCount];
+		for(int i = 0; i < innInventoryShelves.Length; i++)
+        {
+			innInventoryShelves[i] = innInventoryShelfSystem.GetChild(i);
+        }
+		//Add Shelf Displayer to the callback
+		onInventoryChangedCallback += DisplayItemsAtShelf;
+
 	}
 }
 public enum InventoryType

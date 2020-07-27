@@ -15,7 +15,7 @@ public class TradeInventoryArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerManager.isPlayerAtTradeInventoryArea = true;
+            playerManager.onPlayerEnterTradeAreaCallback?.Invoke();
         }
     }
 
@@ -23,7 +23,7 @@ public class TradeInventoryArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerManager.isPlayerAtTradeInventoryArea = false;
+            playerManager.onPlayerExitTradeAreaCallback?.Invoke();
         }
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerAIMotor))]
 public class PlayerController : MonoBehaviour
 {
-    public LayerMask movementLayerMask; //Layers we can walk upon
-    public float clickDistance = 100f; //How far will the mouse click travel in-game (world units)
+    [Tooltip("Layers player can walk (hit) upon")] public LayerMask movementLayerMask; //Layers we can walk upon
+    [Tooltip("How far in the scene can the player click (in-game meters)")] public float clickDistance = 100f; //How far will the mouse click travel in-game (world units)
 
     private Camera cam; //Main Camera 
     private Ray ray;

@@ -63,7 +63,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                if(playerManager.isPlayerAtInnInventoryArea || playerManager.isPlayerAtTradeInventoryArea) //Trigger only when player is in these zones, (Move Item will do it's own safety check)
+                if(playerManager.IsPlayerAtInnInventoryArea || playerManager.IsPlayerAtTradeInventoryArea) //Trigger only when player is in these zones, (Move Item will do it's own safety check)
                 {
                     MoveItem();
                 }
@@ -78,7 +78,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             case InventoryType.PlayerInventory: //Item is in player, Can move to inn or trade
 
-                if (playerManager.isPlayerAtInnInventoryArea) // Can move to inn
+                if (playerManager.IsPlayerAtInnInventoryArea) // Can move to inn
                 {
                     if(item.itemType == ItemType.Food) //Only accept food
                     {
@@ -86,7 +86,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                         overlayImage.enabled = false;
                     }
                 }
-                else if (playerManager.isPlayerAtTradeInventoryArea)
+                else if (playerManager.IsPlayerAtTradeInventoryArea)
                 {
                     if(item.itemType != ItemType.Food && item.itemType != ItemType.Drink)
                     {
@@ -103,7 +103,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             case InventoryType.InnInventory: //Item in inventory, Can move to player
 
-                if(playerManager.isPlayerAtInnInventoryArea) //Can only move food out
+                if(playerManager.IsPlayerAtInnInventoryArea) //Can only move food out
                 {
                     if (item.itemType == ItemType.Food) //Player is at the zone to move
                     {
@@ -120,7 +120,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.TradeInventory: //Item in trade, Can move to player
-                if (playerManager.isPlayerAtTradeInventoryArea)
+                if (playerManager.IsPlayerAtTradeInventoryArea)
                 {
                     if(item.itemType != ItemType.Food)
                     {
@@ -142,7 +142,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         switch (inventoryType)
         {
             case InventoryType.PlayerInventory:
-                if (playerManager.isPlayerAtInnInventoryArea) 
+                if (playerManager.IsPlayerAtInnInventoryArea) 
                 {
                     // Player is at Inn, move to inn items
                     if(item.itemType == ItemType.Food) // Only need to check food since drinks are automatically added
@@ -155,7 +155,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     }
 
                 }
-                else if (playerManager.isPlayerAtTradeInventoryArea)
+                else if (playerManager.IsPlayerAtTradeInventoryArea)
                 {
                     //Player at Trade Area, move to trade area items
                     if(item.itemType != ItemType.Food) // Accept anything but food/drink
@@ -176,7 +176,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.InnInventory:
-                if (playerManager.isPlayerAtInnInventoryArea)
+                if (playerManager.IsPlayerAtInnInventoryArea)
                 {
                     if(item.itemType == ItemType.Food)
                     {
@@ -190,7 +190,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.TradeInventory:
-                if (playerManager.isPlayerAtTradeInventoryArea)
+                if (playerManager.IsPlayerAtTradeInventoryArea)
                 {
                     if (item.itemType != ItemType.Food) // Accept anything but food/drink
                     {

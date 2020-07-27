@@ -1,46 +1,64 @@
 ﻿using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class CMPlayerMotor : MonoBehaviour
 {
-    public CinemachineFreeLook _freeLookCamera;
-    public CinemachineVirtualCamera _zoomedInCamera;
+    public CinemachineFreeLook freeLookCamera;
+    public CinemachineVirtualCamera zoomedInCamera;
+    public CinemachineVirtualCamera kitchenCamera;
     private Vector2 mouseDelta;
+    private PlayerManager playerManager;
 
     private void Start()
     {
         Camera.main.depthTextureMode = DepthTextureMode.Depth;
-        PlayerManager.Instance.onInteractablePlayerFocusedCallback += ZoomedInView;
-        PlayerManager.Instance.onInteractablePlayerUnFocusedCallback += CancelZoomedInView;
+        playerManager = PlayerManager.Instance;
+
+        playerManager.onInteractablePlayerFocusedCallback += ZoomedInView;
+        playerManager.onInteractablePlayerUnFocusedCallback += ExitZoomedInView;
+
+        playerManager.onPlayerEnterKitchenAreaCallback += KitchenCameraView;
+        playerManager.onPlayerExitKitchenAreaCallback += ExitKitchenCameraView;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.onInteractablePlayerFocusedCallback -= ZoomedInView;
-        PlayerManager.Instance.onInteractablePlayerUnFocusedCallback -= CancelZoomedInView;
+        playerManager.onInteractablePlayerFocusedCallback -= ZoomedInView;
+        playerManager.onInteractablePlayerUnFocusedCallback -= ExitZoomedInView;
+
+        playerManager.onPlayerEnterKitchenAreaCallback -= KitchenCameraView;
+        playerManager.onPlayerExitKitchenAreaCallback -= ExitKitchenCameraView;
     }
 
-    public void ZoomedInView(Transform lookTarget) // When we interact with player, switch cam
+    private void KitchenCameraView()
     {
-        _zoomedInCamera.LookAt = lookTarget;
-        _zoomedInCamera.Follow = lookTarget;
-        _zoomedInCamera.Priority = 15;
+        kitchenCamera.Priority = 15;
     }
 
-
-
-    public void CancelZoomedInView() //Revert back to freelook camera
+    private void ExitKitchenCameraView()
     {
-        _zoomedInCamera.Priority = 5;
+        kitchenCamera.Priority = 5;
     }
+
+    private void ZoomedInView(Transform lookTarget) // When we interact with player, switch cam
+    {
+        zoomedInCamera.LookAt = lookTarget;
+        zoomedInCamera.Follow = lookTarget;
+        zoomedInCamera.Priority = 15;
+    }
+
+    private void ExitZoomedInView() //Revert back to freelook camera
+    {
+        zoomedInCamera.Priority = 5;
+    }
+
+
 
     private void Update()
     {
+
         if (EventSystem.current.IsPointerOverGameObject()) //Don't rotate if over UI
         {
             return;
@@ -57,8 +75,8 @@ public class CMPlayerMotor : MonoBehaviour
             mouseDelta = Mouse.current.delta.ReadValue();
             mouseDelta *= 0.5f; //Account for Scaling applied
             mouseDelta *= 0.1f; //Account for sensitivity
-            _freeLookCamera.m_XAxis.m_InputAxisValue = mouseDelta.x;
-            _freeLookCamera.m_YAxis.m_InputAxisValue = mouseDelta.y;
+            freeLookCamera.m_XAxis.m_InputAxisValue = mouseDelta.x;
+            freeLookCamera.m_YAxis.m_InputAxisValue = mouseDelta.y;
 
             //_freeLook.m_XAxis.m_InputAxisValue = Input.GetAxis("Mouse X");
             //_freeLook.m_YAxis.m_InputAxisValue = Input.GetAxis("Mouse Y");
@@ -69,8 +87,8 @@ public class CMPlayerMotor : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            _freeLookCamera.m_XAxis.m_InputAxisValue = 0;
-            _freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+            freeLookCamera.m_XAxis.m_InputAxisValue = 0;
+            freeLookCamera.m_YAxis.m_InputAxisValue = 0;
         }
     }
 }
