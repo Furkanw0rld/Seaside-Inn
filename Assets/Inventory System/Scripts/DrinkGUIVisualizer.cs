@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider))]
 public class DrinkGUIVisualizer : MonoBehaviour
 {
-    public DrinkName drinkName = DrinkName.Ale;
+    [SerializeField] private DrinkName drinkName = DrinkName.Ale;
     public GameObject informationWindow;
     public Image radialBar;
     public TextMeshProUGUI amountText;
@@ -31,11 +31,11 @@ public class DrinkGUIVisualizer : MonoBehaviour
         
         if(drinkSlot.amount > 1)
         {
-            amountText.text = drinkSlot.amount + I2.Loc.LocalizationManager.GetTranslation("Pints");
+            amountText.text = drinkSlot.amount + " " + I2.Loc.LocalizationManager.GetTranslation("Pints");
         }
         else
         {
-            amountText.text = drinkSlot.amount + I2.Loc.LocalizationManager.GetTranslation("Pint");
+            amountText.text = drinkSlot.amount + " " + I2.Loc.LocalizationManager.GetTranslation("Pint");
         }
 
         radialBar.fillAmount = drinkSlot.amount / (float)drinkSlot.item.itemAmountLimit;
@@ -53,13 +53,13 @@ public class DrinkGUIVisualizer : MonoBehaviour
     {
         informationWindow.SetActive(false);
     }
-
+    private enum DrinkName //These IDs Follow the Drink's Position in the Inn Inventory. 
+    {
+        Ale = 0,
+        Cider = 1,
+        Mead = 2,
+        Wine = 3
+    }
 }
 
-public enum DrinkName //These IDs Follow the Drink's Position in the Inn Inventory. 
-{ 
-    Ale = 0,
-    Cider = 1,
-    Mead = 2,
-    Wine = 3
-}
+

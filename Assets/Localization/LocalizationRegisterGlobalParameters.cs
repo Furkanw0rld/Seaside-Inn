@@ -1,6 +1,4 @@
 ﻿using I2.Loc;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LocalizationRegisterGlobalParameters : MonoBehaviour, ILocalizationParamsManager
@@ -23,7 +21,7 @@ public class LocalizationRegisterGlobalParameters : MonoBehaviour, ILocalization
     {
         if(parameterName == "VERSION_TAG")
         {
-            return "0.1.3";
+            return "0.1.4";
         }
         if(parameterName == "CURRENT_DAY")
         {

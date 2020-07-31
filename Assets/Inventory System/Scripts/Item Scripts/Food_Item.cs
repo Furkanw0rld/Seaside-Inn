@@ -1,7 +1,7 @@
 ﻿using I2.Loc;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Food", menuName = "Inventory/New Food")]
+[CreateAssetMenu(fileName = "New Food", menuName = "Inventory/New Food", order = 1)]
 public class Food_Item : Item
 {
     [Header("Food Item Related")]

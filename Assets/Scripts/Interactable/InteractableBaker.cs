@@ -36,10 +36,9 @@ public class InteractableBaker : Interactable
     private IEnumerator SmoothLookAt(Transform targetTransform)
     {
         float inTime = 0.33f;
-        //Vector3 lookDirection = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
+
         Vector3 lookDirection = targetTransform.position - this.transform.position;
 
-        //Quaternion toRotation = Quaternion.FromToRotation(transform.forward, lookDirection);
         Quaternion toRotation = Quaternion.LookRotation(lookDirection);
         Quaternion fromRotation = this.transform.rotation;
 

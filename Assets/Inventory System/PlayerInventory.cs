@@ -32,6 +32,9 @@ public class PlayerInventory : MonoBehaviour
 #pragma warning restore 0649
 	private Transform[] innInventoryShelves;
 
+	[Header("Recipe System")]
+	public Dictionary<string, int> inventoryFoodTracker = new Dictionary<string, int>(); //Dynamically tracks all food items in all (inn/player) inventories
+
 	// PUBLIC METHODS:
 	public float GetCoins()
 	{
@@ -299,7 +302,7 @@ public class PlayerInventory : MonoBehaviour
 			case InventoryType.TradeInventory:
 				//TODO: Implement Trade Inventory Add Mechanism 
 				//This functionality probably is not needed, skipping for now.
-				Debug.Log("Trade Inventory not yet implemented.");
+				Debug.Log("Directly adding items to Trade Inventory not yet implemented.");
 				break;
 		}
 
@@ -582,6 +585,15 @@ public class PlayerInventory : MonoBehaviour
 			{
 				RemoveCoins(cost);
 				onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory); 
+
+				if(item is Food_Item) // Add this item to the food tracker if it's a food item.
+                {
+                    if (!inventoryFoodTracker.ContainsKey(item.name))
+                    {
+						inventoryFoodTracker.Add(item.name, 0);
+                    }
+					inventoryFoodTracker[item.name] += 1;
+                }
 			}
 		}
 
@@ -621,6 +633,7 @@ public class PlayerInventory : MonoBehaviour
 				Food_Item food = (Food_Item)innInventory[i].item;
 				if (food.freshness == FoodFreshness.Spoilt)
 				{
+					inventoryFoodTracker.Remove(innInventory[i].item.name);
 					RemoveItemAtIndex(i, InventoryType.InnInventory);
 					continue;
                 }
@@ -637,8 +650,9 @@ public class PlayerInventory : MonoBehaviour
             {
                 Food_Item food = (Food_Item)inventory[i].item;
                 if (food.freshness == FoodFreshness.Spoilt)
-                {
-                    RemoveItemAtIndex(i, InventoryType.PlayerInventory);
+				{
+					inventoryFoodTracker.Remove(inventory[i].item.name);
+					RemoveItemAtIndex(i, InventoryType.PlayerInventory);
 					continue;
                 }
                 else

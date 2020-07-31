@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45e3b6762111e14fab11786300620ff, type: 3}
+  m_Name: Mushrooms
+  m_EditorClassIdentifier: 
+  name: Mushrooms
+  itemType: 0
+  icon: {fileID: 21300000, guid: 491171ff63857254abf12d6a10eb7350, type: 3}
+  description: Be careful to not eat the poisonous ones.
+  prefab: {fileID: 3608321194438257905, guid: 20b810aa61b187f42a2c60eb2a326da6, type: 3}
+  itemPrice: 1.5
+  itemQuality: 0
+  itemAmountLimit: 8
+  FoodDecayModifier: 0.8
+  freshness: 0
+  currentDecay: 0

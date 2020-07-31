@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45e3b6762111e14fab11786300620ff, type: 3}
+  m_Name: Cabbage
+  m_EditorClassIdentifier: 
+  name: Cabbage
+  itemType: 0
+  icon: {fileID: 21300000, guid: 94ea1ef350f8a814eabae68f0ae4cb07, type: 3}
+  description: Yuck, I doubt many people like cabbage.
+  prefab: {fileID: 6709784582389744818, guid: 831afb7b79d0c2b46a64e4dafdbf8ea0, type: 3}
+  itemPrice: 0.75
+  itemQuality: 0
+  itemAmountLimit: 6
+  FoodDecayModifier: 0.75
+  freshness: 0
+  currentDecay: 0

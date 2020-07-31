@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839532f203950364fa5e9da3de06e059, type: 3}
+  m_Name: Whiting Stew
+  m_EditorClassIdentifier: 
+  name: Whiting Stew
+  icon: {fileID: 21300000, guid: dbb6d817d73d3aa4f817fbe24409dc73, type: 3}
+  model: {fileID: 0}
+  amountOfUses: 4
+  ingredients:
+  - item: {fileID: 11400000, guid: 08c715d05e6272e4eb767c817253fba4, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 186d1cf3c9c73544bba5f06404d2f364, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 627abc088bf21e44588d11528afc50ac, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c23ad16f7859463468682aaf3abdd656, type: 2}
+    amount: 1

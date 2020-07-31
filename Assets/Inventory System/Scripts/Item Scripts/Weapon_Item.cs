@@ -1,7 +1,7 @@
 ﻿using I2.Loc;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Weapon", menuName = "Inventory/New Weapon")]
+[CreateAssetMenu(fileName = "New Weapon", menuName = "Inventory/New Weapon", order = 1)]
 public class Weapon_Item : Item
 {
     private void Awake()

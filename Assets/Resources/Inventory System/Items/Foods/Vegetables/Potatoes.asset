@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45e3b6762111e14fab11786300620ff, type: 3}
+  m_Name: Potatoes
+  m_EditorClassIdentifier: 
+  name: Potatoes
+  itemType: 0
+  icon: {fileID: 21300000, guid: 494bf6a7979ae89428496390b89d936b, type: 3}
+  description: Po-ta-toes. Boil them, mash them, stick them in a stew.
+  prefab: {fileID: 2786366867395469642, guid: fec38d2189b71f4499bcb819a8377440, type: 3}
+  itemPrice: 1.5
+  itemQuality: 0
+  itemAmountLimit: 8
+  FoodDecayModifier: 0.5
+  freshness: 0
+  currentDecay: 0
