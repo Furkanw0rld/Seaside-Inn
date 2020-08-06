@@ -12,6 +12,8 @@ public class CookingWindowUI : MonoBehaviour
 
     public List<GameObject> slotItems;
 
+    private PlayerInventory playerInventory;
+
     private void Awake()
     {
         if(Instance == null)
@@ -29,6 +31,8 @@ public class CookingWindowUI : MonoBehaviour
         {
             cookingWindow.SetActive(false);
         }
+
+        playerInventory = PlayerInventory.Instance;
     }
 
     public void DisplayRecipes(HashSet<Recipe> recipesToDisplay)
@@ -51,8 +55,16 @@ public class CookingWindowUI : MonoBehaviour
                 ingredientText.text = "- " + ing.amount + " " + ing.item.name;
                 ingredientText.gameObject.SetActive(true);
             }
-
+            rpSlot.cookButton.onClick.AddListener(delegate { CookRecipe(rp); });
         }
+
+        string temp = "Items in Dict \n";
+        foreach (KeyValuePair<string, int> kp in playerInventory.inventoryFoodTracker)
+        {
+            temp += "- " + kp.Key + " contains: " + kp.Value + "\n";
+        }
+
+        Debug.Log(temp);
     }
 
     private void ClearContentWindow()
@@ -62,5 +74,14 @@ public class CookingWindowUI : MonoBehaviour
             Destroy(go);
         }
         slotItems.Clear();
+    }
+
+    private void CookRecipe(Recipe recipe)
+    {
+        for(int i = 0; i < recipe.ingredients.Count; i++)
+        {
+            playerInventory.FindAndUseFoodItem(recipe.ingredients[i].item, recipe.ingredients[i].amount);
+        }
+        PlayerManager.Instance.playerController.RemoveFocus();
     }
 }

@@ -143,8 +143,6 @@ public class InventoryUI : MonoBehaviour
                 break;
         }
 
-
-        Debug.Log("Inventory UI Updated. " + inventoryType.ToString());
     }
 
     private void DisplayItemAtSlot(int index, InventoryType inventoryType)

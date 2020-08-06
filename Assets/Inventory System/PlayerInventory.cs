@@ -468,7 +468,7 @@ public class PlayerInventory : MonoBehaviour
 		}
 	}
 
-    private void RemoveItem(Item item, InventoryType inventoryFrom, int currentItemAmount)
+    private void RemoveItem(Item item, InventoryType inventoryFrom, int currentItemAmount) //Remove item completely based on the amount there currently is.
     {
         switch (inventoryFrom)
         {
@@ -663,8 +663,131 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+	public void FindAndUseFoodItem(Food_Item item, int amountToUse)
+    {
+		List<InventorySlotItem> foodsFound = new List<InventorySlotItem>();
 
+		for(int i = 0; i < innInventory.Count; i++) //Go through all inventories and find food that matches the one we are looking for and add it to list
+        {
+			if(innInventory[i].item.name == item.name)
+            {
+				foodsFound.Add(innInventory[i]);
+            }
+        }
+		for(int i = 0; i < inventory.Count; i++)
+        {
+			if(inventory[i].item.name == item.name)
+            {
+				foodsFound.Add(inventory[i]);
+            }
+        }
 
+		
+		if(foodsFound.Count > 1)
+        {
+			InventorySlotItem lowestSlot = foodsFound[0];
+			Food_Item lowestFood = (Food_Item) foodsFound[0].item;
+
+			for (int i = 1; i < foodsFound.Count; i++)
+			{
+				Food_Item fItem = (Food_Item) foodsFound[i].item;
+
+				if(fItem.freshness > lowestFood.freshness)
+                {
+					lowestSlot = foodsFound[i];
+					lowestFood = (Food_Item) foodsFound[i].item;
+                }
+			}
+
+			if(lowestSlot.amount >= amountToUse)
+            {
+				lowestSlot.RemoveAmount(amountToUse);
+            }
+            else
+            {
+				int amountUsed = lowestSlot.amount;
+				lowestSlot.RemoveAmount(amountUsed);
+				foodsFound.Remove(lowestSlot);
+
+				for(int i = 0; i < foodsFound.Count; i++)
+                {
+					if(amountUsed >= amountToUse)
+                    {
+						break;
+                    }
+
+					if(foodsFound[i].amount >= (amountToUse - amountUsed))
+                    {
+						amountUsed += (amountToUse - amountUsed);
+						foodsFound[i].RemoveAmount(amountToUse - amountUsed);
+                    }
+                    else
+                    {
+						int cAmount = foodsFound[i].amount;
+						amountUsed += cAmount;
+						foodsFound[i].RemoveAmount(cAmount);
+                    }
+                }
+            }
+        }
+        else // We found only 1 item and remove from there
+        {
+			foodsFound[0].RemoveAmount(amountToUse);
+        }
+
+		onInventoryChangedCallback?.Invoke(InventoryType.InnInventory);
+		onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory);
+
+		inventoryFoodTracker[item.name] -= amountToUse;
+		if(inventoryFoodTracker[item.name] <= 0)
+        {
+			inventoryFoodTracker.Remove(item.name);
+        }
+
+		ClearEmptySlots();
+    }
+
+	private void ClearEmptySlots()
+    {
+		if(inventory.Count > 0)
+        {
+			for (int i = inventory.Count - 1; i >= 0; i--)
+			{
+				if (inventory[i].amount <= 0)
+				{
+					Destroy(inventory[i].item);
+					inventory.RemoveAt(i);
+					onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory);
+				}
+			}
+		}
+
+		if(innInventory.Count > 3)
+        {
+			for (int i = innInventory.Count - 1; i >= 4; i--)
+			{
+				if (innInventory[i].amount <= 0)
+				{
+					Destroy(innInventory[i].item);
+					innInventory.RemoveAt(i);
+					onInventoryChangedCallback?.Invoke(InventoryType.InnInventory);
+				}
+			}
+		}
+
+		if(tradeInventory.Count > 0)
+        {
+			for (int i = tradeInventory.Count - 1; i >= 0; i--)
+			{
+				if (tradeInventory[i].amount <= 0)
+				{
+					Destroy(tradeInventory[i].item);
+					tradeInventory.RemoveAt(i);
+					onInventoryChangedCallback?.Invoke(InventoryType.TradeInventory);
+				}
+			}
+		}
+    }
 
 	//TODO: Improve the Inn Inventory Shelving System.
 	// This base system lacks rotation,

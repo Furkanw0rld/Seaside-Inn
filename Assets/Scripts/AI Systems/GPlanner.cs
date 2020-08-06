@@ -93,13 +93,13 @@ public class GPlanner
             queue.Enqueue(a);
         }
 
-        string actionString = "Plan has been found.";
-        foreach(GAction a in queue)
-        {
-            actionString += " Action: " + a.actionName;
-        }
+        //string actionString = "Plan has been found.";
+        //foreach(GAction a in queue)
+        //{
+        //    actionString += " Action: " + a.actionName;
+        //}
 
-        Debug.Log(actionString);
+        //Debug.Log(actionString);
         return queue;
     }
 

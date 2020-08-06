@@ -56,18 +56,6 @@ public class RecipeSystem : MonoBehaviour
         playerInventory = PlayerInventory.Instance;
     }
 
-    public HashSet<Recipe> GetRecipes(Food_Item item)
-    {
-        if (recipes.ContainsKey(item.name))
-        {
-            return recipes[item.name];
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     public HashSet<Recipe> GetAvailableRecipesForPlayer()
     {
         HashSet<Recipe> availableRecipes = new HashSet<Recipe>();
@@ -90,12 +78,12 @@ public class RecipeSystem : MonoBehaviour
                         {
                             if (playerInventory.inventoryFoodTracker.ContainsKey(recipes[currentKey].ElementAt(j).ingredients[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
                             {
-                                if(playerInventory.inventoryFoodTracker[currentKey] < recipes[currentKey].ElementAt(j).ingredients[k].amount) //If we don't have enough of the item break and go to next recipe
+                                if (playerInventory.inventoryFoodTracker[recipes[currentKey].ElementAt(j).ingredients[k].item.name] < recipes[currentKey].ElementAt(j).ingredients[k].amount) //If we don't have enough of the item break and go to next recipe
                                 {
                                     break;
                                 }
-
-                                if(k + 1 == recipes[currentKey].ElementAt(j).ingredients.Count) //Last item in the list
+                                
+                                if (k == recipes[currentKey].ElementAt(j).ingredients.Count - 1) //Last item in the list
                                 {
                                     availableRecipes.Add(recipes[currentKey].ElementAt(j)); //Add to available recipes and break
                                     break;
