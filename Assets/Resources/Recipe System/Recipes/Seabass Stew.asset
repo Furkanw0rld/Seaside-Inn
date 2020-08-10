@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Seabass Stew
   icon: {fileID: 21300000, guid: dbb6d817d73d3aa4f817fbe24409dc73, type: 3}
-  model: {fileID: 0}
   amountOfUses: 4
+  cookTime: 10
+  model: {fileID: 7789139881530008576, guid: f8f2eb036a370f24a94139f29f29965c, type: 3}
+  cookingModel: {fileID: 7789139881530008576, guid: f8f2eb036a370f24a94139f29f29965c,
+    type: 3}
+  cookedModel: {fileID: 7295809412857762636, guid: 52291a752abb0fe4197371face4cd100,
+    type: 3}
   ingredients:
   - item: {fileID: 11400000, guid: 2490ac1926e528041baadc5ff8f4fe14, type: 2}
     amount: 2

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CookingWindowUI : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class CookingWindowUI : MonoBehaviour
         playerInventory = PlayerInventory.Instance;
     }
 
-    public void DisplayRecipes(HashSet<Recipe> recipesToDisplay)
+    public void DisplayRecipes(HashSet<Recipe> recipesToDisplay, UnityAction<Recipe> onCookCallback)
     {
         ClearContentWindow();
 
@@ -55,16 +56,9 @@ public class CookingWindowUI : MonoBehaviour
                 ingredientText.text = "- " + ing.amount + " " + ing.item.name;
                 ingredientText.gameObject.SetActive(true);
             }
-            rpSlot.cookButton.onClick.AddListener(delegate { CookRecipe(rp); });
+            rpSlot.cookButton.onClick.AddListener(delegate { CookRecipe(rp, onCookCallback); });
         }
 
-        string temp = "Items in Dict \n";
-        foreach (KeyValuePair<string, int> kp in playerInventory.inventoryFoodTracker)
-        {
-            temp += "- " + kp.Key + " contains: " + kp.Value + "\n";
-        }
-
-        Debug.Log(temp);
     }
 
     private void ClearContentWindow()
@@ -76,12 +70,15 @@ public class CookingWindowUI : MonoBehaviour
         slotItems.Clear();
     }
 
-    private void CookRecipe(Recipe recipe)
+    private void CookRecipe(Recipe recipe, UnityAction<Recipe> onCookCallback)
     {
         for(int i = 0; i < recipe.ingredients.Count; i++)
         {
             playerInventory.FindAndUseFoodItem(recipe.ingredients[i].item, recipe.ingredients[i].amount);
         }
-        PlayerManager.Instance.playerController.RemoveFocus();
+
+        onCookCallback.Invoke(recipe);
+
+        cookingWindow.SetActive(false);
     }
 }

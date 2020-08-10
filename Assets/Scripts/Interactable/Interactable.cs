@@ -1,6 +1,4 @@
 ﻿using Pathfinding;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -27,6 +25,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
+        // TODO: Make Interact Abstract
         Debug.Log("Interacting with " + transform.name);
         //Overwritten
     }

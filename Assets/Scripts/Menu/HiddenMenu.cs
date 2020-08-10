@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class HiddenMenu : MonoBehaviour
@@ -13,6 +13,7 @@ public class HiddenMenu : MonoBehaviour
     public TextMeshProUGUI currentTimeMultiplierText;
     public TextMeshProUGUI currentEntityCountText;
 
+    UniversalRenderPipelineAsset urp;
     [Header("NPC Spawner")]
     public GameObject npcToSpawn;
 
@@ -22,7 +23,9 @@ public class HiddenMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(QualitySettings.vSyncCount == 0)
+        urp = (UniversalRenderPipelineAsset)GraphicsSettings.currentRenderPipeline;
+
+        if (QualitySettings.vSyncCount == 0)
         {
             vsyncText.text = "vSync disabled.";
         }
@@ -75,6 +78,18 @@ public class HiddenMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ChangeShadowMode()
+    {
+        if(urp.shadowDistance > 0f)
+        {
+            urp.shadowDistance = 0f;
+        }
+        else
+        {
+            urp.shadowDistance = 100f;
+        }
     }
 
     public void RestartGame()

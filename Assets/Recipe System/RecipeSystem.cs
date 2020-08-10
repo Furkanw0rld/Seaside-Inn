@@ -74,16 +74,18 @@ public class RecipeSystem : MonoBehaviour
                     }
                     else
                     {
-                        for(int k = 0; k < recipes[currentKey].ElementAt(j).ingredients.Count; k++) // Go through it's ingredients list, and make sure that the player has atleast that amount
+
+                        List<Ingredient> ingredientList = recipes[currentKey].ElementAt(j).ingredients;
+                        for (int k = 0; k < ingredientList.Count; k++) // Go through it's ingredients list, and make sure that the player has atleast that amount
                         {
-                            if (playerInventory.inventoryFoodTracker.ContainsKey(recipes[currentKey].ElementAt(j).ingredients[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
+                            if (playerInventory.inventoryFoodTracker.ContainsKey(ingredientList[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
                             {
-                                if (playerInventory.inventoryFoodTracker[recipes[currentKey].ElementAt(j).ingredients[k].item.name] < recipes[currentKey].ElementAt(j).ingredients[k].amount) //If we don't have enough of the item break and go to next recipe
+                                if (playerInventory.inventoryFoodTracker[ingredientList[k].item.name] < ingredientList[k].amount) //If we don't have enough of the item break and go to next recipe
                                 {
                                     break;
                                 }
                                 
-                                if (k == recipes[currentKey].ElementAt(j).ingredients.Count - 1) //Last item in the list
+                                if (k == ingredientList.Count - 1) //Last item in the list
                                 {
                                     availableRecipes.Add(recipes[currentKey].ElementAt(j)); //Add to available recipes and break
                                     break;
