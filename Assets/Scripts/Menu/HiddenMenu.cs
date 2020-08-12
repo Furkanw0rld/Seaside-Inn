@@ -17,8 +17,8 @@ public class HiddenMenu : MonoBehaviour
     [Header("NPC Spawner")]
     public GameObject npcToSpawn;
 
-    private GameObject _player; //Player
-    private int entityCount = 9;
+    private GameObject player; //Player
+    private int entityCount = 9; // Starting characters in the scene.
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class HiddenMenu : MonoBehaviour
         {
             vsyncText.text = "vSync enabled.";
         }
-        _player = PlayerManager.Instance.player;
+        player = PlayerManager.Instance.player;
 
         currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(0) + "x";
     }
@@ -43,15 +43,13 @@ public class HiddenMenu : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (hiddenMenu.gameObject.activeSelf)
-            {
-                hiddenMenu.gameObject.SetActive(false);
-            }
-            else
-            {
-                hiddenMenu.gameObject.SetActive(true);
-            }
+            hiddenMenu.gameObject.SetActive(!hiddenMenu.gameObject.activeSelf);
         }
+    }
+
+    public void OpenHiddenMenu()
+    {
+        hiddenMenu.gameObject.SetActive(!hiddenMenu.gameObject.activeSelf);
     }
 
     public void VSyncSetting()
@@ -70,7 +68,7 @@ public class HiddenMenu : MonoBehaviour
 
     public void SpawnNPC()
     {
-        Instantiate(npcToSpawn, _player.transform.position + (_player.transform.right * 2.5f), Quaternion.identity);
+        Instantiate(npcToSpawn, player.transform.position + (player.transform.right * 2.5f), Quaternion.identity);
         entityCount++;
         currentEntityCountText.text = "There are: " + entityCount + " characters.";
     }

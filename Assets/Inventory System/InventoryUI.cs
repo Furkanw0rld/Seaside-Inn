@@ -88,6 +88,11 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void OpenInventoryMenu()
+    {
+        inventoryPanel.gameObject.SetActive(!inventoryPanel.activeSelf);
+    }
+
     private void OnDisable()
     {
         playerInventory.onInventoryChangedCallback -= UpdateUI;

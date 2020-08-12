@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(BoxCollider))]
 public class CookingArea : Interactable
 {
     private const float ALLOWED_MIN_RATIO = 0.9f; // The percent we are allowed to undercook by, this becomes the minimum allowed time (cookTime of 30 -> 27) the food is considered cooked after 27seconds
@@ -21,7 +21,7 @@ public class CookingArea : Interactable
 #pragma warning restore 0649
 
     [Tooltip("Current recipe at this cooking area.")] private Recipe currentRecipe;
-    private MeshCollider collisionMesh; //The Mesh Area we interact with
+    private BoxCollider collisionMesh; //The Mesh Area we interact with
 
     private GameObject cookingGameObject;
     private GameObject cookedGameObject;
@@ -33,7 +33,8 @@ public class CookingArea : Interactable
 
     private void Awake()
     {
-        collisionMesh = this.GetComponent<MeshCollider>();
+        collisionMesh = this.GetComponent<BoxCollider>();
+        collisionMesh.enabled = false;
         cookingInformationWindow.SetActive(false);
     }
 
@@ -42,7 +43,7 @@ public class CookingArea : Interactable
         currentRecipe = recipe;
         IsCooking = true;
         usesLeft = currentRecipe.amountOfUses;
-        collisionMesh.sharedMesh = currentRecipe.cookingModel.GetComponent<MeshFilter>().sharedMesh;
+        collisionMesh.enabled = true;
         cookingGameObject = Instantiate(currentRecipe.cookingModel, this.transform);
         cookingInformationWindow.SetActive(true);
         usesLeftText.gameObject.SetActive(false);
@@ -76,7 +77,7 @@ public class CookingArea : Interactable
                 Debug.Log("Food is cooked!");
                 IsRecipeHere = true;
                 cookedGameObject = Instantiate(currentRecipe.cookedModel, this.transform);
-                collisionMesh.sharedMesh = cookedGameObject.GetComponent<MeshFilter>().sharedMesh;
+                collisionMesh.enabled = true;
                 Destroy(cookingGameObject);
                 cookingGameObject = null;
 
@@ -91,7 +92,7 @@ public class CookingArea : Interactable
                 Debug.Log("Food isn't cooked! Trashing.");
                 IsRecipeHere = false;
                 usesLeft = 0;
-                collisionMesh.sharedMesh = null;
+                collisionMesh.enabled = false;
                 currentRecipe = null;
                 cookingInformationWindow.SetActive(false);
                 Destroy(cookingGameObject);
@@ -111,7 +112,7 @@ public class CookingArea : Interactable
             {
                 IsRecipeHere = false;
                 IsCooking = false;
-                collisionMesh.sharedMesh = null;
+                collisionMesh.enabled = false;
                 currentRecipe = null;
                 Destroy(cookedGameObject);
                 cookedGameObject = null;

@@ -7,7 +7,7 @@ public class PlayerInventory : MonoBehaviour
 	public delegate void OnInventoryChanged(InventoryType inventoryType);
 	public OnInventoryChanged onInventoryChangedCallback;
 
-	private float coins = 100;
+	private float coins = 1000;
 	private readonly float maximumCoinFillAmount = 250; //This the amount of coins when the UI Gold Bar is filled completely.
 	private PlayerManager manager; //Cache of manager
 	[Header("Player Inventory")]

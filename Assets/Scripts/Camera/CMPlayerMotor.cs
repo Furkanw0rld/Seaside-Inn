@@ -11,6 +11,15 @@ public class CMPlayerMotor : MonoBehaviour
     private Vector2 mouseDelta;
     private PlayerManager playerManager;
 
+    private float rotationTimer = 0f;
+    private readonly float minimumTimeToHoldToRotate = 0.3f;
+
+    // Camera Priorities:
+    // Free Look Cam is set to 10. (Default Cam)
+    private const int STANDBY_PRIORITY = 5;
+    private const int KITCHEN_PRIORITY = 15;
+    private const int ZOOMED_IN_PRIORITY = 16;
+
     private void Start()
     {
         Camera.main.depthTextureMode = DepthTextureMode.Depth;
@@ -34,27 +43,25 @@ public class CMPlayerMotor : MonoBehaviour
 
     private void KitchenCameraView()
     {
-        kitchenCamera.Priority = 15;
+        kitchenCamera.Priority = KITCHEN_PRIORITY;
     }
 
     private void ExitKitchenCameraView()
     {
-        kitchenCamera.Priority = 5;
+        kitchenCamera.Priority = STANDBY_PRIORITY;
     }
 
     private void ZoomedInView(Transform lookTarget) // When we interact with player, switch cam
     {
         zoomedInCamera.LookAt = lookTarget;
         zoomedInCamera.Follow = lookTarget;
-        zoomedInCamera.Priority = 15;
+        zoomedInCamera.Priority = ZOOMED_IN_PRIORITY;
     }
 
     private void ExitZoomedInView() //Revert back to freelook camera
     {
-        zoomedInCamera.Priority = 5;
+        zoomedInCamera.Priority = STANDBY_PRIORITY;
     }
-
-
 
     private void Update()
     {
@@ -64,31 +71,39 @@ public class CMPlayerMotor : MonoBehaviour
             return;
         }
 
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
         if (Mouse.current.rightButton.isPressed) 
         {
-            mouseDelta = Mouse.current.delta.ReadValue();
-            mouseDelta *= 0.5f; //Account for Scaling applied
-            mouseDelta *= 0.1f; //Account for sensitivity
-            freeLookCamera.m_XAxis.m_InputAxisValue = mouseDelta.x;
-            freeLookCamera.m_YAxis.m_InputAxisValue = mouseDelta.y;
+            rotationTimer += Time.deltaTime;
 
-            //_freeLook.m_XAxis.m_InputAxisValue = Input.GetAxis("Mouse X");
-            //_freeLook.m_YAxis.m_InputAxisValue = Input.GetAxis("Mouse Y");
+            if(rotationTimer > minimumTimeToHoldToRotate)
+            {
+                if (Cursor.visible)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+
+                mouseDelta = Mouse.current.delta.ReadValue();
+                mouseDelta *= 0.5f; //Account for scaling applied
+                mouseDelta *= 0.1f; //Account for sensitivity
+                freeLookCamera.m_XAxis.m_InputAxisValue = mouseDelta.x;
+                freeLookCamera.m_YAxis.m_InputAxisValue = mouseDelta.y;
+            }
+
         }
 
         if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            rotationTimer = 0f;
 
-            freeLookCamera.m_XAxis.m_InputAxisValue = 0;
-            freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+            if (!Cursor.visible)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                freeLookCamera.m_XAxis.m_InputAxisValue = 0;
+                freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+            }
+
         }
     }
 }

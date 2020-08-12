@@ -29,6 +29,8 @@ public class PlayerAIMotor : MonoBehaviour
     public void StopFollowingTarget()
     {
         target = null;
+        ai.destination = this.transform.position;
+
         if (ai.isStopped)
         {
             ai.isStopped = false;
