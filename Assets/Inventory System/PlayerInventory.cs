@@ -309,11 +309,238 @@ public class PlayerInventory : MonoBehaviour
 		return false;
 	}
 
+	private void RemoveAmountFromItem(Item item, int amountToRemove, InventoryType inventoryFrom)
+    {
+		int amountRemoved = 0;
+
+		switch (inventoryFrom)
+        {
+			case InventoryType.PlayerInventory:
+				switch (item)
+				{
+					case Food_Item foodItem:
+						
+						for(int i = 0; i < inventory.Count; i++)
+                        {
+							if(amountRemoved >= amountToRemove)
+                            {
+								onInventoryChangedCallback?.Invoke(inventoryFrom);
+								return;
+                            }
+
+							if(inventory[i].item.name == foodItem.name)
+                            {
+								Food_Item inventoryItem = (Food_Item)inventory[i].item;
+
+								if(inventoryItem.freshness == foodItem.freshness)
+                                {
+									if(inventory[i].amount >= (amountToRemove - amountRemoved))
+                                    {
+										int toRemove = amountToRemove - amountRemoved;
+										inventory[i].RemoveAmount(toRemove);
+										amountRemoved += toRemove;
+                                    }
+                                    else
+                                    {
+										int toRemove = inventory[i].amount;
+										RemoveItemAtIndex(i, InventoryType.PlayerInventory);
+										amountRemoved += toRemove;
+                                    }
+                                }
+                            }
+                        }
+						break;
+
+					default:
+						for (int i = 0; i < inventory.Count; i++)
+                        {
+							if(amountRemoved >= amountToRemove)
+                            {
+								onInventoryChangedCallback?.Invoke(inventoryFrom);
+								return;
+                            }
+
+							if(inventory[i].item.name == item.name)
+                            {
+								if(inventory[i].amount >= (amountToRemove - amountRemoved))
+                                {
+									int toRemove = amountToRemove - amountRemoved;
+									inventory[i].RemoveAmount(toRemove);
+									amountRemoved += toRemove;
+                                }
+                                else
+                                {
+									int toRemove = inventory[i].amount;
+									RemoveItemAtIndex(i, InventoryType.PlayerInventory);
+									amountRemoved += toRemove;
+                                }
+                            }
+                        }
+						break;
+                }
+				break;
+
+			case InventoryType.InnInventory:
+
+				Food_Item fItem = (Food_Item)item;
+				for(int i = 4; i < innInventory.Count; i++)
+                {
+					if(amountRemoved >= amountToRemove)
+                    {
+						onInventoryChangedCallback?.Invoke(inventoryFrom);
+						return;
+                    }
+
+					if(innInventory[i].item.name == fItem.name)
+                    {
+						Food_Item inventoryItem = (Food_Item)innInventory[i].item;
+
+						if(inventoryItem.freshness == fItem.freshness)
+                        {
+							if(innInventory[i].amount >= (amountToRemove - amountRemoved))
+                            {
+								int toRemove = amountToRemove - amountRemoved;
+								innInventory[i].RemoveAmount(toRemove);
+								amountRemoved += toRemove;
+                            }
+                            else
+                            {
+								int toRemove = innInventory[i].amount;
+								RemoveItemAtIndex(i, InventoryType.InnInventory);
+								amountRemoved += toRemove;
+                            }
+                        }
+                    }
+                }
+				break;
+
+			case InventoryType.TradeInventory:
+				for(int i = 0; i < tradeInventory.Count; i++)
+                {
+					if(amountRemoved >= amountToRemove)
+                    {
+						onInventoryChangedCallback?.Invoke(inventoryFrom);
+						return;
+                    }
+
+					if(tradeInventory[i].item.name == item.name)
+                    {
+						if (tradeInventory[i].amount >= (amountToRemove - amountRemoved))
+						{
+							int toRemove = amountToRemove - amountRemoved;
+							tradeInventory[i].RemoveAmount(toRemove);
+							amountRemoved += toRemove;
+						}
+						else
+						{
+							int toRemove = tradeInventory[i].amount;
+							RemoveItemAtIndex(i, InventoryType.TradeInventory);
+							amountRemoved += toRemove;
+						}
+					}
+                }
+				break;
+        }
+    }
+
     public void MoveItem(Item item, int amount, InventoryType inventoryTo)
     {
-        if (!CanMoveItem(inventoryTo)) //If there is no space to move, just break out without continuing.
+        if (!CanMoveItem(inventoryTo)) //If there is no space to move, nove item partially to another slot.
         {
-			//TODO: Should probably check if it's possible to add items to onto another before returning, thus we could partially add items to another slot. Not a priority for now.
+            int foundIndex;
+
+            switch (inventoryTo)
+            {
+				case InventoryType.PlayerInventory: //Player Inventory is full and we are trying to add an item here.
+					foundIndex = FindAnotherItemWithSpace(0, item);
+
+					if(foundIndex >= 0) // We found a slot we can add this item to. 
+                    {
+						int spaceRemaining = inventory[foundIndex].InventorySpaceRemaining();
+
+						if(spaceRemaining >= amount) //We have enough room to add all of the item
+                        {
+							inventory[foundIndex].AddAmount(amount);
+
+							if(item.itemType == ItemType.Food)
+                            {
+								RemoveItem(item, InventoryType.InnInventory, amount);
+                            }
+                            else
+                            {
+								RemoveItem(item, InventoryType.TradeInventory, amount);
+                            }
+                        }
+                        else // Not enough room to add all of the item, add partially
+                        {
+							inventory[foundIndex].AddAmount(spaceRemaining);
+							if(item.itemType == ItemType.Food)
+                            {
+								RemoveAmountFromItem(item, spaceRemaining, InventoryType.InnInventory);
+                            }
+                            else
+                            {
+								RemoveAmountFromItem(item, spaceRemaining, InventoryType.TradeInventory);
+                            }
+                        }
+						onInventoryChangedCallback?.Invoke(inventoryTo);
+                    }
+                    else
+                    {
+						return;
+                    }
+					break;
+
+				case InventoryType.InnInventory:
+					foundIndex = FindAnotherItemInInnWithSpace(4, item);
+					if(foundIndex >= 0)
+                    {
+						int spaceRemaining = innInventory[foundIndex].InventorySpaceRemaining();
+						if(spaceRemaining >= amount)
+                        {
+							innInventory[foundIndex].AddAmount(amount);
+							RemoveItem(item, InventoryType.PlayerInventory, amount);
+                        }
+                        else
+                        {
+							innInventory[foundIndex].AddAmount(spaceRemaining);
+							RemoveAmountFromItem(item, spaceRemaining, InventoryType.PlayerInventory);
+                        }
+
+						onInventoryChangedCallback?.Invoke(inventoryTo);
+					}
+                    else
+                    {
+						return;
+                    }
+					break;
+
+				case InventoryType.TradeInventory:
+					foundIndex = FindAnotherItemInTradeWithSpace(0, item);
+					if(foundIndex >= 0)
+                    {
+						int spaceRemaining = tradeInventory[foundIndex].InventorySpaceRemaining();
+						if(spaceRemaining >= amount)
+                        {
+							tradeInventory[foundIndex].AddAmount(amount);
+							RemoveItem(item, InventoryType.PlayerInventory, amount);
+                        }
+                        else
+                        {
+							tradeInventory[foundIndex].AddAmount(spaceRemaining);
+							RemoveAmountFromItem(item, spaceRemaining, InventoryType.PlayerInventory);
+                        }
+
+						onInventoryChangedCallback?.Invoke(inventoryTo);
+					}
+                    else
+                    {
+						return;
+                    }
+					break;
+
+            }
+
 			return;
 		}
 

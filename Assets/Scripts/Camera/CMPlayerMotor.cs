@@ -12,7 +12,7 @@ public class CMPlayerMotor : MonoBehaviour
     private PlayerManager playerManager;
 
     private float rotationTimer = 0f;
-    private readonly float minimumTimeToHoldToRotate = 0.3f;
+    private readonly float minimumTimeToHoldToRotate = 0.2f;
 
     // Camera Priorities:
     // Free Look Cam is set to 10. (Default Cam)
