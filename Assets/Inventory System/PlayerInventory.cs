@@ -349,6 +349,7 @@ public class PlayerInventory : MonoBehaviour
                                 }
                             }
                         }
+						onInventoryChangedCallback?.Invoke(inventoryFrom);
 						break;
 
 					default:
@@ -376,6 +377,7 @@ public class PlayerInventory : MonoBehaviour
                                 }
                             }
                         }
+						onInventoryChangedCallback?.Invoke(inventoryFrom);
 						break;
                 }
 				break;
@@ -412,6 +414,7 @@ public class PlayerInventory : MonoBehaviour
                         }
                     }
                 }
+				onInventoryChangedCallback?.Invoke(inventoryFrom);
 				break;
 
 			case InventoryType.TradeInventory:
@@ -439,6 +442,7 @@ public class PlayerInventory : MonoBehaviour
 						}
 					}
                 }
+				onInventoryChangedCallback?.Invoke(inventoryFrom);
 				break;
         }
     }
@@ -487,6 +491,7 @@ public class PlayerInventory : MonoBehaviour
                     }
                     else
                     {
+						onInventoryChangedCallback?.Invoke(inventoryTo);
 						return;
                     }
 					break;
@@ -511,6 +516,7 @@ public class PlayerInventory : MonoBehaviour
 					}
                     else
                     {
+						onInventoryChangedCallback?.Invoke(inventoryTo);
 						return;
                     }
 					break;
@@ -535,6 +541,7 @@ public class PlayerInventory : MonoBehaviour
 					}
                     else
                     {
+						onInventoryChangedCallback?.Invoke(inventoryTo);
 						return;
                     }
 					break;
