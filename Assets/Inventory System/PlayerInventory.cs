@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -897,131 +898,129 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+	private struct FoodItemsInInventoryHelperTracker
+    {
+		public int index;
+		public InventoryType inventoryAt;
+		public FoodFreshness freshness;
+		public int amount;
+
+		public FoodItemsInInventoryHelperTracker(int i, int amount, InventoryType type, FoodFreshness freshness)
+        {
+			index = i;
+			this.amount = amount;
+			inventoryAt = type;
+			this.freshness = freshness;
+        }
+    }
+
 	public void FindAndUseFoodItem(Food_Item item, int amountToUse)
     {
-		List<InventorySlotItem> foodsFound = new List<InventorySlotItem>();
+		List<FoodItemsInInventoryHelperTracker> foodsFound = new List<FoodItemsInInventoryHelperTracker>();
+		int amountUsed = 0;
 
-		for(int i = 0; i < innInventory.Count; i++) //Go through all inventories and find food that matches the one we are looking for and add it to list
+		for(int i = 4; i < innInventory.Count; i++)
         {
 			if(innInventory[i].item.name == item.name)
             {
-				foodsFound.Add(innInventory[i]);
+				Food_Item fItem = (Food_Item)innInventory[i].item;
+				foodsFound.Add(new FoodItemsInInventoryHelperTracker(i, innInventory[i].amount, InventoryType.InnInventory, fItem.freshness));
             }
         }
 		for(int i = 0; i < inventory.Count; i++)
         {
-			if(inventory[i].item.name == item.name)
+			if (inventory[i].item.name == item.name)
             {
-				foodsFound.Add(inventory[i]);
+				Food_Item fItem = (Food_Item)inventory[i].item;
+				foodsFound.Add(new FoodItemsInInventoryHelperTracker(i, inventory[i].amount, InventoryType.PlayerInventory, fItem.freshness));
             }
         }
 
-		
-		if(foodsFound.Count > 1)
+		List<FoodItemsInInventoryHelperTracker> sortedFoods = foodsFound.OrderBy(x => x.freshness).ThenBy(x => x.amount).ToList();
+
+		if(sortedFoods.Count > 1)
         {
-			InventorySlotItem lowestSlot = foodsFound[0];
-			Food_Item lowestFood = (Food_Item) foodsFound[0].item;
-
-			for (int i = 1; i < foodsFound.Count; i++)
-			{
-				Food_Item fItem = (Food_Item) foodsFound[i].item;
-
-				if(fItem.freshness > lowestFood.freshness)
-                {
-					lowestSlot = foodsFound[i];
-					lowestFood = (Food_Item) foodsFound[i].item;
-                }
-			}
-
-			if(lowestSlot.amount >= amountToUse)
+			int i = 0;
+			while(amountUsed < amountToUse)
             {
-				lowestSlot.RemoveAmount(amountToUse);
-            }
-            else
-            {
-				int amountUsed = lowestSlot.amount;
-				lowestSlot.RemoveAmount(amountUsed);
-				foodsFound.Remove(lowestSlot);
-
-				for(int i = 0; i < foodsFound.Count; i++)
+                switch (sortedFoods[i].inventoryAt)
                 {
-					if(amountUsed >= amountToUse)
-                    {
+					case InventoryType.PlayerInventory:
+						if(sortedFoods[i].amount >= (amountToUse - amountUsed))
+                        {
+							int used = amountToUse - amountUsed;
+							inventory[sortedFoods[i].index].RemoveAmount(used);
+							amountUsed += used;
+							if(inventory[sortedFoods[i].index].amount <= 0)
+                            {
+								RemoveItemAtIndex(sortedFoods[i].index, InventoryType.PlayerInventory);
+                            }
+                        }
+                        else
+                        {
+							int used = sortedFoods[i].amount;
+							RemoveItemAtIndex(sortedFoods[i].index, InventoryType.PlayerInventory);
+							amountUsed += used;
+                        }
+						i++;
 						break;
-                    }
 
-					if(foodsFound[i].amount >= (amountToUse - amountUsed))
-                    {
-						amountUsed += (amountToUse - amountUsed);
-						foodsFound[i].RemoveAmount(amountToUse - amountUsed);
-                    }
-                    else
-                    {
-						int cAmount = foodsFound[i].amount;
-						amountUsed += cAmount;
-						foodsFound[i].RemoveAmount(cAmount);
-                    }
+					case InventoryType.InnInventory:
+						if(sortedFoods[i].amount >= (amountToUse - amountUsed))
+                        {
+							int used = amountToUse - amountUsed;
+							innInventory[sortedFoods[i].index].RemoveAmount(used);
+							amountUsed += used;
+							if(innInventory[sortedFoods[i].index].amount <= 0)
+                            {
+								RemoveItemAtIndex(sortedFoods[i].index, InventoryType.InnInventory);
+                            }
+                        }
+                        else
+                        {
+							int used = sortedFoods[i].amount;
+							RemoveItemAtIndex(sortedFoods[i].index, InventoryType.InnInventory);
+							amountUsed += used;
+                        }
+						i++;
+						break;
                 }
             }
         }
-        else // We found only 1 item and remove from there
+        else
         {
-			foodsFound[0].RemoveAmount(amountToUse);
+            switch (sortedFoods[0].inventoryAt)
+            {
+				case InventoryType.PlayerInventory:
+					inventory[sortedFoods[0].index].RemoveAmount(amountToUse);
+
+					if(inventory[sortedFoods[0].index].amount <= 0)
+                    {
+						RemoveItemAtIndex(sortedFoods[0].index, InventoryType.PlayerInventory);
+                    }
+					break;
+
+				case InventoryType.InnInventory:
+					innInventory[sortedFoods[0].index].RemoveAmount(amountToUse);
+
+					if(innInventory[sortedFoods[0].index].amount <= 0)
+                    {
+						RemoveItemAtIndex(sortedFoods[0].index, InventoryType.InnInventory);
+                    }
+					break;
+            }
         }
 
 		onInventoryChangedCallback?.Invoke(InventoryType.InnInventory);
 		onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory);
 
 		inventoryFoodTracker[item.name] -= amountToUse;
-		if(inventoryFoodTracker[item.name] <= 0)
-        {
+		if (inventoryFoodTracker[item.name] <= 0)
+		{
 			inventoryFoodTracker.Remove(item.name);
-        }
-
-		ClearEmptySlots();
-    }
-
-	private void ClearEmptySlots()
-    {
-		if(inventory.Count > 0)
-        {
-			for (int i = inventory.Count - 1; i >= 0; i--)
-			{
-				if (inventory[i].amount <= 0)
-				{
-					Destroy(inventory[i].item);
-					inventory.RemoveAt(i);
-					onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory);
-				}
-			}
 		}
 
-		if(innInventory.Count > 3)
-        {
-			for (int i = innInventory.Count - 1; i >= 4; i--)
-			{
-				if (innInventory[i].amount <= 0)
-				{
-					Destroy(innInventory[i].item);
-					innInventory.RemoveAt(i);
-					onInventoryChangedCallback?.Invoke(InventoryType.InnInventory);
-				}
-			}
-		}
-
-		if(tradeInventory.Count > 0)
-        {
-			for (int i = tradeInventory.Count - 1; i >= 0; i--)
-			{
-				if (tradeInventory[i].amount <= 0)
-				{
-					Destroy(tradeInventory[i].item);
-					tradeInventory.RemoveAt(i);
-					onInventoryChangedCallback?.Invoke(InventoryType.TradeInventory);
-				}
-			}
-		}
-    }
+	}
 
 	//TODO: Improve the Inn Inventory Shelving System.
 	// This base system lacks rotation,

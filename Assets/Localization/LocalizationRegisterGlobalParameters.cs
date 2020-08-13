@@ -21,7 +21,7 @@ public class LocalizationRegisterGlobalParameters : MonoBehaviour, ILocalization
     {
         if(parameterName == "VERSION_TAG")
         {
-            return "0.1.5";
+            return "0.1.5.2";
         }
         if(parameterName == "CURRENT_DAY")
         {
