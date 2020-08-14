@@ -45,7 +45,7 @@ public class PlayerInventory : MonoBehaviour
 	public float AddCoins(float amount)
 	{
 		coins += amount;
-		manager.coinsText.text = coins.ToString();
+		manager.coinsText.text = string.Format("{0:0.##}", coins);
 		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
 		return coins;
 	}
@@ -53,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
 	public float RemoveCoins(float amount)
 	{
 		coins -= amount;
-		manager.coinsText.text = coins.ToString();
+		manager.coinsText.text = string.Format("{0:0.##}", coins);
 		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
 		return coins;
 	}
@@ -914,29 +914,34 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-	public void FindAndUseFoodItem(Food_Item item, int amountToUse)
+	private List<FoodItemsInInventoryHelperTracker> GetFoodInInventoriesSorted(Food_Item item)
     {
 		List<FoodItemsInInventoryHelperTracker> foodsFound = new List<FoodItemsInInventoryHelperTracker>();
-		int amountUsed = 0;
 
-		for(int i = 4; i < innInventory.Count; i++)
-        {
-			if(innInventory[i].item.name == item.name)
-            {
+		for (int i = 4; i < innInventory.Count; i++)
+		{
+			if (innInventory[i].item.name == item.name)
+			{
 				Food_Item fItem = (Food_Item)innInventory[i].item;
 				foodsFound.Add(new FoodItemsInInventoryHelperTracker(i, innInventory[i].amount, InventoryType.InnInventory, fItem.freshness));
-            }
-        }
-		for(int i = 0; i < inventory.Count; i++)
-        {
+			}
+		}
+		for (int i = 0; i < inventory.Count; i++)
+		{
 			if (inventory[i].item.name == item.name)
-            {
+			{
 				Food_Item fItem = (Food_Item)inventory[i].item;
 				foodsFound.Add(new FoodItemsInInventoryHelperTracker(i, inventory[i].amount, InventoryType.PlayerInventory, fItem.freshness));
-            }
-        }
+			}
+		}
 
-		List<FoodItemsInInventoryHelperTracker> sortedFoods = foodsFound.OrderBy(x => x.freshness).ThenBy(x => x.amount).ToList();
+		return foodsFound.OrderByDescending(x => x.freshness).ThenBy(x => x.amount).ToList();
+	}
+
+	public void FindAndUseFoodItem(Food_Item item, int amountToUse)
+    {
+		int amountUsed = 0;
+		List<FoodItemsInInventoryHelperTracker> sortedFoods = GetFoodInInventoriesSorted(item);
 
 		if(sortedFoods.Count > 1)
         {
@@ -946,43 +951,59 @@ public class PlayerInventory : MonoBehaviour
                 switch (sortedFoods[i].inventoryAt)
                 {
 					case InventoryType.PlayerInventory:
-						if(sortedFoods[i].amount >= (amountToUse - amountUsed))
+						if(inventory[sortedFoods[i].index].amount >= (amountToUse - amountUsed))
                         {
 							int used = amountToUse - amountUsed;
 							inventory[sortedFoods[i].index].RemoveAmount(used);
 							amountUsed += used;
+
 							if(inventory[sortedFoods[i].index].amount <= 0)
                             {
 								RemoveItemAtIndex(sortedFoods[i].index, InventoryType.PlayerInventory);
+								sortedFoods = GetFoodInInventoriesSorted(item);
+								i = 0;
+                            }
+                            else
+                            {
+								i++;
                             }
                         }
                         else
                         {
-							int used = sortedFoods[i].amount;
+							int used = inventory[sortedFoods[i].index].amount;
 							RemoveItemAtIndex(sortedFoods[i].index, InventoryType.PlayerInventory);
+							sortedFoods = GetFoodInInventoriesSorted(item);
 							amountUsed += used;
+							i = 0;
                         }
-						i++;
 						break;
 
 					case InventoryType.InnInventory:
-						if(sortedFoods[i].amount >= (amountToUse - amountUsed))
+						if(innInventory[sortedFoods[i].index].amount >= (amountToUse - amountUsed))
                         {
 							int used = amountToUse - amountUsed;
 							innInventory[sortedFoods[i].index].RemoveAmount(used);
 							amountUsed += used;
+
 							if(innInventory[sortedFoods[i].index].amount <= 0)
                             {
 								RemoveItemAtIndex(sortedFoods[i].index, InventoryType.InnInventory);
+								sortedFoods = GetFoodInInventoriesSorted(item);
+								i = 0;
+                            }
+                            else
+                            {
+								i++;
                             }
                         }
                         else
                         {
-							int used = sortedFoods[i].amount;
+							int used = innInventory[sortedFoods[i].index].amount;
 							RemoveItemAtIndex(sortedFoods[i].index, InventoryType.InnInventory);
 							amountUsed += used;
+							sortedFoods = GetFoodInInventoriesSorted(item);
+							i = 0;
                         }
-						i++;
 						break;
                 }
             }
