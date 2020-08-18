@@ -22,7 +22,7 @@ public class InteractableBaker : Interactable
         interactableAI.enabled = false;
         StartCoroutine(SmoothLookAt(target));
         base.Interact();
-        StartCoroutine(conversationController.ConversationBegan());
+        conversationController.ConversationBegan();
     }
 
     public override void OnDeFocus()
