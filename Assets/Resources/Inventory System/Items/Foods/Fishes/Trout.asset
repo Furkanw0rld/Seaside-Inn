@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Trout
   itemType: 0
-  icon: {fileID: 21300000, guid: cf5b8c3cf019fb14ebb39ff11a3b7f29, type: 3}
+  icon: {fileID: 21300000, guid: a19d8120c69d4d54e8e92850fc1697dc, type: 3}
   description: Mainly found in freshwaters and rivers, it is one of the go-to fish
     for many.
   prefab: {fileID: 1343426206790823282, guid: 54de0a02a64f5a5439415a6ee552f588, type: 3}

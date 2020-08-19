@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Whiting
   itemType: 0
-  icon: {fileID: 21300000, guid: cf5b8c3cf019fb14ebb39ff11a3b7f29, type: 3}
+  icon: {fileID: 21300000, guid: 7aa0f4f74b67b954dbf709eb8b0d8dfb, type: 3}
   description: A small ocean fish, sweet and very delicate, similar to cod, but cheaper.
     Don't cook it slowly.
   prefab: {fileID: 1343426206790823282, guid: 54de0a02a64f5a5439415a6ee552f588, type: 3}

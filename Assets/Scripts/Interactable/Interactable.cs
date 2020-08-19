@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
 
     protected bool hasInteracted = false;
 
-    protected void Start()
+    protected virtual void Start()
     {
         if(interactionPoint == null)
         {

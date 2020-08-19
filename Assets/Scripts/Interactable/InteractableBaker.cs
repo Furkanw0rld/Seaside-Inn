@@ -2,23 +2,26 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(RichAI), typeof(HoverOverAI))]
+[RequireComponent(typeof(RichAI), typeof(HoverOverAI), typeof(ConversationControllerBaker))]
 public class InteractableBaker : Interactable
 {
     private RichAI interactableAI; //Cached AI Component
-    private HoverOverAI hoverOverAI;
-#pragma warning disable 0649 
-    [SerializeField] private ConversationController conversationController;
-#pragma warning restore 0649 
-    new private void Start()
+    private HoverOverAI hoverOverAI; //Cached Information
+    private PlayerManager playerManager;
+    private ConversationController conversationController;
+
+    protected override void Start()
     {
+        base.Start();
         interactableAI = GetComponent<RichAI>();
         hoverOverAI = GetComponent<HoverOverAI>();
+        playerManager = PlayerManager.Instance;
+        conversationController = GetComponent<ConversationControllerBaker>();
     }
 
     public override void Interact()
     {
-        PlayerManager.Instance.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
+        playerManager.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
         interactableAI.enabled = false;
         StartCoroutine(SmoothLookAt(target));
         base.Interact();
@@ -27,7 +30,7 @@ public class InteractableBaker : Interactable
 
     public override void OnDeFocus()
     {
-        PlayerManager.Instance.onInteractablePlayerUnFocusedCallback?.Invoke();
+        playerManager.onInteractablePlayerUnFocusedCallback?.Invoke();
         conversationController.ConversationEnded();
         base.OnDeFocus();
         interactableAI.enabled = true;
