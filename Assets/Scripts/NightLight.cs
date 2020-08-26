@@ -7,7 +7,7 @@ public class NightLight : MonoBehaviour
 {
 	[Tooltip("Can be left null.")] public GameObject lightBeam;
 	private Light _light;
-	private DayNightCycle _cycle;
+	private GameTimeManager _cycle;
 	private float _originalIntensity;
 
 	private float _noiseX = 0.0f;
@@ -17,7 +17,7 @@ public class NightLight : MonoBehaviour
 	{
 		_light = this.GetComponent<Light>();
 		_originalIntensity = _light.intensity;
-		_cycle = DayNightCycle.Instance; // Cache the Cycle
+		_cycle = GameTimeManager.Instance; // Cache the Cycle
 
 		if (_cycle.IsDayTime()) //Make sure the light is set correctly without transition
 		{

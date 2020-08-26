@@ -5,12 +5,100 @@ using UnityEngine.UI;
 
 public class InventoryButcher : NPCInventorySystem
 {
+    private ulong lastProductionTime = 0;
+    private ulong nextProductionTime = 10480;
+    private const int PRODUCTION_TIME = 720;
+
+#pragma warning disable 0649
+    [Header("Production Items")]
+    [SerializeField] private Food_Item chicken;
+    [SerializeField] private Food_Item beef;
+    [SerializeField] private Food_Item lamb;
+    [SerializeField] private Food_Item pork;
+#pragma warning restore 0649
 
     // Start is called before the first frame update
     void Start()
     {
         shopInventory = ShopInventoryManager.Instance;
         playerInventory = PlayerInventory.Instance;
+        gameTimeManager = GameTimeManager.Instance;
+
+        StartCoroutine(BuildUpResources());
+    }
+
+    private IEnumerator BuildUpResources()
+    {
+        while (true)
+        {
+            if(nextProductionTime <= gameTimeManager.GetWorldTime())
+            {
+                Debug.Log("Butcher is producing more items.");
+
+                int index = FindItemInInventory(chicken);
+                if(index >= 0 && inventorySlots[index].amount <= 4)
+                {
+                    inventorySlots[index].amount += Random.Range(0,4);
+                }
+                else
+                {
+                    inventorySlots.Add(new InventorySlotItem(chicken, Random.Range(0, 4)));
+                }
+
+                yield return null;
+
+                index = FindItemInInventory(beef);
+                if(index >= 0 && inventorySlots[index].amount <= 4)
+                {
+                    inventorySlots[index].amount += Random.Range(0, 4);
+                }
+                else
+                {
+                    inventorySlots.Add(new InventorySlotItem(beef, Random.Range(0, 4)));
+                }
+                yield return null;
+
+                index = FindItemInInventory(pork);
+                if(index >= 0 && inventorySlots[index].amount <= 4)
+                {
+                    inventorySlots[index].amount += Random.Range(0, 4);
+                }
+                else
+                {
+                    inventorySlots.Add(new InventorySlotItem(pork, Random.Range(0, 4)));
+                }
+                yield return null;
+
+                index = FindItemInInventory(lamb);
+                if(index >= 0 && inventorySlots[index].amount <= 4)
+                {
+                    inventorySlots[index].amount += Random.Range(0, 4);
+                }
+                else
+                {
+                    inventorySlots.Add(new InventorySlotItem(lamb, Random.Range(0, 4)));
+                }
+
+                lastProductionTime = gameTimeManager.GetWorldTime();
+                nextProductionTime = gameTimeManager.GetNextWorldTime(lastProductionTime, PRODUCTION_TIME);
+                Debug.Log("Butcher will produce more items at: " + nextProductionTime);
+            }
+
+            yield return new WaitForSeconds(60f / gameTimeManager.GetTimeMultiplier());
+        }
+    }
+
+    private int FindItemInInventory(Food_Item item)
+    {
+        for(int i = 0; i < inventorySlots.Count; i++)
+        {
+            if(inventorySlots[i].item.name == item.name)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public override void OpenShop()

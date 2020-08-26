@@ -14,9 +14,9 @@ public class Food_Item : Item
     private void Awake()
     {
         itemType = ItemType.Food;
-        if (DayNightCycle.Instance)
+        if (GameTimeManager.Instance)
         {
-            DayNightCycle.Instance.onDayTimeCallback += UpdateDecay;
+            GameTimeManager.Instance.onDayTimeCallback += UpdateDecay;
         }
     }
 
@@ -32,7 +32,7 @@ public class Food_Item : Item
     }
     public void OnDestroy()
     {
-        DayNightCycle.Instance.onDayTimeCallback -= UpdateDecay;
+        GameTimeManager.Instance.onDayTimeCallback -= UpdateDecay;
     }
 
     private void DecayQuality() {

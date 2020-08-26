@@ -9,6 +9,7 @@ public abstract class NPCInventorySystem : MonoBehaviour
     public List<InventorySlotItem> inventorySlots = new List<InventorySlotItem>();
     protected ShopInventoryManager shopInventory;
     protected PlayerInventory playerInventory;
+    protected GameTimeManager gameTimeManager;
 
     public abstract void OpenShop();
     public abstract void CloseShop();

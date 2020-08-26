@@ -21,11 +21,11 @@ public class LocalizationRegisterGlobalParameters : MonoBehaviour, ILocalization
     {
         if(parameterName == "VERSION_TAG")
         {
-            return "0.1.5.5";
+            return "0.1.5.6";
         }
         if(parameterName == "CURRENT_DAY")
         {
-            return DayNightCycle.Instance.GetCurrentDay().ToString();
+            return GameTimeManager.Instance.GetCurrentDay().ToString();
         }
         return null;
     }

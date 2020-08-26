@@ -35,7 +35,7 @@ public class HiddenMenu : MonoBehaviour
         }
         player = PlayerManager.Instance.player;
 
-        currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(0) + "x";
+        currentTimeMultiplierText.text = "Current Time Speed: " + GameTimeManager.Instance.ModifyTimeMultiplier(0) + "x";
     }
 
     // Update is called once per frame
@@ -97,22 +97,22 @@ public class HiddenMenu : MonoBehaviour
 
     public void SetTimeToMidnight()
     {
-        DayNightCycle.Instance.SetTime(1440f);
+        GameTimeManager.Instance.SetTime(1440f);
     }
 
     public void SetTimeToNoon()
     {
-        DayNightCycle.Instance.SetTime(720f);
+        GameTimeManager.Instance.SetTime(720f);
     }
 
     public void SpeedUpTime()
     {
-        currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(1f) + "x";
+        currentTimeMultiplierText.text = "Current Time Speed: " + GameTimeManager.Instance.ModifyTimeMultiplier(1f) + "x";
     }
 
     public void SlowDownTime()
     {
-        currentTimeMultiplierText.text = "Current Time Speed: " + DayNightCycle.Instance.ModifyTimeMultiplier(-1f) + "x";
+        currentTimeMultiplierText.text = "Current Time Speed: " + GameTimeManager.Instance.ModifyTimeMultiplier(-1f) + "x";
     }
 
     public void AddCoins()
