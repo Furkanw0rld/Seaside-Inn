@@ -35,10 +35,10 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 8, y: 8}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c3bb1d5298b924d80959c9f822ffe414, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -63,11 +63,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
+    - _ApplyNormal: 0
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Culling: 0
-    - _Cutoff: 0.56
+    - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnableBaseMap: 0
     - _EnvironmentReflections: 1

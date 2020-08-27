@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Lightbeam Noise
   m_Shader: {fileID: 4800000, guid: 4571e5fb008664916836abe841f15f2d, type: 3}
-  m_ShaderKeywords: _APPLYFOG _MASKMAP
+  m_ShaderKeywords: ORTHO_SUPPORT _APPLYFOG _MASKMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -43,7 +43,7 @@ Material:
     - _DistanceFade: 9.81
     - _InvFade: 2.15
     - _LimitLength: 50
-    - _OrthoSpport: 0
+    - _OrthoSpport: 1
     - _ReadMask: 255
     - _SpecGlossEnabled: 1
     - _SpotFade: 1

@@ -158,7 +158,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.platforms": {
-      "version": "0.8.0-preview.4",
+      "version": "0.8.0-preview.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -189,7 +189,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.properties": {
-      "version": "1.4.3-preview",
+      "version": "1.5.0-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -199,12 +199,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.properties.ui": {
-      "version": "1.4.3-preview",
+      "version": "1.5.0-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.properties": "1.4.3-preview",
-        "com.unity.serialization": "1.4.3-preview",
+        "com.unity.properties": "1.5.0-preview",
+        "com.unity.serialization": "1.5.0-preview",
         "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -252,8 +252,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.serialization": {
-      "version": "1.4.3-preview",
-      "depth": 1,
+      "version": "1.5.0-preview",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.collections": "0.8.0-preview.5",

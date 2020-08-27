@@ -24,75 +24,131 @@ public class InventoryButcher : NPCInventorySystem
         playerInventory = PlayerInventory.Instance;
         gameTimeManager = GameTimeManager.Instance;
 
-        StartCoroutine(BuildUpResources());
+        //StartCoroutine(BuildUpResources());
+        GenerateResources();
     }
 
-    private IEnumerator BuildUpResources()
+
+    private void GenerateResources()
     {
-        while (true)
+        Debug.Log("Butcher is producing more items.");
+
+        int index = FindItemInInventory(chicken);
+        if (index >= 0 && inventorySlots[index].amount <= 4)
         {
-            if(nextProductionTime <= gameTimeManager.GetWorldTime())
-            {
-                Debug.Log("Butcher is producing more items.");
-
-                int index = FindItemInInventory(chicken);
-                if(index >= 0 && inventorySlots[index].amount <= 4)
-                {
-                    inventorySlots[index].amount += Random.Range(0,4);
-                }
-                else
-                {
-                    inventorySlots.Add(new InventorySlotItem(chicken, Random.Range(0, 4)));
-                }
-
-                yield return null;
-
-                index = FindItemInInventory(beef);
-                if(index >= 0 && inventorySlots[index].amount <= 4)
-                {
-                    inventorySlots[index].amount += Random.Range(0, 4);
-                }
-                else
-                {
-                    inventorySlots.Add(new InventorySlotItem(beef, Random.Range(0, 4)));
-                }
-                yield return null;
-
-                index = FindItemInInventory(pork);
-                if(index >= 0 && inventorySlots[index].amount <= 4)
-                {
-                    inventorySlots[index].amount += Random.Range(0, 4);
-                }
-                else
-                {
-                    inventorySlots.Add(new InventorySlotItem(pork, Random.Range(0, 4)));
-                }
-                yield return null;
-
-                index = FindItemInInventory(lamb);
-                if(index >= 0 && inventorySlots[index].amount <= 4)
-                {
-                    inventorySlots[index].amount += Random.Range(0, 4);
-                }
-                else
-                {
-                    inventorySlots.Add(new InventorySlotItem(lamb, Random.Range(0, 4)));
-                }
-
-                lastProductionTime = gameTimeManager.GetWorldTime();
-                nextProductionTime = gameTimeManager.GetNextWorldTime(lastProductionTime, PRODUCTION_TIME);
-                Debug.Log("Butcher will produce more items at: " + nextProductionTime);
-            }
-
-            yield return new WaitForSeconds(60f / gameTimeManager.GetTimeMultiplier());
+            inventorySlots[index].amount += Random.Range(0, 4);
         }
+        else if (index < 0)
+        {
+            inventorySlots.Add(new InventorySlotItem(chicken, Random.Range(0, 4)));
+        }
+
+        index = FindItemInInventory(beef);
+        if (index >= 0 && inventorySlots[index].amount <= 4)
+        {
+            inventorySlots[index].amount += Random.Range(0, 4);
+        }
+        else if (index < 0)
+        {
+            inventorySlots.Add(new InventorySlotItem(beef, Random.Range(0, 4)));
+        }
+
+
+        index = FindItemInInventory(pork);
+        if (index >= 0 && inventorySlots[index].amount <= 4)
+        {
+            inventorySlots[index].amount += Random.Range(0, 4);
+        }
+        else if (index < 0)
+        {
+            inventorySlots.Add(new InventorySlotItem(pork, Random.Range(0, 4)));
+        }
+
+        index = FindItemInInventory(lamb);
+        if (index >= 0 && inventorySlots[index].amount <= 4)
+        {
+            inventorySlots[index].amount += Random.Range(0, 4);
+        }
+        else if (index < 0)
+        {
+            inventorySlots.Add(new InventorySlotItem(lamb, Random.Range(0, 4)));
+        }
+
+        lastProductionTime = gameTimeManager.GetWorldTime();
+        nextProductionTime = gameTimeManager.GetNextWorldTime(lastProductionTime, PRODUCTION_TIME);
+
+        StartCoroutine(gameTimeManager.WaitUntilWorldTime(nextProductionTime, GenerateResources));
+        Debug.Log("Butcher will produce more items at: " + nextProductionTime);
     }
+
+    //private IEnumerator BuildUpResources()
+    //{
+    //    while (true)
+    //    {
+    //        if (nextProductionTime <= gameTimeManager.GetWorldTime())
+    //        {
+    //            Debug.Log("Butcher is producing more items.");
+
+    //            int index = FindItemInInventory(chicken);
+    //            if (index >= 0 && inventorySlots[index].amount <= 4)
+    //            {
+    //                inventorySlots[index].amount += Random.Range(0, 4);
+    //            }
+    //            else if (index < 0)
+    //            {
+    //                inventorySlots.Add(new InventorySlotItem(chicken, Random.Range(0, 4)));
+    //            }
+
+    //            yield return null;
+
+    //            index = FindItemInInventory(beef);
+    //            if (index >= 0 && inventorySlots[index].amount <= 4)
+    //            {
+    //                inventorySlots[index].amount += Random.Range(0, 4);
+    //            }
+    //            else if (index < 0)
+    //            {
+    //                inventorySlots.Add(new InventorySlotItem(beef, Random.Range(0, 4)));
+    //            }
+
+    //            yield return null;
+
+    //            index = FindItemInInventory(pork);
+    //            if (index >= 0 && inventorySlots[index].amount <= 4)
+    //            {
+    //                inventorySlots[index].amount += Random.Range(0, 4);
+    //            }
+    //            else if (index < 0)
+    //            {
+    //                inventorySlots.Add(new InventorySlotItem(pork, Random.Range(0, 4)));
+    //            }
+
+    //            yield return null;
+
+    //            index = FindItemInInventory(lamb);
+    //            if (index >= 0 && inventorySlots[index].amount <= 4)
+    //            {
+    //                inventorySlots[index].amount += Random.Range(0, 4);
+    //            }
+    //            else if (index < 0)
+    //            {
+    //                inventorySlots.Add(new InventorySlotItem(lamb, Random.Range(0, 4)));
+    //            }
+
+    //            lastProductionTime = gameTimeManager.GetWorldTime();
+    //            nextProductionTime = gameTimeManager.GetNextWorldTime(lastProductionTime, PRODUCTION_TIME);
+    //            Debug.Log("Butcher will produce more items at: " + nextProductionTime);
+    //        }
+
+    //        yield return new WaitForSeconds(60f / gameTimeManager.GetTimeMultiplier());
+    //    }
+    //}
 
     private int FindItemInInventory(Food_Item item)
     {
-        for(int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
-            if(inventorySlots[i].item.name == item.name)
+            if (inventorySlots[i].item.name == item.name)
             {
                 return i;
             }

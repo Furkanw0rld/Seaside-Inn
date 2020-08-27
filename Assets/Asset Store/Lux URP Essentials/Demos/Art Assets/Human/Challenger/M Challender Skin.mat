@@ -66,6 +66,7 @@ Material:
     - _Culling: 0
     - _Curvature: 0.75
     - _Cutoff: 0.5
+    - _Distortion: 0.01
     - _DstBlend: 0
     - _EnableDistanceFade: 0
     - _EnvironmentReflections: 1
@@ -84,6 +85,8 @@ Material:
     - _RimPower: 2
     - _ShadowStrength: 0.85
     - _Shadows: 0
+    - _SkinShadowBias: 1
+    - _SkinShadowSamplingBias: 0
     - _Smoothness: 0.884
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -102,7 +105,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _DistanceFade: {r: 2500, g: 0.001, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

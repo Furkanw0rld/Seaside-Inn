@@ -70,6 +70,7 @@ Material:
     - _Culling: 0
     - _Cutoff: 0.5
     - _DstBlend: 0
+    - _EnableNormal: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
