@@ -21,6 +21,15 @@ public class InventoryUI : MonoBehaviour
     public Sprite activeButtonSprite;
     public Sprite inactiveButtonSprite;
 
+    private InventoryType activeInventoryTab = InventoryType.PlayerInventory; // Tracks the currently active UI Tab
+
+    [Header("Sorting Options")]
+    public GameObject sortPanel;
+    public Button sortQualityAscending;
+    public Button sortQualityDescending;
+    public Button sortAmountAscending;
+    public Button sortAmountDescending;
+
     private PlayerInventory playerInventory; //Cached inventory system
     private InventorySlot[] slots; // Player Inventory UI
     private InventorySlot[] innSlots; // Inn Inventory UI
@@ -77,20 +86,30 @@ public class InventoryUI : MonoBehaviour
         tradeInventoryButton.onClick.AddListener(delegate { ChangeInventoryTabs(InventoryType.TradeInventory); });
 
         UpdateUI(InventoryType.InnInventory); //Update inn inventory, since there are starting items within it
+        ChangeSortButtonsToActiveTab(); // Set the starting sort buttons
+    }
 
+    public void ShowInventorySortUI()
+    {
+        sortPanel.SetActive(!sortPanel.activeSelf);
     }
 
     private void Update()
     {
         if (Keyboard.current.iKey.wasPressedThisFrame)
         {
-            inventoryPanel.gameObject.SetActive(!inventoryPanel.activeSelf);
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+
+            if (!inventoryPanel.activeSelf)//Close sort panel when inventory is closed.
+            {
+                sortPanel.SetActive(false);
+            }
         }
     }
 
     public void OpenInventoryMenu()
     {
-        inventoryPanel.gameObject.SetActive(!inventoryPanel.activeSelf);
+        inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 
     private void OnDisable()
@@ -244,6 +263,8 @@ public class InventoryUI : MonoBehaviour
 
     private void ChangeInventoryTabs(InventoryType inventoryType)
     {
+        activeInventoryTab = inventoryType;
+
         switch (inventoryType)
         {
             case InventoryType.PlayerInventory:
@@ -282,6 +303,22 @@ public class InventoryUI : MonoBehaviour
                 tradeInventorySlots.gameObject.SetActive(true);
                 break;
         }
+
+        ChangeSortButtonsToActiveTab();
+    }
+
+    private void ChangeSortButtonsToActiveTab()
+    {
+        //Clear listeners, and new ones to match the active tab
+        sortQualityAscending.onClick.RemoveAllListeners();
+        sortQualityDescending.onClick.RemoveAllListeners();
+        sortAmountAscending.onClick.RemoveAllListeners();
+        sortAmountDescending.onClick.RemoveAllListeners();
+
+        sortQualityAscending.onClick.AddListener(delegate { playerInventory.SortInventoryByQuality(activeInventoryTab, false); ShowInventorySortUI(); });
+        sortQualityDescending.onClick.AddListener(delegate { playerInventory.SortInventoryByQuality(activeInventoryTab, true); ShowInventorySortUI(); });
+        sortAmountAscending.onClick.AddListener(delegate { playerInventory.SortInventoryByAmount(activeInventoryTab, false); ShowInventorySortUI(); });
+        sortAmountDescending.onClick.AddListener(delegate { playerInventory.SortInventoryByAmount(activeInventoryTab, true); ShowInventorySortUI(); });
     }
 
 }

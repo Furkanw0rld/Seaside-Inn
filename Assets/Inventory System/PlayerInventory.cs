@@ -1043,6 +1043,207 @@ public class PlayerInventory : MonoBehaviour
 
 	}
 
+	public void SortInventoryByQuality(InventoryType inventoryType, bool descending)
+    {
+        switch (inventoryType)
+        {
+			case InventoryType.PlayerInventory:
+				List<InventorySlotItem> sortedFoodsList = new List<InventorySlotItem>();
+				List<InventorySlotItem> sortedItemsList = new List<InventorySlotItem>();
+
+				for (int i = 0; i < inventory.Count; i++)
+				{
+					if (inventory[i].item is Food_Item)
+					{
+						sortedFoodsList.Add(inventory[i]);
+					}
+					else
+					{
+						sortedItemsList.Add(inventory[i]);
+					}
+				}
+
+				if (!descending)
+				{
+					sortedItemsList = sortedItemsList.OrderByDescending(x => x.item.itemQuality).ThenBy(x => x.item.name).ToList();
+				}
+				else
+				{
+					sortedItemsList = sortedItemsList.OrderBy(x => x.item.itemQuality).ThenBy(x => x.item.name).ToList();
+				}
+
+				sortedFoodsList.Sort(delegate (InventorySlotItem a, InventorySlotItem b)
+				{
+					Food_Item first = (Food_Item)a.item;
+					Food_Item second = (Food_Item)b.item;
+
+					if (descending)
+					{
+						if (first.freshness > second.freshness)
+							return -1;
+						if (first.freshness == second.freshness)
+							return first.name.CompareTo(second.name);
+
+						return 1;
+					}
+					else
+					{
+						if (first.freshness > second.freshness)
+							return 1;
+						if (first.freshness == second.freshness)
+							return first.name.CompareTo(second.name);
+
+						return -1;
+					}
+				});
+
+				inventory.Clear();
+
+				for (int i = 0; i < sortedFoodsList.Count; i++)
+				{
+					inventory.Add(sortedFoodsList[i]);
+				}
+
+				for (int i = 0; i < sortedItemsList.Count; i++)
+				{
+					inventory.Add(sortedItemsList[i]);
+				}
+
+				break;
+
+			case InventoryType.InnInventory:
+				List<InventorySlotItem> sortedList = new List<InventorySlotItem>();
+				for (int i = 0; i < innInventory.Count; i++)
+				{
+					sortedList.Add(innInventory[i]);
+				}
+				sortedList.RemoveRange(0, 4); //Remove the drinks
+
+				sortedList.Sort(delegate (InventorySlotItem a, InventorySlotItem b)
+				{
+					Food_Item first = (Food_Item)a.item;
+					Food_Item second = (Food_Item)b.item;
+
+					if (descending)
+					{
+						if (first.freshness > second.freshness)
+							return -1;
+						if (first.freshness == second.freshness)
+							return first.name.CompareTo(second.name);
+
+						return 1;
+					}
+					else
+					{
+						if (first.freshness > second.freshness)
+							return 1;
+						if (first.freshness == second.freshness)
+							return first.name.CompareTo(second.name);
+
+						return -1;
+					}
+				});
+
+				for (int i = 3; i >= 0; i--) //Insert back the drinks
+				{
+					sortedList.Insert(0, innInventory[i]);
+				}
+
+				for (int i = 0; i < sortedList.Count; i++)
+				{
+					innInventory[i] = sortedList[i];
+				}
+				break;
+
+			case InventoryType.TradeInventory:
+				List<InventorySlotItem> sortedItems = new List<InventorySlotItem>();
+
+				for(int i = 0; i < tradeInventory.Count; i++)
+                {
+					sortedItems.Add(tradeInventory[i]);
+                }
+
+				if (!descending)
+				{
+					sortedItems = sortedItems.OrderByDescending(x => x.item.itemQuality).ThenBy(x => x.item.name).ToList();
+				}
+				else
+				{
+					sortedItems = sortedItems.OrderBy(x => x.item.itemQuality).ThenBy(x => x.item.name).ToList();
+				}
+
+				for(int i = 0; i < tradeInventory.Count; i++)
+                {
+					tradeInventory[i] = sortedItems[i];
+                }
+
+				break;
+        }
+
+		onInventoryChangedCallback(inventoryType);
+	}
+
+	public void SortInventoryByAmount(InventoryType inventoryType, bool descending)
+    {
+        switch (inventoryType)
+        {
+			case InventoryType.PlayerInventory:
+				if (descending)
+				{
+					inventory = inventory.OrderByDescending(x => x.amount).ThenBy(x => x.item.name).ToList();
+				}
+				else
+				{
+					inventory = inventory.OrderBy(x => x.amount).ThenBy(x => x.item.name).ToList();
+				}
+				break;
+
+			case InventoryType.InnInventory:
+				List<InventorySlotItem> sortedList = new List<InventorySlotItem>();
+				for (int i = 0; i < innInventory.Count; i++)
+				{
+					sortedList.Add(innInventory[i]);
+				}
+
+				sortedList.RemoveRange(0, 4);
+
+				if (descending)
+				{
+					sortedList = sortedList.OrderByDescending(x => x.amount).ThenBy(x => x.item.name).ToList();
+				}
+				else
+				{
+					sortedList = sortedList.OrderBy(x => x.amount).ThenBy(x => x.item.name).ToList();
+				}
+
+				for (int i = 3; i >= 0; i--) // Insert back drinks
+				{
+					sortedList.Insert(0, innInventory[i]);
+				}
+
+				for (int i = 0; i < sortedList.Count; i++)
+				{
+					innInventory[i] = sortedList[i];
+				}
+
+				break;
+
+			case InventoryType.TradeInventory:
+                if (descending)
+                {
+					tradeInventory = tradeInventory.OrderByDescending(x => x.amount).ThenBy(x => x.item.name).ToList();
+                }
+                else
+                {
+					tradeInventory = tradeInventory.OrderBy(x => x.amount).ThenBy(x => x.item.name).ToList();
+                }
+
+				break;
+        }
+
+		onInventoryChangedCallback(inventoryType);
+    }
+
 	//TODO: Improve the Inn Inventory Shelving System.
 	// This base system lacks rotation,
 	// and can probably made more efficient by caching subsystems and the GO's. 
