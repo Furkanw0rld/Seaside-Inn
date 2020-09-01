@@ -66,9 +66,9 @@
 
         #if !defined(UNITY_PASS_SHADOWCASTER) && !defined(DEPTHONLYPASS)
             DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 1);
-            #if defined(REQUIRES_WORLD_SPACE_POS_INTERPOLATOR)
+            //#if defined(REQUIRES_WORLD_SPACE_POS_INTERPOLATOR)
                 float3 positionWS           : TEXCOORD2;
-            #endif
+            //#endif
             float3 normalWS                 : TEXCOORD3;
             #ifdef _NORMALMAP
                 float4 tangentWS            : TEXCOORD4;

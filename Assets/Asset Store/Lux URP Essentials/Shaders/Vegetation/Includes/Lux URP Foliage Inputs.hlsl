@@ -31,6 +31,7 @@
         half _TranslucencyPower;
         half _TranslucencyStrength;
         half _ShadowStrength;
+        half _MaskByShadowStrength;
         half _Distortion;
         #if defined(DEBUG)
             half _DebugColor;

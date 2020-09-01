@@ -17,7 +17,7 @@ Shader "Lux URP/Cloth"
         _AlphaClip                  ("Alpha Clipping", Float) = 0.0
         [LuxURPHelpDrawer]
         _Help ("Enabling Alpha Clipping needs you to enable and assign the Mask Map as well.", Float) = 0.0
-        _Cutoff                     ("    Threshold", Range(0.0, 1.0)) = 0.5
+        _Cutoff                     ("     Threshold", Range(0.0, 1.0)) = 0.5
         [ToggleOff(_RECEIVE_SHADOWS_OFF)]
         _ReceiveShadows             ("Receive Shadows", Float) = 1.0
         _ShadowOffset               ("Shadow Offset", Float) = 1.0
@@ -30,20 +30,20 @@ Shader "Lux URP/Cloth"
         //[NoScaleOffset]
         // Only needed for IBL – so we can skip it
         //_PreIntegratedLUT           ("    Preintegrated LUT", 2D) = "white" {}
-        _SheenColor                 ("    Sheen Color", Color) = (0.5, 0.5, 0.5)
+        _SheenColor                 ("     Sheen Color", Color) = (0.5, 0.5, 0.5)
 
         [Header(GGX anisotropic Lighting)]
         [Space(5)]
-        _Anisotropy                 ("    Anisotropy", Range(-1.0, 1.0)) = 0.0
+        _Anisotropy                 ("     Anisotropy", Range(-1.0, 1.0)) = 0.0
 
         [Header(Transmission)]
         [Space(5)]
         [Toggle(_SCATTERING)]
         _UseScattering              ("Enable Transmission", Float) = 0.0
-        _TranslucencyPower          ("    Power", Range(0.0, 32.0)) = 7.0
-        _TranslucencyStrength       ("    Strength", Range(0.0, 1.0)) = 1.0
-        _ShadowStrength             ("    Shadow Strength", Range(0.0, 1.0)) = 0.7
-        _Distortion                 ("    Distortion", Range(0.0, 0.1)) = 0.01
+        _TranslucencyPower          ("     Power", Range(0.0, 32.0)) = 7.0
+        _TranslucencyStrength       ("     Strength", Range(0.0, 1.0)) = 1.0
+        _ShadowStrength             ("     Shadow Strength", Range(0.0, 1.0)) = 0.7
+        _Distortion                 ("     Distortion", Range(0.0, 0.1)) = 0.01
 
 
         [Header(Surface Inputs)]
@@ -61,32 +61,32 @@ Shader "Lux URP/Cloth"
         [Toggle(_NORMALMAP)]
         _ApplyNormal                ("Enable Normal Map", Float) = 0.0
         [NoScaleOffset]
-        _BumpMap                    ("    Normal Map", 2D) = "bump" {}
-        _BumpScale                  ("    Normal Scale", Float) = 1.0
+        _BumpMap                    ("     Normal Map", 2D) = "bump" {}
+        _BumpScale                  ("     Normal Scale", Float) = 1.0
 
         [Space(5)]
         [Toggle(_MASKMAP)]
         _EnableMaskMap              ("Enable Mask Map", Float) = 0.0
-        _MaskMap                    ("    Thickness (G) Occlusion (B) Alpha (A)", 2D) = "white" {}
-        _OcclusionStrength          ("    Occlusion", Range(0.0, 1.0)) = 1
+        _MaskMap                    ("     Thickness (G) Occlusion (B) Alpha (A)", 2D) = "white" {}
+        _OcclusionStrength          ("     Occlusion", Range(0.0, 1.0)) = 1
         
 
         [Header(Rim Lighting)]
         [Space(5)]
         [Toggle(_RIMLIGHTING)]
         _Rim                        ("Enable Rim Lighting", Float) = 0
-        [HDR] _RimColor                   ("Rim Color", Color) = (0.5,0.5,0.5,1)
+        [HDR] _RimColor             ("Rim Color", Color) = (0.5,0.5,0.5,1)
         _RimPower                   ("Rim Power", Float) = 2
         _RimFrequency               ("Rim Frequency", Float) = 0
-        _RimMinPower                ("    Rim Min Power", Float) = 1
-        _RimPerPositionFrequency    ("    Rim Per Position Frequency", Range(0.0, 1.0)) = 1
+        _RimMinPower                ("     Rim Min Power", Float) = 1
+        _RimPerPositionFrequency    ("     Rim Per Position Frequency", Range(0.0, 1.0)) = 1
 
 
         [Header(Stencil)]
         [Space(5)]
         [IntRange] _Stencil         ("Stencil Reference", Range (0, 255)) = 0
-        [IntRange] _ReadMask        ("    Read Mask", Range (0, 255)) = 255
-        [IntRange] _WriteMask       ("    Write Mask", Range (0, 255)) = 255
+        [IntRange] _ReadMask        ("     Read Mask", Range (0, 255)) = 255
+        [IntRange] _WriteMask       ("     Write Mask", Range (0, 255)) = 255
         [Enum(UnityEngine.Rendering.CompareFunction)]
         _StencilComp                ("Stencil Comparison", Int) = 8     // always – terrain should be the first thing being rendered anyway
         [Enum(UnityEngine.Rendering.StencilOp)]

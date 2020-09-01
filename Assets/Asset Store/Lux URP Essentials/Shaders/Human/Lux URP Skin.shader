@@ -23,7 +23,8 @@ Shader "Lux URP/Human/Skin"
         
         [Space(5)]
         _Smoothness                 ("Smoothness", Range(0.0, 1.0)) = 0.5
-        _SpecColor                  ("Specular", Color) = (0.2, 0.2, 0.2)
+    //  For some reason android did not like _SpecColor!?
+        _SpecularColor              ("Specular", Color) = (0.2, 0.2, 0.2)
 
         [Space(5)]
         [Toggle(_NORMALMAP)]
@@ -47,6 +48,7 @@ Shader "Lux URP/Human/Skin"
         _TranslucencyPower          ("Transmission Power", Range(0.0, 10.0)) = 7.0
         _TranslucencyStrength       ("Transmission Strength", Range(0.0, 1.0)) = 1.0
         _ShadowStrength             ("Shadow Strength", Range(0.0, 1.0)) = 0.7
+        _MaskByShadowStrength       ("Mask by incoming Shadow Strength", Range(0.0, 1.0)) = 1.0
         _Distortion                 ("Transmission Distortion", Range(0.0, 0.1)) = 0.01
 
         [Space(5)]
@@ -139,7 +141,7 @@ Shader "Lux URP/Human/Skin"
 
             // -------------------------------------
             // Material Keywords
-            #define _SPECULAR_SETUP 1
+            #define _SPECULAR_SETUP
             #pragma shader_feature _NORMALMAP
             #pragma shader_feature_local _NORMALMAPDIFFUSE
             #pragma shader_feature_local _DISTANCEFADE
@@ -222,6 +224,8 @@ Shader "Lux URP/Human/Skin"
                 #endif
 
                 #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
+                //  tweak the sampling position
+                    vertexInput.positionWS += output.normalWS.xyz * _SkinShadowSamplingBias;
                     output.shadowCoord = GetShadowCoord(vertexInput);
                 #endif
                 output.positionCS = vertexInput.positionCS;
@@ -240,7 +244,7 @@ Shader "Lux URP/Human/Skin"
                 
                 outSurfaceData.albedo = albedoAlpha.rgb;
                 outSurfaceData.metallic = 0;
-                outSurfaceData.specular = _SpecColor;
+                outSurfaceData.specular = _SpecularColor;
             
             //  Normal Map
                 #if defined (_NORMALMAP)
@@ -289,7 +293,7 @@ Shader "Lux URP/Human/Skin"
                 inputData.viewDirectionWS = viewDirWS;
                 
                 #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-                    inputData.shadowCoord = input.shadowCoord + input.normalWS * _SkinShadowSamplingBias;
+                    inputData.shadowCoord = input.shadowCoord;
                 #elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
                     inputData.shadowCoord = TransformWorldToShadowCoord(inputData.positionWS + input.normalWS * _SkinShadowSamplingBias);
                 #else
@@ -355,7 +359,8 @@ Shader "Lux URP/Human/Skin"
                     _SubsurfaceColor,
                     lerp(surfaceData.translucency, 1, _Curvature),
                 //  Lerp lighting towards standard according the distance fade
-                    surfaceData.skinMask * input.fade
+                    surfaceData.skinMask * input.fade,
+                    _MaskByShadowStrength
                     );    
 
             //  Add fog
@@ -509,7 +514,7 @@ Shader "Lux URP/Human/Skin"
                 outSurfaceData.alpha = 1;
                 outSurfaceData.albedo = albedoAlpha.rgb;
                 outSurfaceData.metallic = 0;
-                outSurfaceData.specular = _SpecColor;
+                outSurfaceData.specular = _SpecularColor;
                 outSurfaceData.smoothness = _Smoothness;
                 outSurfaceData.normalTS = half3(0,0,1);
                 outSurfaceData.occlusion = 1;

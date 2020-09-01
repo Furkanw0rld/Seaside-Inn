@@ -30,9 +30,15 @@ Shader "Lux URP/Clear Coat"
         [Space(5)]
         [MainColor]
         _BaseColor                  ("Color", Color) = (1,1,1,1)
+        
+        [Toggle(_BASECOLORMAP)]
+        _EnableBaseMap              ("Enable Base Layer Albedo Map", Float) = 0.0
+        [MainTexture]
+        _BaseMap                    ("Base Layer Albedo (RGB)", 2D) = "white" {}
+        
         [Toggle(_SECONDARYCOLOR)]
         _EnableSecColor             ("Enable Secondary Color", Float) = 0.0
-        _SecondaryColor             ("    Secondary Color", Color) = (1,1,1,1)
+        _SecondaryColor             ("     Secondary Color", Color) = (1,1,1,1)
 
         [Space(5)]
         _Smoothness                 ("Smoothness", Range(0.0, 1.0)) = 0.5
@@ -43,14 +49,13 @@ Shader "Lux URP/Clear Coat"
         [Space(5)]
         [Toggle(_NORMALMAP)]
         _ApplyNormal                ("Enable Normal Map", Float) = 0.0
-        _BumpMap                    ("    Normal Map", 2D) = "bump" {}
-        _BumpScale                  ("    Normal Scale", Float) = 1.0
+        _BumpMap                    ("     Normal Map", 2D) = "bump" {}
+        _BumpScale                  ("     Normal Scale", Float) = 1.0
 
         [Toggle(_MASKMAPSECONDARY)]
         _EnableSecondaryMask        ("Enable Base Layer Mask Map", Float) = 0.0
-        [NoScaleOffset]
-        _SecondaryMask              ("    Metallic (R) Occlusion (G) Smoothness (A)", 2D) = "white" {}
-        _Occlusion                  ("    Occlusion", Range(0.0, 1.0)) = 1.0
+        _SecondaryMask              ("     Metallic (R) Occlusion (G) Smoothness (A)", 2D) = "white" {}
+        _Occlusion                  ("     Occlusion", Range(0.0, 1.0)) = 1.0
 
         [Toggle(_SECONDARYLOBE)]
         _EnableSecondaryLobe        ("Enable secondary Reflection Sample", Float) = 0.0
@@ -60,18 +65,18 @@ Shader "Lux URP/Clear Coat"
         [Space(5)]
         [Toggle(_RIMLIGHTING)]
         _Rim                        ("Enable Rim Lighting", Float) = 0
-        [HDR] _RimColor                   ("Rim Color", Color) = (0.5,0.5,0.5,1)
+        [HDR] _RimColor             ("Rim Color", Color) = (0.5,0.5,0.5,1)
         _RimPower                   ("Rim Power", Float) = 2
         _RimFrequency               ("Rim Frequency", Float) = 0
-        _RimMinPower                ("    Rim Min Power", Float) = 1
-        _RimPerPositionFrequency    ("    Rim Per Position Frequency", Range(0.0, 1.0)) = 1
+        _RimMinPower                ("     Rim Min Power", Float) = 1
+        _RimPerPositionFrequency    ("     Rim Per Position Frequency", Range(0.0, 1.0)) = 1
 
 
         [Header(Stencil)]
         [Space(5)]
         [IntRange] _Stencil         ("Stencil Reference", Range (0, 255)) = 0
-        [IntRange] _ReadMask        ("    Read Mask", Range (0, 255)) = 255
-        [IntRange] _WriteMask       ("    Write Mask", Range (0, 255)) = 255
+        [IntRange] _ReadMask        ("     Read Mask", Range (0, 255)) = 255
+        [IntRange] _WriteMask       ("     Write Mask", Range (0, 255)) = 255
         [Enum(UnityEngine.Rendering.CompareFunction)]
         _StencilComp                ("Stencil Comparison", Int) = 8     // always – terrain should be the first thing being rendered anyway
         [Enum(UnityEngine.Rendering.StencilOp)]
@@ -135,6 +140,7 @@ Shader "Lux URP/Clear Coat"
 
             // -------------------------------------
             // Material Keywords
+            #pragma shader_feature_local _BASECOLORMAP
             #pragma shader_feature_local _SECONDARYCOLOR
             //#pragma shader_feature_local _ADJUSTSPEC
             #pragma shader_feature_local _MASKMAP
@@ -194,7 +200,9 @@ Shader "Lux URP/Clear Coat"
                 half3 vertexLight = VertexLighting(vertexInput.positionWS, normalInput.normalWS);
                 half fogFactor = ComputeFogFactor(vertexInput.positionCS.z);
 
-                output.uv.xy = TRANSFORM_TEX(input.texcoord, _BumpMap);
+                //output.uv.xy = TRANSFORM_TEX(input.texcoord, _BumpMap);
+                output.uv.xy = input.texcoord;
+                
                 // already normalized from normal transform to WS.
                 output.normalWS = normalInput.normalWS;
                 output.viewDirWS = viewDirWS;
@@ -245,24 +253,33 @@ Shader "Lux URP/Clear Coat"
                 outSurfaceData.specular = half3(0.0h, 0.0h, 0.0h);
                 
                 outSurfaceData.smoothness = _Smoothness;
+
+
+                #if defined (_BASECOLORMAP)
+                    float2 albedoUV = TRANSFORM_TEX(uv, _BaseMap);
+                    outSurfaceData.albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, albedoUV).rgb;
+                #endif
+
             
             //  Normal Map
                 #if defined (_NORMALMAP)
-                    /*half4 sampleNormal = SAMPLE_TEXTURE2D(_MaskMap, sampler_MaskMap, uv);
-                    half3 tangentNormal;
-                    tangentNormal.xy = sampleNormal.ag * 2 - 1;
-                    tangentNormal.xy *= _BumpScale;
-                    tangentNormal.z = sqrt(1.0 - dot(tangentNormal.xy, tangentNormal.xy));  
-                    outSurfaceData.normalTS = tangentNormal;
-                    outSurfaceData.smoothness = sampleNormal.b * _Smoothness;*/
-                    outSurfaceData.normalTS = SampleNormal(uv.xy, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);
+                    // half4 sampleNormal = SAMPLE_TEXTURE2D(_MaskMap, sampler_MaskMap, uv);
+                    // half3 tangentNormal;
+                    // tangentNormal.xy = sampleNormal.ag * 2 - 1;
+                    // tangentNormal.xy *= _BumpScale;
+                    // tangentNormal.z = sqrt(1.0 - dot(tangentNormal.xy, tangentNormal.xy));  
+                    // outSurfaceData.normalTS = tangentNormal;
+                    // outSurfaceData.smoothness = sampleNormal.b * _Smoothness;
+                    float2 normalUV = TRANSFORM_TEX(uv, _BumpMap);
+                    outSurfaceData.normalTS = SampleNormal(normalUV, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);
                 #else
                     outSurfaceData.normalTS = half3(0,0,1);
                 #endif
 
             //  Secondary Mask
                 #if defined(_MASKMAPSECONDARY)
-                    half4 secondaryMaskSample = SAMPLE_TEXTURE2D(_SecondaryMask, sampler_SecondaryMask, uv.xy);
+                    float2 secondaryMaskUV = TRANSFORM_TEX(uv, _SecondaryMask);
+                    half4 secondaryMaskSample = SAMPLE_TEXTURE2D(_SecondaryMask, sampler_SecondaryMask, secondaryMaskUV);
                     outSurfaceData.metallic *= secondaryMaskSample.r;
                     outSurfaceData.occlusion = lerp(1, secondaryMaskSample.g, _Occlusion);
                     outSurfaceData.smoothness *= secondaryMaskSample.a;
@@ -349,7 +366,11 @@ Shader "Lux URP/Clear Coat"
                     surfaceData.clearCoatThickness,
                     _ClearCoatSpecular,
                     NormalizeNormalPerPixel(input.normalWS.xyz),
-                    _BaseColor,
+                    #if defined (_BASECOLORMAP)
+                        _BaseColor * surfaceData.albedo,
+                    #else
+                        _BaseColor,
+                    #endif
                     _SecondaryColor
                 );    
             //  Add fog

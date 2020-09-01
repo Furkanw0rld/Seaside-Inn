@@ -53,7 +53,7 @@
         _SpecularHighlights                             ("Enable Specular Highlights", Float) = 1.0
         [ToggleOff]
         _EnvironmentReflections                         ("Environment Reflections", Float) = 1.0
-        
+
     }
 
     SubShader

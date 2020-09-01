@@ -286,12 +286,13 @@
                     float3 bitangentWS = 0;
                 #endif
 
+                half3 viewDirWS = SafeNormalize(input.viewDirWS);
+
                 #if defined(_PARALLAX)
             //  NOTE: Take possible back faces into account.
                     input.normalWS.xyz *= facing;
                     half3x3 tangentSpaceRotation =  half3x3(input.tangentWS.xyz, bitangentWS, input.normalWS.xyz);
-                    //half3 viewDirWS = half3(input.normalWS.w, input.tangentWS.w, input.bitangentWS.w);
-                    half3 viewDirTS = SafeNormalize( mul(tangentSpaceRotation, input.viewDirWS) );
+                    half3 viewDirTS = SafeNormalize( mul(tangentSpaceRotation, viewDirWS) );
                 #else
                     half3 viewDirTS = 0; 
                 #endif
@@ -300,8 +301,8 @@
                 InitializeStandardLitSurfaceDataUber(input.uv, viewDirTS, surfaceData);
 
                 InputData inputData;
-            //  Custom function! which uses bitangentWS as additional input here.
-                InitializeInputData(input, bitangentWS, surfaceData.normalTS, inputData);
+            //  Custom function! which uses bitangentWS and viewDirWS as additional inputs here.
+                InitializeInputData(input, bitangentWS, viewDirWS, surfaceData.normalTS, inputData);
 
                 #if defined(_BENTNORMAL)
                     half3 bentNormal  = SampleNormalExtended(input.uv, TEXTURE2D_ARGS(_BentNormalMap, sampler_BentNormalMap), 1);     
@@ -329,7 +330,7 @@
                 #endif
 
                 #if defined(_RIMLIGHTING)
-                    half rim = saturate(1.0h - saturate( dot(inputData.normalWS, inputData.viewDirectionWS ) ) );
+half rim = saturate(1.0h - saturate( dot(inputData.normalWS, inputData.viewDirectionWS ) ) );
                     half power = _RimPower;
                     UNITY_BRANCH if(_RimFrequency > 0 ) {
                         half perPosition = lerp(0.0h, 1.0h, dot(1.0h, frac(UNITY_MATRIX_M._m03_m13_m23) * 2.0h - 1.0h ) * _RimPerPositionFrequency ) * 3.1416h;

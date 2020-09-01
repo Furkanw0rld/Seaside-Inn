@@ -93,7 +93,7 @@
                     outSurfaceData.shift = MaskMapSample.b;
                 #else
                     outSurfaceData.occlusion = 1;
-                    outSurfaceData.shift = 0;
+                    outSurfaceData.shift = 1;
                 #endif
 
                 outSurfaceData.smoothness = _Smoothness;

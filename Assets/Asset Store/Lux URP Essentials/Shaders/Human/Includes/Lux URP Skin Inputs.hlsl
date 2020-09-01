@@ -18,10 +18,10 @@
     CBUFFER_START(UnityPerMaterial)
 
         half4  _BaseColor;
+        half3 _SpecularColor;
 
         float4 _BaseMap_ST;
         half _Smoothness;
-        half3 _SpecColor;
         
         half _BumpScale;
         half _Bias;
@@ -38,6 +38,7 @@
         half _TranslucencyPower;
         half _TranslucencyStrength;
         half _ShadowStrength;
+        half _MaskByShadowStrength;
         half _Distortion;
 
         #if defined(_RIMLIGHTING)

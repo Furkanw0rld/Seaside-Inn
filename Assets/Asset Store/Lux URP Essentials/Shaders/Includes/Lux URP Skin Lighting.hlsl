@@ -48,7 +48,7 @@ half3 DirectBDRF_Lux(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, 
     half3 color = specularTerm * brdfData.specular; // + brdfData.diffuse;
     return color;
 #else
-    return brdfData.diffuse;
+    return 0; //brdfData.diffuse;
 #endif
 }
 
@@ -81,7 +81,7 @@ half3 LightingPhysicallyBasedSkin(BRDFData brdfData, Light light, half3 normalWS
 
 
 half4 LuxLWRPSkinFragmentPBR(InputData inputData, half3 albedo, half metallic, half3 specular,
-    half smoothness, half occlusion, half3 emission, half alpha, half4 translucency, half AmbientReflection, half3 diffuseNormalWS, half3 subsurfaceColor, half curvature, half skinMask)
+    half smoothness, half occlusion, half3 emission, half alpha, half4 translucency, half AmbientReflection, half3 diffuseNormalWS, half3 subsurfaceColor, half curvature, half skinMask, half maskbyshadowstrength)
 {
     BRDFData brdfData;
     InitializeBRDFData(albedo, metallic, specular, smoothness, alpha, brdfData);
@@ -107,11 +107,17 @@ half3 color = GlobalIllumination_Lux(brdfData, inputData.bakedGI, occlusion, inp
         int pixelLightCount = GetAdditionalLightsCount();
         for (int i = 0; i < pixelLightCount; ++i)
         {
-            Light light = GetAdditionalLight(i, inputData.positionWS);
+            //Light light = GetAdditionalLight(i, inputData.positionWS);
+        //  Get index upfront as we need it for GetAdditionalLightShadowParams();
+            int index = GetPerObjectLightIndex(i);
+            Light light = GetAdditionalPerObjectLight(index, inputData.positionWS);
 
             half NdotLUnclamped = dot(diffuseNormalWS, light.direction);
             NdotL = saturate( dot(inputData.normalWS, light.direction) );
             color += LightingPhysicallyBasedSkin(brdfData, light, inputData.normalWS, inputData.viewDirectionWS, NdotL, NdotLUnclamped, curvature, skinMask);
+
+half4 shadowParams = GetAdditionalLightShadowParams(index);
+light.color *= lerp(1, shadowParams.x, maskbyshadowstrength); // shadowParams.x == shadow strength, which is 0 for point lights
 
         //  Subsurface Scattering
             transLightDir = light.direction + inputData.normalWS * translucency.w;

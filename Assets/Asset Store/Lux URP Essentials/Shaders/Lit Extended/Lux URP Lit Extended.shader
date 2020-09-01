@@ -170,14 +170,8 @@
                 InputData inputData;
                 InitializeInputData(input, surfaceData.normalTS, inputData);
 
-                #ifdef _NORMALMAP
-                    half3 viewDirWS = half3(input.normalWS.w, input.tangentWS.w, input.bitangentWS.w);
-                #else
-                    half3 viewDirWS = input.viewDirWS;
-                #endif
-
                 #if defined(_RIMLIGHTING)
-                    half rim = saturate(1.0h - saturate( dot(inputData.normalWS, normalize(viewDirWS)) ) );
+                    half rim = saturate(1.0h - saturate( dot(inputData.normalWS, inputData.viewDirectionWS)));
                     half power = _RimPower;
                     UNITY_BRANCH if(_RimFrequency > 0 ) {
                         half perPosition = lerp(0.0h, 1.0h, dot(1.0h, frac(UNITY_MATRIX_M._m03_m13_m23) * 2.0h - 1.0h ) * _RimPerPositionFrequency ) * 3.1416h;

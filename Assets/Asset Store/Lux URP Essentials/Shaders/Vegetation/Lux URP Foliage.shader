@@ -39,6 +39,7 @@ Shader "Lux URP/Vegetation/Foliage"
         _TranslucencyPower          ("Power", Range(0.0, 10.0)) = 7.0
         _TranslucencyStrength       ("Strength", Range(0.0, 1.0)) = 1.0
         _ShadowStrength             ("Shadow Strength", Range(0.0, 1.0)) = 0.7
+        _MaskByShadowStrength       ("Mask by incoming Shadow Strength", Range(0.0, 1.0)) = 0.0
         _Distortion                 ("Distortion", Range(0.0, 0.1)) = 0.01
 
         [Header(Wind)]
@@ -312,7 +313,9 @@ Shader "Lux URP/Vegetation/Foliage"
                     surfaceData.emission, 
                     surfaceData.alpha,
                     half4(_TranslucencyStrength * surfaceData.translucency, _TranslucencyPower, _ShadowStrength, _Distortion),
-                    1); //_AmbientReflection);
+                    1, //_AmbientReflection
+                    _MaskByShadowStrength
+                );
 
             //  Add fog
                 color.rgb = MixFog(color.rgb, inputData.fogCoord);

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Rendering;
 using UnityEditor.Rendering.Universal;
 
 namespace UnityEditor
@@ -306,12 +307,13 @@ namespace UnityEditor
                 		material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
                 		material.SetInt("_ZWrite", 1);
 	        			material.SetOverrideTag("RenderType", "Opaque");
-	        			material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry + 50;
+	        			material.renderQueue = (int)RenderQueue.Geometry;
 	        			material.SetShaderPassEnabled("ShadowCaster", true);
 	        		}
 	        		else {
-	        			material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent + 50; // Make it match Standard Lit shader
 	        			material.SetOverrideTag("RenderType", "Transparent");
+	        			material.SetInt("_ZWrite", 0);
+	        			material.renderQueue = (int)RenderQueue.Transparent;
 	        			material.SetShaderPassEnabled("ShadowCaster", false);
 	        		}
 	        	}
@@ -338,8 +340,10 @@ namespace UnityEditor
 	        			if (alphaclip) {
 	        				alphaClipProp.floatValue = 1;
 	        				material.EnableKeyword("_ALPHATEST_ON");
-	        				material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.AlphaTest + 50;
-                    		material.SetOverrideTag("RenderType", "TransparentCutout");
+	        				if (surface == SurfaceType.Opaque) {
+	        					material.renderQueue = (int)RenderQueue.AlphaTest;
+                    			material.SetOverrideTag("RenderType", "TransparentCutout");
+                    		}
 
                     	//	We may have to re eanble camera fading
                     		if(cameraFadingEnabledProp.floatValue == 1) {
@@ -360,11 +364,12 @@ namespace UnityEditor
 	        			else {
 	        				alphaClipProp.floatValue = 0;
 	        				material.DisableKeyword("_ALPHATEST_ON");
-	        				material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry + 50;
-                    		material.SetOverrideTag("RenderType", "Opaque");
-
-	        				material.DisableKeyword("_FADING_ON");
-	        				material.DisableKeyword("_FADING_SHADOWS_ON");
+	        				if (surface == SurfaceType.Opaque) {
+	        					material.renderQueue = (int)RenderQueue.Geometry;
+                    			material.SetOverrideTag("RenderType", "Opaque");
+	        					material.DisableKeyword("_FADING_ON");
+	        					material.DisableKeyword("_FADING_SHADOWS_ON");
+	        				}
 	        			}
 	        		}
 	        		if (alphaclip) {

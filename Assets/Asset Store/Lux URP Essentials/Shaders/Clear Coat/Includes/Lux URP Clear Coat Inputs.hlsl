@@ -43,6 +43,10 @@
         half    _RimMinPower;
         half    _RimFrequency;
         half    _RimPerPositionFrequency;
+
+        #if defined(_MASKMAPSECONDARY)
+                float4 _SecondaryMask_ST;
+        #endif
             
     CBUFFER_END
 

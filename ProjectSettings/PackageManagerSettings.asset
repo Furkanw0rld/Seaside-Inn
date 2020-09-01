@@ -15,4 +15,37 @@ MonoBehaviour:
   m_EnablePreviewPackages: 1
   m_EnablePackageDependencies: 1
   m_AdvancedSettingsExpanded: 1
+  m_ScopedRegistriesSettingsExpanded: 1
   oneTimeWarningShown: 1
+  m_Registries:
+  - m_Id: main
+    m_Name: 
+    m_Url: https://packages.unity.com
+    m_Scopes: []
+    m_IsDefault: 1
+    m_Capabilities: 7
+  - m_Id: scoped:A* Pathfinding Project
+    m_Name: A* Pathfinding Project
+    m_Url: https://arongranberg.com/packages/f8ef463f65e856c728598c206d47c26c5efbfe68ec076
+    m_Scopes:
+    - com.arongranberg.astar
+    m_IsDefault: 0
+    m_Capabilities: 0
+  m_UserSelectedRegistryName: 
+  m_UserAddingNewScopedRegistry: 0
+  m_RegistryInfoDraft:
+    m_ErrorMessage: 
+    m_Original:
+      m_Id: scoped:A* Pathfinding Project
+      m_Name: A* Pathfinding Project
+      m_Url: https://arongranberg.com/packages/f8ef463f65e856c728598c206d47c26c5efbfe68ec076
+      m_Scopes:
+      - com.arongranberg.astar
+      m_IsDefault: 0
+      m_Capabilities: 0
+    m_Modified: 0
+    m_Name: A* Pathfinding Project
+    m_Url: https://arongranberg.com/packages/f8ef463f65e856c728598c206d47c26c5efbfe68ec076
+    m_Scopes:
+    - com.arongranberg.astar
+    m_SelectedScopeIndex: 0

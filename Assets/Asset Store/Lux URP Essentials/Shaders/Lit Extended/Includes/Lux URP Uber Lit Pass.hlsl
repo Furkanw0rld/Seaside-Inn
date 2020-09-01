@@ -55,15 +55,13 @@ struct Varyings
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
-void InitializeInputData(Varyings input, float3 bitangentWS, half3 normalTS, out InputData inputData)
+void InitializeInputData(Varyings input, float3 bitangentWS, half3 viewDirWS, half3 normalTS, out InputData inputData)
 {
     inputData = (InputData)0;
 
     #if defined(REQUIRES_WORLD_SPACE_POS_INTERPOLATOR)
         inputData.positionWS = input.positionWS;
     #endif
-
-    half3 viewDirWS = SafeNormalize(input.viewDirWS);
 
     #ifdef _NORMALMAP
         inputData.normalWS = TransformTangentToWorld(normalTS, half3x3(input.tangentWS.xyz, bitangentWS.xyz, input.normalWS.xyz));

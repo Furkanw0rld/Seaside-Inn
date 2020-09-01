@@ -84,6 +84,7 @@ half4 LuxLWRPTranslucentFragmentPBR(InputData inputData, half3 albedo, half meta
     #if defined(_STANDARDLIGHTING)
         , half mask
     #endif
+    , half maskbyshadowstrength
 )
 {
     BRDFData brdfData;
@@ -123,10 +124,17 @@ half4 LuxLWRPTranslucentFragmentPBR(InputData inputData, half3 albedo, half meta
         int pixelLightCount = GetAdditionalLightsCount();
         for (int i = 0; i < pixelLightCount; ++i)
         {
-            Light light = GetAdditionalLight(i, inputData.positionWS);
+            //Light light = GetAdditionalLight(i, inputData.positionWS);
+            //  Get index upfront as we need it for GetAdditionalLightShadowParams();
+            int index = GetPerObjectLightIndex(i);
+            Light light = GetAdditionalPerObjectLight(index, inputData.positionWS);
+
     //  Wrapped Diffuse
             NdotL = saturate((dot(inputData.normalWS, light.direction) + w) / ((1 + w) * (1 + w)));
             color += LightingPhysicallyBasedWrapped(brdfData, light, inputData.normalWS, inputData.viewDirectionWS, NdotL);
+
+half4 shadowParams = GetAdditionalLightShadowParams(index);
+light.color *= lerp(1, shadowParams.x, maskbyshadowstrength); // shadowParams.x == shadow strength, which is 0 for point lights
 
     //  Translucency
             transLightDir = light.direction + inputData.normalWS * translucency.w;

@@ -281,6 +281,7 @@ Shader "Lux URP/Versatile Blend"
             //  Depth based blending
                 float depthDist = perspectiveSceneDepth - input.positionCS.w + _AlphaShift;
                 surfaceData.alpha = saturate(depthDist * _AlphaWidth);
+//surfaceData.alpha = 1;
 
             //  Prepare surface data (like bring normal into world space and get missing inputs like gi)
                 InputData inputData;
@@ -300,10 +301,13 @@ Shader "Lux URP/Versatile Blend"
                 shadowShift *= _ShadowShift;
                 float3 finalShift = float3(0, shadowShift, 0) + viewShift;
 
+            //  Limit shift: Depth buffer sample might be some where in space or even sky!
+                finalShift *= saturate(1.0 - depthDist);                
+
             //  Calculate shadowCoord. We have to do it per pixel :(
                 #if defined(_MAIN_LIGHT_SHADOWS) && !defined(_RECEIVE_SHADOWS_OFF)
                     #if defined(_MAIN_LIGHT_SHADOWS_CASCADE)
-                        half cascadeIndex = ComputeCascadeIndex(input.positionWS);
+                        half cascadeIndex = ComputeCascadeIndex(input.positionWS + finalShift);
                     #else
                         half cascadeIndex = 0;
                     #endif

@@ -41,6 +41,7 @@
         half    _TranslucencyPower;
         half    _TranslucencyStrength;
         half    _ShadowStrength;
+        half    _MaskByShadowStrength;
         half    _Distortion;
 
         half    _CustomWrap;

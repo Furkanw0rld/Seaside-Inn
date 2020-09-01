@@ -50,6 +50,7 @@ Shader "Lux URP/Transmission"
         _TranslucencyPower          ("Power", Range(0.0, 32.0)) = 7.0
         _TranslucencyStrength       ("Strength", Range(0.0, 1.0)) = 1.0
         _ShadowStrength             ("Shadow Strength", Range(0.0, 1.0)) = 0.7
+        _MaskByShadowStrength       ("Mask by incoming Shadow Strength", Range(0.0, 1.0)) = 0.0
         _Distortion                 ("Distortion", Range(0.0, 0.1)) = 0.01
 
         [Space(5)]
@@ -348,6 +349,7 @@ Shader "Lux URP/Transmission"
                         #if defined(_STANDARDLIGHTING)
                             , surfaceData.mask
                         #endif
+                        , _MaskByShadowStrength
                 );    
             //  Add fog
                 color.rgb = MixFog(color.rgb, inputData.fogCoord);
