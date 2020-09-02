@@ -58,7 +58,7 @@ public class PlayerInventory : MonoBehaviour
 		return coins;
 	}
 
-	private int FindAnotherItemInInnWithSpace(int startingIndex, Item itemToCheck)
+	public int FindAnotherItemInInnWithSpace(int startingIndex, Item itemToCheck)
 	{
 		switch (itemToCheck)
 		{
@@ -237,7 +237,7 @@ public class PlayerInventory : MonoBehaviour
 		return addedItem;
 	}
 
-	public bool AddItem(Item item, InventoryType inventoryTo) //Overload to add to a specific inventory 
+	public bool AddItem(Item item, InventoryType inventoryTo, int amount = 1) //Overload to add to a specific inventory 
 	{
 		bool addedItem = false;
 
@@ -247,6 +247,7 @@ public class PlayerInventory : MonoBehaviour
 				return AddItem(item);
 
 			case InventoryType.InnInventory:
+				
 				if(item.itemType != ItemType.Food && item.itemType != ItemType.Drink)
 				{
 					break; 
@@ -267,8 +268,7 @@ public class PlayerInventory : MonoBehaviour
 								if (foodItem.freshness == inventoryItem.freshness) // Matching freshness, add item.
 								{
 									innInventory[i].AddAmount(1);
-									addedItem = true;
-									break;
+									return true;
 								}
 								else // Freshness does not match, try to find another.
 								{
@@ -277,9 +277,15 @@ public class PlayerInventory : MonoBehaviour
 							}
 							else // Everything else must be a drink item since we do a check when we enter the case.
 							{
-								innInventory[i].AddAmount(10); // Just adding 10 for now. 
-								addedItem = true;
-								break;
+								if(amount > 1)
+                                {
+									innInventory[i].AddAmount(amount);
+                                }
+                                else
+                                {
+									innInventory[i].AddAmount(5);
+								}
+								return true;
 							}
 						}
 					}
@@ -287,6 +293,11 @@ public class PlayerInventory : MonoBehaviour
 
                 if (!addedItem) // Didn't manage to add the item.
                 {
+					if(item.itemType == ItemType.Drink)
+                    {
+						return false;
+                    }
+
 					if(innInventory.Count >= INN_INVENTORY_SPACE) // No room in inventory.
                     {
 						return addedItem;
@@ -300,10 +311,10 @@ public class PlayerInventory : MonoBehaviour
                 }
 
 				break;
+
 			case InventoryType.TradeInventory:
 				//TODO: Implement Trade Inventory Add Mechanism 
 				//This functionality probably is not needed, skipping for now.
-				Debug.Log("Directly adding items to Trade Inventory not yet implemented.");
 				break;
 		}
 
@@ -809,33 +820,82 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public bool BuyItem(Item item, float cost)
-	{
-		bool boughtItem = false;
+    public bool BuyItem(Item item, float cost, int amount = 1)
+    {
+        bool boughtItem = false;
 
-		if(cost <= GetCoins()) // We have coins to buy item
-		{
-			boughtItem = AddItem(item);
-			if (boughtItem) //We managed to buy it, take away coins and update UI.
-			{
-				RemoveCoins(cost);
-				onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory); 
+		if(item.itemType == ItemType.Drink)
+        {
+			int index = FindAnotherItemInInnWithSpace(0, item);
 
-				if(item is Food_Item) // Add this item to the food tracker if it's a food item.
-                {
-                    if (!inventoryFoodTracker.ContainsKey(item.name))
-                    {
-						inventoryFoodTracker.Add(item.name, 0);
-                    }
-					inventoryFoodTracker[item.name] += 1;
-                }
+			if(index < 0) // No more room to purchase any drinks
+            {
+				return false;
+            }
+
+			if(amount > 1)
+            {
+				cost *= amount;
+            }
+            else
+            {
+				if (innInventory[index].InventorySpaceRemaining() < 5)
+				{
+					cost *= innInventory[index].InventorySpaceRemaining();
+				}
+				else
+				{
+					cost *= 5f;
+				}
+
 			}
+
+			if (cost <= GetCoins())
+            {
+				if(amount > 1)
+                {
+					boughtItem = AddItem(item, InventoryType.InnInventory, amount);
+                }
+                else
+                {
+					boughtItem = AddItem(item, InventoryType.InnInventory);
+				}
+				
+                if (boughtItem)
+                {
+					RemoveCoins(cost);
+					onInventoryChangedCallback?.Invoke(InventoryType.InnInventory);
+                }
+            }
+			return boughtItem;
+        }
+        else
+        {
+			if (cost <= GetCoins()) // We have coins to buy item
+			{
+				boughtItem = AddItem(item);
+
+				if (boughtItem) //We managed to buy it, take away coins and update UI.
+				{
+					RemoveCoins(cost);
+					onInventoryChangedCallback?.Invoke(InventoryType.PlayerInventory);
+
+					if (item.itemType == ItemType.Food) // Add this item to the food tracker if it's a food item.
+					{
+						if (!inventoryFoodTracker.ContainsKey(item.name))
+						{
+							inventoryFoodTracker.Add(item.name, 0);
+						}
+						inventoryFoodTracker[item.name] += 1;
+					}
+				}
+			}
+
+			return boughtItem;
 		}
+    }
 
-		return boughtItem;
-	}
-
-	public void RemoveItemAtIndex(int index, InventoryType inventoryFrom)
+    public void RemoveItemAtIndex(int index, InventoryType inventoryFrom)
 	{
         switch (inventoryFrom)
         {
@@ -1053,7 +1113,7 @@ public class PlayerInventory : MonoBehaviour
 
 				for (int i = 0; i < inventory.Count; i++)
 				{
-					if (inventory[i].item is Food_Item)
+					if (inventory[i].item.itemType == ItemType.Food)
 					{
 						sortedFoodsList.Add(inventory[i]);
 					}

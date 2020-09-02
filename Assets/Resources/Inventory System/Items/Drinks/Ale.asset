@@ -19,4 +19,4 @@ MonoBehaviour:
   prefab: {fileID: 0}
   itemPrice: 2.25
   itemQuality: 0
-  itemAmountLimit: 50
+  itemAmountLimit: 40

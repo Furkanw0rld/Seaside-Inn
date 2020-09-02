@@ -18,6 +18,6 @@ MonoBehaviour:
   description: Wine, the best available drink for purchase. Goes well with everything,
     but it is not cheap.
   prefab: {fileID: 0}
-  itemPrice: 7.5
+  itemPrice: 4
   itemQuality: 0
-  itemAmountLimit: 50
+  itemAmountLimit: 40

@@ -25,7 +25,6 @@ public class InteractableDrinks : Interactable
         if(drinkSlot.amount > 0)
         {
             drinkSlot.RemoveAmount(1);
-            Debug.Log("We used 1 " + drinkName.ToString());
             playerInventory.onInventoryChangedCallback(InventoryType.InnInventory);
         }
         else

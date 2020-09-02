@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 949ba31b3d27719499b751d0710a7fe5, type: 3}
   description: Stronger than beer, but made with honey and water, also known as honey-wine.
   prefab: {fileID: 0}
-  itemPrice: 3.5
+  itemPrice: 3.25
   itemQuality: 0
-  itemAmountLimit: 50
+  itemAmountLimit: 40

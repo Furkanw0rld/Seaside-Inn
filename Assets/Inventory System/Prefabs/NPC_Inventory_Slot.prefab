@@ -102,7 +102,8 @@ MonoBehaviour:
   itemName: {fileID: 5208631828504163550}
   itemIcon: {fileID: 5208631829640808835}
   itemDescription: {fileID: 5208631829708898871}
-  itemPrice: {fileID: 5208631828199293479}
+  itemPriceText: {fileID: 5208631828199293479}
+  itemPrice: 0
   itemQuality: {fileID: 5208631827815373485}
   itemAmount: {fileID: 5208631828549924852}
   purchaseButton: {fileID: 5208631828566198333}
@@ -307,7 +308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Miktar:'
+  m_text: 'Amount:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 67a6b0f0f6683c640a2b2be7a386bedc, type: 2}
   m_sharedMaterial: {fileID: 3336512605978223509, guid: 67a6b0f0f6683c640a2b2be7a386bedc,
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.85
+  m_fontSize: 15.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -481,7 +482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fiyat:'
+  m_text: 'Price:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 67a6b0f0f6683c640a2b2be7a386bedc, type: 2}
   m_sharedMaterial: {fileID: 3336512605978223509, guid: 67a6b0f0f6683c640a2b2be7a386bedc,
@@ -509,7 +510,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.05
+  m_fontSize: 17.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -730,7 +731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kalite:'
+  m_text: 'Quality:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 67a6b0f0f6683c640a2b2be7a386bedc, type: 2}
   m_sharedMaterial: {fileID: 3336512605978223509, guid: 67a6b0f0f6683c640a2b2be7a386bedc,
@@ -1640,7 +1641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sat\u0131n Al"
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 67a6b0f0f6683c640a2b2be7a386bedc, type: 2}
   m_sharedMaterial: {fileID: 3336512605978223509, guid: 67a6b0f0f6683c640a2b2be7a386bedc,
@@ -1668,7 +1669,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.95
+  m_fontSize: 25.9
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

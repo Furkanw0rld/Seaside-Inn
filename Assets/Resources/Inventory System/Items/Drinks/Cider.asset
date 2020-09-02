@@ -18,6 +18,6 @@ MonoBehaviour:
   description: Refreshing drink made with apples, for those who can't handle the
     bitterness of Ale.
   prefab: {fileID: 0}
-  itemPrice: 3
+  itemPrice: 2.75
   itemQuality: 0
-  itemAmountLimit: 50
+  itemAmountLimit: 40

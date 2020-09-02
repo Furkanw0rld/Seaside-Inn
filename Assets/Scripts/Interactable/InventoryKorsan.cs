@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryKorsan : NPCInventorySystem
@@ -40,26 +38,80 @@ public class InventoryKorsan : NPCInventorySystem
 
     public override void BuyItem(InventorySlotItem slot, Button purchaseButton, NPC_ItemSlotInformationData slotInformation)
     {
-        if (playerInventory.GetCoins() >= slot.item.itemPrice)
+
+        if (slot.item.itemType == ItemType.Drink)
         {
-            if (playerInventory.BuyItem(slot.item, slot.item.itemPrice))
+            int index = playerInventory.FindAnotherItemInInnWithSpace(0, slot.item);
+            if(index < 0)
             {
-                slot.RemoveAmount(1);
-                slotInformation.itemAmount.text = slot.amount.ToString();
+                return;
+            }
 
-                if (slot.amount == 0)
+            int spaceRemaining = playerInventory.innInventory[index].InventorySpaceRemaining();
+
+            if (slot.amount < spaceRemaining && slot.amount < 5)
+            {
+                if (playerInventory.GetCoins() >= slot.item.itemPrice)
                 {
-                    shopInventory.RemoveItem(slotInformation);
-                }
+                    if (playerInventory.BuyItem(slot.item, slot.item.itemPrice, slot.amount))
+                    {
+                        slot.RemoveAmount(slot.amount);
+                        slotInformation.itemAmount.text = slot.amount.ToString();
 
-                shopInventory.UpdateContentWindowItems();
+                        if (slot.amount <= 0)
+                        {
+                            shopInventory.RemoveItem(slotInformation);
+                        }
+                        shopInventory.UpdateContentWindowItems();
+                    }
+                }
+            }
+            else
+            {
+                if (playerInventory.GetCoins() >= slot.item.itemPrice)
+                {
+                    if (playerInventory.BuyItem(slot.item, slot.item.itemPrice))
+                    {
+                        if (spaceRemaining < 5)
+                        {
+                            slot.RemoveAmount(spaceRemaining);
+                        }
+                        else
+                        {
+                            slot.RemoveAmount(5);
+                        }
+
+                        slotInformation.itemAmount.text = slot.amount.ToString();
+
+                        if (slot.amount <= 0)
+                        {
+                            shopInventory.RemoveItem(slotInformation);
+                        }
+
+                        shopInventory.UpdateContentWindowItems();
+                    }
+                }
             }
         }
-    }
+        else
+        {
+            if (playerInventory.GetCoins() >= slot.item.itemPrice)
+            {
+                if (playerInventory.BuyItem(slot.item, slot.item.itemPrice))
+                {
+                    slot.RemoveAmount(1);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+                    slotInformation.itemAmount.text = slot.amount.ToString();
+
+                    if (slot.amount <= 0)
+                    {
+                        shopInventory.RemoveItem(slotInformation);
+                    }
+
+                    shopInventory.UpdateContentWindowItems();
+                }
+            }
+        }
+
     }
 }
