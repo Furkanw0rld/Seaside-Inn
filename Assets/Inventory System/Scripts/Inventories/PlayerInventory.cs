@@ -1369,9 +1369,9 @@ public class PlayerInventory : MonoBehaviour
 		}
 
 		// Add the starting items to inventory.
-		innInventory.Add(new InventorySlotItem(Instantiate(ale), 1));
-		innInventory.Add(new InventorySlotItem(Instantiate(cider), 10));
-		innInventory.Add(new InventorySlotItem(Instantiate(mead), 20));
+		innInventory.Add(new InventorySlotItem(Instantiate(ale), 7));
+		innInventory.Add(new InventorySlotItem(Instantiate(cider), 12));
+		innInventory.Add(new InventorySlotItem(Instantiate(mead), 23));
 		innInventory.Add(new InventorySlotItem(Instantiate(wine), 38));
 	}
 

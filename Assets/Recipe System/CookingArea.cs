@@ -18,6 +18,8 @@ public class CookingArea : Interactable
     [SerializeField] private Gradient usesLeftGradient;
     [SerializeField] private Image radialBar;
     [SerializeField] private TextMeshProUGUI usesLeftText;
+    [Header("Fire Effects")]
+    [SerializeField] private ParticleSystem fireEffect;
 #pragma warning restore 0649
 
     [Tooltip("Current recipe at this cooking area.")] private Recipe currentRecipe;
@@ -36,6 +38,9 @@ public class CookingArea : Interactable
         collisionMesh = this.GetComponent<BoxCollider>();
         collisionMesh.enabled = false;
         cookingInformationWindow.SetActive(false);
+
+        //fireEffect.transform.localPosition = new Vector3(0, fireEffect.transform.localPosition.y - 0.4f, 0);
+        fireEffect.Stop();
     }
 
     public IEnumerator FoodCooker(Recipe recipe)
@@ -48,6 +53,8 @@ public class CookingArea : Interactable
         cookingInformationWindow.SetActive(true);
         usesLeftText.gameObject.SetActive(false);
         StartCoroutine(ManageCookTimer());
+
+        fireEffect.Play();
         yield return null;
     }
 
@@ -86,6 +93,7 @@ public class CookingArea : Interactable
                 usesLeftText.text = usesLeft + "/" + currentRecipe.amountOfUses;
                 radialBar.color = usesLeftGradient.Evaluate((float) usesLeft / currentRecipe.amountOfUses);
                 radialBar.fillAmount = 1f;
+                fireEffect.Stop();
             }
             else // The food is either overcooked or undercooked. Destroy.
             {
@@ -97,6 +105,7 @@ public class CookingArea : Interactable
                 cookingInformationWindow.SetActive(false);
                 Destroy(cookingGameObject);
                 cookingGameObject = null;
+                fireEffect.Stop();
             }
         }
         else if (IsRecipeHere && !IsCooking && usesLeft > 0)

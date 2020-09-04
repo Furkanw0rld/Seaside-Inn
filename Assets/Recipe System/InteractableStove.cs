@@ -58,19 +58,17 @@ public class InteractableStove : Interactable
 
     private CookingArea FindEmptyCookingArea()
     {
-        if(!cookingAreaRight.IsCooking && !cookingAreaRight.IsRecipeHere) // Right is empty
+        if (!cookingAreaRight.IsCooking && !cookingAreaRight.IsRecipeHere) // Right is empty
         {
             return cookingAreaRight;
-
         }
 
-        if(!cookingAreaCenter.IsCooking && !cookingAreaCenter.IsRecipeHere) // Center is empty
+        if (!cookingAreaCenter.IsCooking && !cookingAreaCenter.IsRecipeHere) // Center is empty
         {
             return cookingAreaCenter;
-
         }
 
-        if(!cookingAreaLeft.IsCooking && !cookingAreaLeft.IsRecipeHere) // Left is empty
+        if (!cookingAreaLeft.IsCooking && !cookingAreaLeft.IsRecipeHere) // Left is empty
         {
             return cookingAreaLeft;
         }
