@@ -30,6 +30,9 @@ public class CookingArea : Interactable
 
     private float cookTimer = 0;
 
+    //Display Message
+    private DisplayMessageUI displayMessageUI;
+
     public bool IsCooking { get; set; } // Is there something actively cooking
     public bool IsRecipeHere { get; set; } // Is there a recipe here that's being used
 
@@ -39,8 +42,13 @@ public class CookingArea : Interactable
         collisionMesh.enabled = false;
         cookingInformationWindow.SetActive(false);
 
-        //fireEffect.transform.localPosition = new Vector3(0, fireEffect.transform.localPosition.y - 0.4f, 0);
         fireEffect.Stop();
+    }
+
+    protected override void Start()
+    {
+        displayMessageUI = DisplayMessageUI.Instance;
+        base.Start();
     }
 
     public IEnumerator FoodCooker(Recipe recipe)
@@ -81,7 +89,10 @@ public class CookingArea : Interactable
 
             if (cookTimer >= allowedMinimumTime && cookTimer <= allowedMaximumTime) // We are in the range, where the food is cooked. Use.
             {
-                Debug.Log("Food is cooked!");
+                // Food is Cooked
+                string message = "<color=#ffde00>" + currentRecipe.name + "</color> is cooked!";
+                displayMessageUI.DisplayMessage(message);
+
                 IsRecipeHere = true;
                 cookedGameObject = Instantiate(currentRecipe.cookedModel, this.transform);
                 collisionMesh.enabled = true;
@@ -94,10 +105,22 @@ public class CookingArea : Interactable
                 radialBar.color = usesLeftGradient.Evaluate((float) usesLeft / currentRecipe.amountOfUses);
                 radialBar.fillAmount = 1f;
                 fireEffect.Stop();
+
             }
             else // The food is either overcooked or undercooked. Destroy.
             {
-                Debug.Log("Food isn't cooked! Trashing.");
+                // Food isn't cooked
+                string message = "<color=#8f3d0c>" + currentRecipe.name + "</color>";
+                if (cookTimer >= allowedMaximumTime) //Overcooked
+                {
+                    message += " is burnt!";
+                }
+                else //Undercooked
+                {
+                    message += " is undercooked!";
+                }
+                displayMessageUI.DisplayMessage(message);
+
                 IsRecipeHere = false;
                 usesLeft = 0;
                 collisionMesh.enabled = false;
@@ -106,6 +129,7 @@ public class CookingArea : Interactable
                 Destroy(cookingGameObject);
                 cookingGameObject = null;
                 fireEffect.Stop();
+
             }
         }
         else if (IsRecipeHere && !IsCooking && usesLeft > 0)
@@ -114,11 +138,13 @@ public class CookingArea : Interactable
             usesLeftText.text = usesLeft + "/" + currentRecipe.amountOfUses;
             radialBar.color = usesLeftGradient.Evaluate((float) usesLeft / currentRecipe.amountOfUses);
             radialBar.fillAmount = (float)usesLeft / currentRecipe.amountOfUses;
-            Debug.Log("We used 1 " + currentRecipe.name);
+            //Debug.Log("We used 1 " + currentRecipe.name);
             // TODO: Use the food here
 
             if (usesLeft == 0) // Now that an item is used, we should check if there any uses left, if there isn't empty this slot.
             {
+                string message = "<color=#ffde00>" + currentRecipe.name + "</color> is all used up!";
+                displayMessageUI.DisplayMessage(message);
                 IsRecipeHere = false;
                 IsCooking = false;
                 collisionMesh.enabled = false;

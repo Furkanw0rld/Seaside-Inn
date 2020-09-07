@@ -10,7 +10,7 @@ Material:
   m_Name: Burning_Wood_Effect
   m_Shader: {fileID: 4800000, guid: 4701aa1174e3d2a4685bfc28e2e7de24, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -51,7 +51,9 @@ Material:
     - _AlphaCutoff: 0.5
     - _FireIntensity: 1
     - _FireMaximumIntensity: 25
+    - _FireMaximumIntensity1: 20
     - _FireMinimumIntensity: 0.5
+    - _FireMinimumIntensity1: 1
     - _Smoothness: 0.108
     - _TransmissionShadow: 0.5
     m_Colors:
@@ -59,7 +61,7 @@ Material:
     - _Color0: {r: 21.560085, g: 5.81417, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FireSpeed: {r: 0.1, g: -0.3, b: 0, a: 0}
-    - _IntensitySpeed: {r: -0.15, g: 0.1, b: 0, a: 0}
+    - _IntensitySpeed: {r: -0.1, g: 0.33, b: 0, a: 0}
     - _NoiseSpeed: {r: 0.1, g: -0.07, b: 0, a: 0}
-    - _VoronoiSpeed: {r: -0.33, g: -0.33, b: 0, a: 0}
+    - _VoronoiSpeed: {r: -0.44, g: -0.33, b: 0, a: 0}
   m_BuildTextureStacks: []

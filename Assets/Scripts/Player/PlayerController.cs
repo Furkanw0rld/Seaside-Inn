@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (Mouse.current.rightButton.wasPressedThisFrame) //Interactable 
         {
             ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if(Physics.Raycast(ray, out hit, clickDistance))
+            if(Physics.Raycast(ray, out hit, clickDistance, movementLayerMask))
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if(interactable != null) //Object is interactable

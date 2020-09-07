@@ -6,6 +6,7 @@ public class InteractableStove : Interactable
 {
     private CookingWindowUI cookingWindowUI;
     private RecipeSystem recipeSystem;
+    private DisplayMessageUI displayMessageUI;
 
     public CookingArea cookingAreaRight;
     public CookingArea cookingAreaCenter;
@@ -29,6 +30,7 @@ public class InteractableStove : Interactable
     {
         cookingWindowUI = CookingWindowUI.Instance;
         recipeSystem = RecipeSystem.Instance;
+        displayMessageUI = DisplayMessageUI.Instance;
     }
 
     public override void Interact()
@@ -38,8 +40,17 @@ public class InteractableStove : Interactable
         CookingArea getEmptyArea = FindEmptyCookingArea();
         if(getEmptyArea)
         {
-            cookingWindowUI.cookingWindow.SetActive(true);
-            cookingWindowUI.DisplayRecipes(recipeSystem.GetAvailableRecipesForPlayer(), StartCooking);
+            HashSet<Recipe> availableRecipes = recipeSystem.GetAvailableRecipesForPlayer();
+            if(availableRecipes.Count > 0)
+            {
+                cookingWindowUI.cookingWindow.SetActive(true);
+                cookingWindowUI.DisplayRecipes(availableRecipes, StartCooking);
+            }
+            else
+            {
+                displayMessageUI.DisplayMessage("There aren't any available <color=#ffde00>recipes</color>.");
+            }
+
         }
     }
 
