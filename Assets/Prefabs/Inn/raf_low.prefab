@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 4634625398283253187}
   - component: {fileID: 6354094555365876129}
   - component: {fileID: 2785449586200880826}
+  - component: {fileID: 724254668542735243}
   m_Layer: 0
   m_Name: raf_zincir_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4634625398283253187
 Transform:
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &724254668542735243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505440874853788972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.88385487, y: 0.90932655, z: 0.15695524}
+  m_Center: {x: 0.06995554, y: 0.5146576, z: -2.1997976}
 --- !u!1 &2427846924239335858
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,12 +106,13 @@ GameObject:
   - component: {fileID: 2427846924239335869}
   - component: {fileID: 2427846924239335871}
   - component: {fileID: 2427846924239335868}
+  - component: {fileID: 3866920777158456191}
   m_Layer: 0
   m_Name: raf_alt_low (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2427846924239335869
 Transform:
@@ -162,6 +177,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3866920777158456191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427846924239335858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9096846, y: 0.38067535, z: 0.21120834}
+  m_Center: {x: 0.054465383, y: -0.21827804, z: -1.9544146}
 --- !u!1 &2427846925158645483
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,12 +201,13 @@ GameObject:
   - component: {fileID: 2427846925158645482}
   - component: {fileID: 2427846925158645492}
   - component: {fileID: 2427846925158645493}
+  - component: {fileID: 2665813502342440336}
   m_Layer: 0
   m_Name: raf_zincir_low (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2427846925158645482
 Transform:
@@ -243,6 +272,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2665813502342440336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427846925158645483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.88385487, y: 0.90932655, z: 0.15695524}
+  m_Center: {x: 0.06995554, y: 0.5146576, z: -2.1997976}
 --- !u!1 &3077970228658091538
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +299,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2449101892057623720
 Transform:
@@ -289,12 +331,13 @@ GameObject:
   - component: {fileID: 7485902071424899421}
   - component: {fileID: 6324853035410147389}
   - component: {fileID: 8969933928352892112}
+  - component: {fileID: 4670430533415356051}
   m_Layer: 0
   m_Name: raf_govde_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7485902071424899421
 Transform:
@@ -359,6 +402,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4670430533415356051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402994306892520043}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0148296, y: 0.19301516, z: 4.548652}
+  m_Center: {x: -0.038033813, y: 0.0024507493, z: 0}
 --- !u!1 &7782925789210267892
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,12 +426,13 @@ GameObject:
   - component: {fileID: 8856777334998751293}
   - component: {fileID: 2702726184937252365}
   - component: {fileID: 7516321930427866712}
+  - component: {fileID: 5153992796729664492}
   m_Layer: 0
   m_Name: raf_alt_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8856777334998751293
 Transform:
@@ -440,3 +497,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5153992796729664492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782925789210267892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9096846, y: 0.38067535, z: 0.21120834}
+  m_Center: {x: 0.054465383, y: -0.21827804, z: -1.9544146}

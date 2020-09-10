@@ -56,7 +56,7 @@ public class RecipeSystem : MonoBehaviour
         playerInventory = PlayerInventory.Instance;
     }
 
-    public HashSet<Recipe> GetAvailableRecipesForPlayer()
+    public HashSet<Recipe> GetAvailableRecipesForPlayer(bool grilledRecipes = false)
     {
         HashSet<Recipe> availableRecipes = new HashSet<Recipe>();
 
@@ -74,27 +74,67 @@ public class RecipeSystem : MonoBehaviour
                     }
                     else
                     {
-
-                        List<Ingredient> ingredientList = recipes[currentKey].ElementAt(j).ingredients;
-                        for (int k = 0; k < ingredientList.Count; k++) // Go through it's ingredients list, and make sure that the player has atleast that amount
+                        if (grilledRecipes) //Grilled Recipe is flagged, Only add grilled recipes
                         {
-                            if (playerInventory.inventoryFoodTracker.ContainsKey(ingredientList[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
+                            if (!recipes[currentKey].ElementAt(j).isGrilled) //We want grilled recipes and this recipe isn't
                             {
-                                if (playerInventory.inventoryFoodTracker[ingredientList[k].item.name] < ingredientList[k].amount) //If we don't have enough of the item break and go to next recipe
+                                continue;
+                            }
+                            //This is a grilled recipe, check this recipe
+
+                            List<Ingredient> ingredientsList = recipes[currentKey].ElementAt(j).ingredients;
+
+                            for(int k = 0; k < ingredientsList.Count; k++) // Go through the ingredients
+                            {
+                                if (playerInventory.inventoryFoodTracker.ContainsKey(ingredientsList[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
+                                {
+                                    if (playerInventory.inventoryFoodTracker[ingredientsList[k].item.name] < ingredientsList[k].amount) //If we don't have enough of the item break and go to next recipe
+                                    {
+                                        break;
+                                    }
+
+                                    if (k == ingredientsList.Count - 1) //Last item in the list
+                                    {
+                                        availableRecipes.Add(recipes[currentKey].ElementAt(j)); //Add to available recipes and break
+                                        break;
+                                    }
+                                }
+                                else // We don't have the item, break right away and continue to next recipe
                                 {
                                     break;
                                 }
-                                
-                                if (k == ingredientList.Count - 1) //Last item in the list
+                            }
+                        }
+                        else // Cooked Recipes
+                        {
+                            if (recipes[currentKey].ElementAt(j).isGrilled) //If this recipe is grilled, continue to the next recipe
+                            {
+                                continue;
+                            }
+
+                            // Otherwise, check this recipe to add to the recipes list
+                            List<Ingredient> ingredientList = recipes[currentKey].ElementAt(j).ingredients;
+                            for (int k = 0; k < ingredientList.Count; k++) // Go through it's ingredients list, and make sure that the player has atleast that amount
+                            {
+                                if (playerInventory.inventoryFoodTracker.ContainsKey(ingredientList[k].item.name)) //We do have the item, make sure the amount is greater than the ingredient requirement
                                 {
-                                    availableRecipes.Add(recipes[currentKey].ElementAt(j)); //Add to available recipes and break
+                                    if (playerInventory.inventoryFoodTracker[ingredientList[k].item.name] < ingredientList[k].amount) //If we don't have enough of the item break and go to next recipe
+                                    {
+                                        break;
+                                    }
+
+                                    if (k == ingredientList.Count - 1) //Last item in the list
+                                    {
+                                        availableRecipes.Add(recipes[currentKey].ElementAt(j)); //Add to available recipes and break
+                                        break;
+                                    }
+                                }
+                                else // We don't have the item, break right away and continue to next recipe
+                                {
                                     break;
                                 }
                             }
-                            else // We don't have the item, break right away and continue to next recipe
-                            {
-                                break;
-                            }
+
                         }
                     }
                 }
@@ -103,5 +143,4 @@ public class RecipeSystem : MonoBehaviour
 
         return availableRecipes;
     }
-
 }

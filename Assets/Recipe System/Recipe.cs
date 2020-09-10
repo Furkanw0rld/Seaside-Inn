@@ -9,11 +9,14 @@ public class Recipe : ScriptableObject
     [Tooltip("How many uses does the recipe have")] [Min(1)] public int amountOfUses;
     [Tooltip("How long does the food take to cook (in seconds)")] [Min(10)] public float cookTime;
 
-    [Header("Models")] [Tooltip("Serving Model")] public GameObject model;
+    [Space][Header("Grilled Recipes")] public bool isGrilled = false;
+    [Tooltip("If the recipe is grilled, should it be put on the roaster")] public bool isOnRoaster = false;
+
+    [Space][Header("Models")] [Tooltip("Serving Model")] public GameObject model;
     [Tooltip("Cooking Model")] public GameObject cookingModel;
     [Tooltip("Cooked Model")] public GameObject cookedModel;
     
-    [Space] [Tooltip("The Items needed for the recipe")] public List<Ingredient> ingredients;
+    [Space][Tooltip("The Items needed for the recipe")] public List<Ingredient> ingredients;
     
 }
 

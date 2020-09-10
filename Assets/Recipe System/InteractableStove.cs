@@ -13,6 +13,7 @@ public class InteractableStove : Interactable
     public CookingArea cookingAreaLeft;
 
     public static InteractableStove Instance;
+    private InteractableGrill interactableGrill;
 
     private void Awake()
     {
@@ -31,20 +32,37 @@ public class InteractableStove : Interactable
         cookingWindowUI = CookingWindowUI.Instance;
         recipeSystem = RecipeSystem.Instance;
         displayMessageUI = DisplayMessageUI.Instance;
+        interactableGrill = InteractableGrill.Instance;
     }
 
     public override void Interact()
     {
+        HashSet<Recipe> grillRecipes = new HashSet<Recipe>();
+        HashSet<Recipe> availableRecipes = new HashSet<Recipe>();
         base.Interact();
 
-        CookingArea getEmptyArea = FindEmptyCookingArea();
-        if(getEmptyArea)
+        if (IsCookingAreaAvailable())
         {
-            HashSet<Recipe> availableRecipes = recipeSystem.GetAvailableRecipesForPlayer();
-            if(availableRecipes.Count > 0)
+            availableRecipes = recipeSystem.GetAvailableRecipesForPlayer();
+        }
+
+        if (interactableGrill.IsGrillingAreaAvailable())
+        {
+            grillRecipes = recipeSystem.GetAvailableRecipesForPlayer(true);
+        }
+
+        availableRecipes.UnionWith(grillRecipes);
+
+        if(availableRecipes.Count > 0)
+        {
+            cookingWindowUI.cookingWindow.SetActive(true);
+            cookingWindowUI.DisplayRecipes(availableRecipes, StartCooking);
+        }
+        else
+        {
+            if (!interactableGrill.IsGrillingAreaAvailable() && !IsCookingAreaAvailable())
             {
-                cookingWindowUI.cookingWindow.SetActive(true);
-                cookingWindowUI.DisplayRecipes(availableRecipes, StartCooking);
+                displayMessageUI.DisplayMessage("There aren't any available cooking pits.");
             }
             else
             {
@@ -52,6 +70,7 @@ public class InteractableStove : Interactable
             }
 
         }
+
     }
 
     public override void OnDeFocus()
@@ -62,9 +81,15 @@ public class InteractableStove : Interactable
 
     public void StartCooking(Recipe recipe)
     {
-        CookingArea emptyArea = FindEmptyCookingArea();
-        Debug.Log("We began cooking: " + recipe.name);
-        StartCoroutine(emptyArea.FoodCooker(recipe));
+        if (recipe.isGrilled)
+        {
+            interactableGrill.StartGrilling(recipe);
+        }
+        else
+        {
+            CookingArea emptyArea = FindEmptyCookingArea();
+            StartCoroutine(emptyArea.FoodCooker(recipe));
+        }
     }
 
     private CookingArea FindEmptyCookingArea()
@@ -85,6 +110,26 @@ public class InteractableStove : Interactable
         }
 
         return null;
+    }
+
+    public bool IsCookingAreaAvailable()
+    {
+        if (!cookingAreaRight.IsCooking && !cookingAreaRight.IsRecipeHere) // Right is empty
+        {
+            return true;
+        }
+
+        if (!cookingAreaCenter.IsCooking && !cookingAreaCenter.IsRecipeHere) // Center is empty
+        {
+            return true;
+        }
+
+        if (!cookingAreaLeft.IsCooking && !cookingAreaLeft.IsRecipeHere) // Left is empty
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }

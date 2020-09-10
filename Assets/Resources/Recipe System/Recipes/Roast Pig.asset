@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839532f203950364fa5e9da3de06e059, type: 3}
+  m_Name: Roast Pig
+  m_EditorClassIdentifier: 
+  name: Roast Pig
+  icon: {fileID: 21300000, guid: dbb6d817d73d3aa4f817fbe24409dc73, type: 3}
+  amountOfUses: 2
+  cookTime: 30
+  isGrilled: 1
+  isOnRoaster: 1
+  model: {fileID: 7789139881530008576, guid: f8f2eb036a370f24a94139f29f29965c, type: 3}
+  cookingModel: {fileID: 8616485298618226273, guid: ec7bf72280f67a740a461a2b3bbda650,
+    type: 3}
+  cookedModel: {fileID: 7295809412857762636, guid: 52291a752abb0fe4197371face4cd100,
+    type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: e04e75da13ec2314cbc00fd5c748c808, type: 2}
+    amount: 2

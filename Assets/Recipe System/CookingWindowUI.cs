@@ -40,7 +40,7 @@ public class CookingWindowUI : MonoBehaviour
     {
         ClearContentWindow();
 
-        foreach(Recipe rp in recipesToDisplay)
+        foreach (Recipe rp in recipesToDisplay)
         {
             GameObject slotItem = Instantiate(recipeSlot, contentWindow.transform);
             slotItems.Add(slotItem);
@@ -50,13 +50,18 @@ public class CookingWindowUI : MonoBehaviour
             rpSlot.recipeName.text = rp.name;
             rpSlot.recipeImage.sprite = rp.icon;
             rpSlot.amountOfUses.text = rp.amountOfUses.ToString();
-            foreach(Ingredient ing in rp.ingredients)
+            foreach (Ingredient ing in rp.ingredients)
             {
                 TextMeshProUGUI ingredientText = Instantiate(rpSlot.ingredientText, rpSlot.ingredientsContentWindow.transform);
                 ingredientText.text = "- " + ing.amount + " " + ing.item.name;
                 ingredientText.gameObject.SetActive(true);
             }
             rpSlot.cookButton.onClick.AddListener(delegate { CookRecipe(rp, onCookCallback); });
+
+            if (rp.isGrilled)
+            {
+                rpSlot.cookButton.GetComponentInChildren<TextMeshProUGUI>().text = "Grill";
+            }
         }
 
     }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839532f203950364fa5e9da3de06e059, type: 3}
+  m_Name: Grilled Steak
+  m_EditorClassIdentifier: 
+  name: Grilled Steak
+  icon: {fileID: 21300000, guid: dbb6d817d73d3aa4f817fbe24409dc73, type: 3}
+  amountOfUses: 1
+  cookTime: 15
+  isGrilled: 1
+  isOnRoaster: 0
+  model: {fileID: 7789139881530008576, guid: f8f2eb036a370f24a94139f29f29965c, type: 3}
+  cookingModel: {fileID: 4066220246723984684, guid: 5175c868f698cb34fa454ab3cecaebdc,
+    type: 3}
+  cookedModel: {fileID: 7295809412857762636, guid: 52291a752abb0fe4197371face4cd100,
+    type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: b4d8a4e63421692419fe2d992bbe1ae0, type: 2}
+    amount: 2
