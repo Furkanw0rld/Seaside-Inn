@@ -21,8 +21,9 @@ public class CookingArea : Interactable
     [SerializeField] private TextMeshProUGUI recipeNameText;
     [Header("Transforms")]
     [SerializeField] private Transform recipeInstantiationPoint;
-    [Header("Fire Effects")]
+    [Header("Effect Systems")]
     [SerializeField] private ParticleSystem fireEffect;
+    [SerializeField] private ParticleSystem bubblesEffect;
 #pragma warning restore 0649
 
     [Tooltip("Current recipe at this cooking area.")] private Recipe currentRecipe;
@@ -48,6 +49,7 @@ public class CookingArea : Interactable
         cookingInformationWindow.SetActive(false);
 
         fireEffect.Stop();
+        bubblesEffect.Stop();
     }
 
     protected override void Start()
@@ -93,29 +95,49 @@ public class CookingArea : Interactable
         }
 
         recipeInstantiationPoint.localPosition = recipeFinalHeight;
+        bubblesEffect.Play();
     }
 
-    private IEnumerator FoodDecreasingEffect()
+    private IEnumerator FoodDecreasingEffect(bool completelyDeplete = false)
     {
         float emptyingTime = 0.5f;
         float time = 0;
         float normalized;
 
-        float nextHeight = recipeEmptyHeight + ((recipeFullHeight - recipeEmptyHeight) * ((float)usesLeft / currentRecipe.amountOfUses));
-
+        float nextHeight;
+        Vector3 recipeFinalHeight;
         Vector3 recipeStartHeight = recipeInstantiationPoint.localPosition;
-        Vector3 recipeFinalHeight = new Vector3(0f, nextHeight, 0f);
+
+        if (completelyDeplete)
+        {
+            recipeFinalHeight = new Vector3(0f, recipeEmptyHeight, 0f);
+            emptyingTime = 1.5f;
+        }
+        else
+        {
+            nextHeight = recipeEmptyHeight + ((recipeFullHeight - recipeEmptyHeight) * ((float)usesLeft / currentRecipe.amountOfUses));
+            recipeFinalHeight = new Vector3(0f, nextHeight, 0f);
+        }
 
         while(time < emptyingTime)
         {
             normalized = time / emptyingTime;
-            normalized = normalized * normalized * (3f - 2f * normalized);
+            normalized = normalized * normalized * (3f - 2f * normalized); //Smoothing algorithm
             recipeInstantiationPoint.localPosition = Vector3.Lerp(recipeStartHeight, recipeFinalHeight, normalized);
             time += Time.deltaTime;
             yield return null;
         }
 
         recipeInstantiationPoint.localPosition = recipeFinalHeight;
+
+        if (completelyDeplete) // Destroy and nullify cookingGameObject if it still exits when we completely deplete
+        {
+            if(cookingGameObject != null)
+            {
+                Destroy(cookingGameObject);
+                cookingGameObject = null;
+            }
+        }
     }
 
     IEnumerator ManageCookTimer()
@@ -154,7 +176,7 @@ public class CookingArea : Interactable
                 radialBar.color = usesLeftGradient.Evaluate((float)usesLeft / currentRecipe.amountOfUses);
                 radialBar.fillAmount = 1f;
                 fireEffect.Stop();
-
+                bubblesEffect.Stop();
             }
             else // The food is either overcooked or undercooked. Destroy.
             {
@@ -175,10 +197,13 @@ public class CookingArea : Interactable
                 collisionMesh.enabled = false;
                 currentRecipe = null;
                 cookingInformationWindow.SetActive(false);
-                Destroy(cookingGameObject);
-                cookingGameObject = null;
-                fireEffect.Stop();
 
+                //No need to nullify cookingGO because we will do so at the end of Effect
+                //Destroy(cookingGameObject);
+                //cookingGameObject = null;
+                StartCoroutine(FoodDecreasingEffect(true));
+                fireEffect.Stop();
+                bubblesEffect.Stop();
             }
         }
         else if (IsRecipeHere && !IsCooking && usesLeft > 0)

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Burning_Wood_Effect
+  m_Shader: {fileID: 4800000, guid: 4701aa1174e3d2a4685bfc28e2e7de24, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: d82855ff4086126499a08518ed264bfd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FireEffect:
+        m_Texture: {fileID: 2800000, guid: fdeaefbf737951b46b57000e58ff4ce0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 1, y: 1}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: d8633066d766d93448f8f9c5e692d297, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 2800000, guid: 3e75f04230df11545a2105bae9b4e874, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 08f59ce72aee86648bd9f57bcc974923, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 2800000, guid: 70c69580dde9c4b4f8130e8894b71e78, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _FireIntensity: 1
+    - _FireMaximumIntensity: 25
+    - _FireMaximumIntensity1: 20
+    - _FireMinimumIntensity: 0.5
+    - _FireMinimumIntensity1: 1
+    - _Smoothness: 0.108
+    - _TransmissionShadow: 0.5
+    m_Colors:
+    - _Bloom: {r: 5.5908794, g: 1.6684823, b: 0, a: 0}
+    - _Color0: {r: 21.560085, g: 5.81417, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FireSpeed: {r: 0.1, g: -0.3, b: 0, a: 0}
+    - _IntensitySpeed: {r: -0.1, g: 0.33, b: 0, a: 0}
+    - _NoiseSpeed: {r: 0.1, g: -0.07, b: 0, a: 0}
+    - _VoronoiSpeed: {r: -0.44, g: -0.33, b: 0, a: 0}
+  m_BuildTextureStacks: []

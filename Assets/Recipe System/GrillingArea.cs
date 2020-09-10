@@ -23,7 +23,7 @@ public class GrillingArea : Interactable
     [Header("Transforms")]
     [SerializeField] private Transform grillingPoint;
     [SerializeField] private Transform roastingPoint;
-    [SerializeField] private SimpleGrillLightFlicker lightFlicker;
+    [SerializeField] private GrillEffects lightFlicker;
     [Header("Fire Effects")]
     [SerializeField] private ParticleSystem fireEffect;
 #pragma warning restore 0649
