@@ -1682,10 +1682,7 @@ namespace AmplifyShaderEditor
 				if( EditorGUI.EndChangeCheck() )
 					ContainerGraph.CurrentPrecision = m_currentPrecisionType;
 
-				EditorGUI.BeginChangeCheck();
 				DrawSamplingMacros();
-				if( EditorGUI.EndChangeCheck() )
-					ContainerGraph.SamplingMacros = SamplingMacros;
 
 				m_drawInstancedHelper.Draw( this );
 				m_fallbackHelper.Draw( this );
@@ -2934,9 +2931,9 @@ namespace AmplifyShaderEditor
 				}
 
 				if( UIUtils.CurrentShaderVersion() > 18302 )
-					m_samplingMacros = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
+					SamplingMacros = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
 				else
-					m_samplingMacros = false;
+					SamplingMacros = false;
 
 				//if( m_templateMultiPass != null && !m_templateMultiPass.IsSinglePass )
 				//{
@@ -2950,7 +2947,6 @@ namespace AmplifyShaderEditor
 
 			m_containerGraph.CurrentCanvasMode = NodeAvailability.TemplateShader;
 			m_containerGraph.CurrentPrecision = m_currentPrecisionType;
-			m_containerGraph.SamplingMacros = m_samplingMacros;
 		}
 
 		public override void WriteToString( ref string nodeInfo, ref string connectionsInfo )
@@ -3135,7 +3131,7 @@ namespace AmplifyShaderEditor
 					}
 				}
 
-				m_samplingMacros = false;
+				SamplingMacros = false;
 			}
 			catch( Exception e )
 			{

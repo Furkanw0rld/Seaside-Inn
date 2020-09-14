@@ -98,9 +98,9 @@ namespace AmplifyShaderEditor
 				, colors[ 0 ], colors[ 1 ], colors[ 2 ], colors[ 3 ], colors[ 4 ], colors[ 5 ], colors[ 6 ], colors[ 7 ]
 				, alphas[ 0 ], alphas[ 1 ], alphas[ 2 ], alphas[ 3 ], alphas[ 4 ], alphas[ 5 ], alphas[ 6 ], alphas[ 7 ] );
 
-			dataCollector.AddLocalVariable( UniqueId, "Gradient gradient" + UniqueId + " = " + functionResult + ";" );
+			dataCollector.AddLocalVariable( UniqueId, "Gradient gradient" + OutputId + " = " + functionResult + ";" );
 
-			return "gradient" + UniqueId;
+			return "gradient" + OutputId;
 		}
 
 		public static void GenerateGradientStruct( ref string body )

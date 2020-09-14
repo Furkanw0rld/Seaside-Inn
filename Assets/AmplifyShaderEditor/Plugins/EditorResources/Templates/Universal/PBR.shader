@@ -148,6 +148,8 @@ Shader /*ase_name*/ "Hidden/Universal/PBR" /*end*/
 				false:RemoveDefine:pragma multi_compile_fog
 				true:SetDefine:ASE_FOG 1
 				false:RemoveDefine:ASE_FOG 1
+			Option,_FinalColorxAlpha:Final Color x Alpha:true,false:false
+				true:SetDefine:ASE_FINAL_COLOR_ALPHA_MULTIPLY 1
 			Option:Meta Pass:false,true:true
 				true:IncludePass:Meta
 				false,disable:ExcludePass:Meta
@@ -761,6 +763,7 @@ Shader /*ase_name*/ "Hidden/Universal/PBR" /*end*/
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
 				float4 ase_tangent : TANGENT;
+				float4 texcoord : TEXCOORD0;
 				float4 texcoord1 : TEXCOORD1;
 				/*ase_vcontrol*/
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -780,6 +783,7 @@ Shader /*ase_name*/ "Hidden/Universal/PBR" /*end*/
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
 				o.ase_tangent = v.ase_tangent;
+				o.texcoord = v.texcoord;
 				o.texcoord1 = v.texcoord1;
 				/*ase_control_code:v=VertexInput;o=VertexControl*/
 				return o;
@@ -821,6 +825,7 @@ Shader /*ase_name*/ "Hidden/Universal/PBR" /*end*/
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
 				o.ase_tangent = patch[0].ase_tangent * bary.x + patch[1].ase_tangent * bary.y + patch[2].ase_tangent * bary.z;
+				o.texcoord = patch[0].texcoord * bary.x + patch[1].texcoord * bary.y + patch[2].texcoord * bary.z;
 				o.texcoord1 = patch[0].texcoord1 * bary.x + patch[1].texcoord1 * bary.y + patch[2].texcoord1 * bary.z;
 				/*ase_domain_code:patch=VertexControl;o=VertexInput;bary=SV_DomainLocation*/
 				#if defined(ASE_PHONG_TESSELLATION)
@@ -1005,6 +1010,10 @@ Shader /*ase_name*/ "Hidden/Universal/PBR" /*end*/
 					float3 refraction = SHADERGRAPH_SAMPLE_SCENE_COLOR( projScreenPos ) * RefractionColor;
 					color.rgb = lerp( refraction, color.rgb, color.a );
 					color.a = 1;
+				#endif
+
+				#ifdef ASE_FINAL_COLOR_ALPHA_MULTIPLY
+					color.rgb *= color.a;
 				#endif
 
 				#ifdef ASE_FOG

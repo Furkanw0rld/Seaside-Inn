@@ -46,7 +46,8 @@ namespace AmplifyShaderEditor
 		SV_VertexID,
 		SV_PrimitiveID,
 		SV_InstanceID,
-		INTERNALTESSPOS
+		INTERNALTESSPOS,
+		INSTANCEID_SEMANTIC
 	}
 
 	public enum TemplateInfoOnSematics
@@ -441,6 +442,7 @@ namespace AmplifyShaderEditor
 		{
 			base.SetAllModulesDefault();
 			ColorMaskId = string.Empty;
+			Target = string.Empty;
 			for( int i = 0; i < ColorMaskData.Length; i++ )
 			{
 				ColorMaskData[ i ] = true;
@@ -1895,7 +1897,15 @@ namespace AmplifyShaderEditor
 
 					WirePortDataType dataType = CgToWirePortType[ match.Groups[ 1 ].Value ];
 					string varName = match.Groups[ 2 ].Value;
-					TemplateSemantics semantics = (TemplateSemantics)Enum.Parse( typeof( TemplateSemantics ), match.Groups[ 3 ].Value );
+					TemplateSemantics semantics = TemplateSemantics.NONE;
+					try
+					{
+						semantics = (TemplateSemantics)Enum.Parse( typeof( TemplateSemantics ), match.Groups[ 3 ].Value );
+					}
+					catch(Exception e) 
+					{
+						Debug.LogException( e );
+					}
 					TemplateVertexData templateVertexData = new TemplateVertexData( semantics, dataType, varName );
 					vertexDataList.Add( templateVertexData );
 					vertexDataDict.Add( semantics, templateVertexData );
@@ -2013,7 +2023,16 @@ namespace AmplifyShaderEditor
 					{
 						WirePortDataType dataType = CgToWirePortType[ match.Groups[ 1 ].Value ];
 						string varName = match.Groups[ 2 ].Value;
-						TemplateSemantics semantics = (TemplateSemantics)Enum.Parse( typeof( TemplateSemantics ), match.Groups[ 3 ].Value );
+						TemplateSemantics semantics = TemplateSemantics.NONE;
+						try
+						{
+							semantics = (TemplateSemantics)Enum.Parse( typeof( TemplateSemantics ), match.Groups[ 3 ].Value );
+						}
+						catch( Exception e )
+						{
+							Debug.LogException( e );
+						}
+
 						TemplateVertexData templateVertexData = new TemplateVertexData( semantics, dataType, varName );
 						//interpDataList.Add( templateVertexData );
 						interpDataDict.Add( semantics, templateVertexData );

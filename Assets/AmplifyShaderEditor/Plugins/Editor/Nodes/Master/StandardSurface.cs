@@ -753,10 +753,7 @@ namespace AmplifyShaderEditor
 
 			m_receiveShadows = EditorGUILayoutToggle( ReceiveShadowsContent, m_receiveShadows );
 
-			EditorGUI.BeginChangeCheck();
 			DrawSamplingMacros();
-			if( EditorGUI.EndChangeCheck() )
-				ContainerGraph.SamplingMacros = m_samplingMacros;
 
 			m_drawInstancedHelper.Draw( this );
 
@@ -3126,9 +3123,9 @@ namespace AmplifyShaderEditor
 					m_inlineAlphaToCoverage.ReadFromString( ref m_currentReadParamIdx, ref nodeParams );
 
 				if( UIUtils.CurrentShaderVersion() > 18302 )
-					m_samplingMacros = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
+					SamplingMacros = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
 				else
-					m_samplingMacros = false;
+					SamplingMacros = false;
 
 				m_lightModelChanged = true;
 				m_lastLightModel = m_currentLightModel;
@@ -3138,7 +3135,6 @@ namespace AmplifyShaderEditor
 				m_customBlendMode = TestCustomBlendMode();
 
 				ContainerGraph.CurrentPrecision = m_currentPrecisionType;
-				ContainerGraph.SamplingMacros = m_samplingMacros;
 			}
 			catch( Exception e )
 			{

@@ -7,13 +7,11 @@ public class HoverOverAI : MonoBehaviour
     public TextMeshPro actionText;
     public TextMeshPro characterNameText;
 
-    private GAgent agent;
-
     private void Start()
     {
         actionText.enabled = false;
         characterNameText.enabled = false;
-        agent = this.GetComponent<GAgent>();
+        actionText.text = "Idle";
 
     }
 
@@ -21,15 +19,6 @@ public class HoverOverAI : MonoBehaviour
     {
         actionText.enabled = true;
         characterNameText.enabled = true;
-        if(agent.currentAction != null)
-        {
-            actionText.text = agent.currentAction.actionName;
-        }
-        else
-        {
-            actionText.text = "Idle";
-        }
-        
     }
 
     public void OnMouseOver()
