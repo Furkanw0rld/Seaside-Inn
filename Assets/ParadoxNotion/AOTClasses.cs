@@ -25,6 +25,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Framework.BBParameter<UnityEngine.RaycastHit2D> NodeCanvas_Framework_BBParameter_UnityEngine_RaycastHit2D;
 		NodeCanvas.Framework.BBParameter<UnityEngine.Ray> NodeCanvas_Framework_BBParameter_UnityEngine_Ray;
 		NodeCanvas.Framework.BBParameter<UnityEngine.Space> NodeCanvas_Framework_BBParameter_UnityEngine_Space;
+		NodeCanvas.Framework.BBParameter<System.UInt16> NodeCanvas_Framework_BBParameter_System_UInt16;
+		NodeCanvas.Framework.BBParameter<System.UInt64> NodeCanvas_Framework_BBParameter_System_UInt64;
 		NodeCanvas.Framework.BBParameter<UnityEngine.LayerMask> NodeCanvas_Framework_BBParameter_UnityEngine_LayerMask;
 
 		NodeCanvas.Framework.ExposedParameter<System.Boolean> NodeCanvas_Framework_ExposedParameter_System_Boolean;
@@ -46,6 +48,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Framework.ExposedParameter<UnityEngine.RaycastHit2D> NodeCanvas_Framework_ExposedParameter_UnityEngine_RaycastHit2D;
 		NodeCanvas.Framework.ExposedParameter<UnityEngine.Ray> NodeCanvas_Framework_ExposedParameter_UnityEngine_Ray;
 		NodeCanvas.Framework.ExposedParameter<UnityEngine.Space> NodeCanvas_Framework_ExposedParameter_UnityEngine_Space;
+		NodeCanvas.Framework.ExposedParameter<System.UInt16> NodeCanvas_Framework_ExposedParameter_System_UInt16;
+		NodeCanvas.Framework.ExposedParameter<System.UInt64> NodeCanvas_Framework_ExposedParameter_System_UInt64;
 		NodeCanvas.Framework.ExposedParameter<UnityEngine.LayerMask> NodeCanvas_Framework_ExposedParameter_UnityEngine_LayerMask;
 
 		NodeCanvas.Framework.Variable<System.Boolean> NodeCanvas_Framework_Variable_System_Boolean;
@@ -67,6 +71,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Framework.Variable<UnityEngine.RaycastHit2D> NodeCanvas_Framework_Variable_UnityEngine_RaycastHit2D;
 		NodeCanvas.Framework.Variable<UnityEngine.Ray> NodeCanvas_Framework_Variable_UnityEngine_Ray;
 		NodeCanvas.Framework.Variable<UnityEngine.Space> NodeCanvas_Framework_Variable_UnityEngine_Space;
+		NodeCanvas.Framework.Variable<System.UInt16> NodeCanvas_Framework_Variable_System_UInt16;
+		NodeCanvas.Framework.Variable<System.UInt64> NodeCanvas_Framework_Variable_System_UInt64;
 		NodeCanvas.Framework.Variable<UnityEngine.LayerMask> NodeCanvas_Framework_Variable_UnityEngine_LayerMask;
 
 		NodeCanvas.Framework.Internal.ReflectedAction<System.Boolean> NodeCanvas_Framework_Internal_ReflectedAction_System_Boolean;
@@ -88,6 +94,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Framework.Internal.ReflectedAction<UnityEngine.RaycastHit2D> NodeCanvas_Framework_Internal_ReflectedAction_UnityEngine_RaycastHit2D;
 		NodeCanvas.Framework.Internal.ReflectedAction<UnityEngine.Ray> NodeCanvas_Framework_Internal_ReflectedAction_UnityEngine_Ray;
 		NodeCanvas.Framework.Internal.ReflectedAction<UnityEngine.Space> NodeCanvas_Framework_Internal_ReflectedAction_UnityEngine_Space;
+		NodeCanvas.Framework.Internal.ReflectedAction<System.UInt16> NodeCanvas_Framework_Internal_ReflectedAction_System_UInt16;
+		NodeCanvas.Framework.Internal.ReflectedAction<System.UInt64> NodeCanvas_Framework_Internal_ReflectedAction_System_UInt64;
 		NodeCanvas.Framework.Internal.ReflectedAction<UnityEngine.LayerMask> NodeCanvas_Framework_Internal_ReflectedAction_UnityEngine_LayerMask;
 
 		NodeCanvas.Framework.Internal.ReflectedFunction<System.Boolean> NodeCanvas_Framework_Internal_ReflectedFunction_System_Boolean;
@@ -109,6 +117,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Framework.Internal.ReflectedFunction<UnityEngine.RaycastHit2D> NodeCanvas_Framework_Internal_ReflectedFunction_UnityEngine_RaycastHit2D;
 		NodeCanvas.Framework.Internal.ReflectedFunction<UnityEngine.Ray> NodeCanvas_Framework_Internal_ReflectedFunction_UnityEngine_Ray;
 		NodeCanvas.Framework.Internal.ReflectedFunction<UnityEngine.Space> NodeCanvas_Framework_Internal_ReflectedFunction_UnityEngine_Space;
+		NodeCanvas.Framework.Internal.ReflectedFunction<System.UInt16> NodeCanvas_Framework_Internal_ReflectedFunction_System_UInt16;
+		NodeCanvas.Framework.Internal.ReflectedFunction<System.UInt64> NodeCanvas_Framework_Internal_ReflectedFunction_System_UInt64;
 		NodeCanvas.Framework.Internal.ReflectedFunction<UnityEngine.LayerMask> NodeCanvas_Framework_Internal_ReflectedFunction_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.AddElementToDictionary<System.Boolean> NodeCanvas_Tasks_Actions_AddElementToDictionary_System_Boolean;
@@ -130,6 +140,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.AddElementToDictionary<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_AddElementToDictionary_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.AddElementToDictionary<UnityEngine.Ray> NodeCanvas_Tasks_Actions_AddElementToDictionary_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.AddElementToDictionary<UnityEngine.Space> NodeCanvas_Tasks_Actions_AddElementToDictionary_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.AddElementToDictionary<System.UInt16> NodeCanvas_Tasks_Actions_AddElementToDictionary_System_UInt16;
+		NodeCanvas.Tasks.Actions.AddElementToDictionary<System.UInt64> NodeCanvas_Tasks_Actions_AddElementToDictionary_System_UInt64;
 		NodeCanvas.Tasks.Actions.AddElementToDictionary<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_AddElementToDictionary_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.AddElementToList<System.Boolean> NodeCanvas_Tasks_Actions_AddElementToList_System_Boolean;
@@ -151,6 +163,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.AddElementToList<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_AddElementToList_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.AddElementToList<UnityEngine.Ray> NodeCanvas_Tasks_Actions_AddElementToList_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.AddElementToList<UnityEngine.Space> NodeCanvas_Tasks_Actions_AddElementToList_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.AddElementToList<System.UInt16> NodeCanvas_Tasks_Actions_AddElementToList_System_UInt16;
+		NodeCanvas.Tasks.Actions.AddElementToList<System.UInt64> NodeCanvas_Tasks_Actions_AddElementToList_System_UInt64;
 		NodeCanvas.Tasks.Actions.AddElementToList<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_AddElementToList_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.GetDictionaryElement<System.Boolean> NodeCanvas_Tasks_Actions_GetDictionaryElement_System_Boolean;
@@ -172,6 +186,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.GetDictionaryElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_GetDictionaryElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.GetDictionaryElement<UnityEngine.Ray> NodeCanvas_Tasks_Actions_GetDictionaryElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.GetDictionaryElement<UnityEngine.Space> NodeCanvas_Tasks_Actions_GetDictionaryElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.GetDictionaryElement<System.UInt16> NodeCanvas_Tasks_Actions_GetDictionaryElement_System_UInt16;
+		NodeCanvas.Tasks.Actions.GetDictionaryElement<System.UInt64> NodeCanvas_Tasks_Actions_GetDictionaryElement_System_UInt64;
 		NodeCanvas.Tasks.Actions.GetDictionaryElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_GetDictionaryElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.GetIndexOfElement<System.Boolean> NodeCanvas_Tasks_Actions_GetIndexOfElement_System_Boolean;
@@ -193,6 +209,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.GetIndexOfElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_GetIndexOfElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.GetIndexOfElement<UnityEngine.Ray> NodeCanvas_Tasks_Actions_GetIndexOfElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.GetIndexOfElement<UnityEngine.Space> NodeCanvas_Tasks_Actions_GetIndexOfElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.GetIndexOfElement<System.UInt16> NodeCanvas_Tasks_Actions_GetIndexOfElement_System_UInt16;
+		NodeCanvas.Tasks.Actions.GetIndexOfElement<System.UInt64> NodeCanvas_Tasks_Actions_GetIndexOfElement_System_UInt64;
 		NodeCanvas.Tasks.Actions.GetIndexOfElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_GetIndexOfElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.InsertElementToList<System.Boolean> NodeCanvas_Tasks_Actions_InsertElementToList_System_Boolean;
@@ -214,6 +232,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.InsertElementToList<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_InsertElementToList_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.InsertElementToList<UnityEngine.Ray> NodeCanvas_Tasks_Actions_InsertElementToList_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.InsertElementToList<UnityEngine.Space> NodeCanvas_Tasks_Actions_InsertElementToList_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.InsertElementToList<System.UInt16> NodeCanvas_Tasks_Actions_InsertElementToList_System_UInt16;
+		NodeCanvas.Tasks.Actions.InsertElementToList<System.UInt64> NodeCanvas_Tasks_Actions_InsertElementToList_System_UInt64;
 		NodeCanvas.Tasks.Actions.InsertElementToList<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_InsertElementToList_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.PickListElement<System.Boolean> NodeCanvas_Tasks_Actions_PickListElement_System_Boolean;
@@ -235,6 +255,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.PickListElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_PickListElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.PickListElement<UnityEngine.Ray> NodeCanvas_Tasks_Actions_PickListElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.PickListElement<UnityEngine.Space> NodeCanvas_Tasks_Actions_PickListElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.PickListElement<System.UInt16> NodeCanvas_Tasks_Actions_PickListElement_System_UInt16;
+		NodeCanvas.Tasks.Actions.PickListElement<System.UInt64> NodeCanvas_Tasks_Actions_PickListElement_System_UInt64;
 		NodeCanvas.Tasks.Actions.PickListElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_PickListElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.PickRandomListElement<System.Boolean> NodeCanvas_Tasks_Actions_PickRandomListElement_System_Boolean;
@@ -256,6 +278,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.PickRandomListElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_PickRandomListElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.PickRandomListElement<UnityEngine.Ray> NodeCanvas_Tasks_Actions_PickRandomListElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.PickRandomListElement<UnityEngine.Space> NodeCanvas_Tasks_Actions_PickRandomListElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.PickRandomListElement<System.UInt16> NodeCanvas_Tasks_Actions_PickRandomListElement_System_UInt16;
+		NodeCanvas.Tasks.Actions.PickRandomListElement<System.UInt64> NodeCanvas_Tasks_Actions_PickRandomListElement_System_UInt64;
 		NodeCanvas.Tasks.Actions.PickRandomListElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_PickRandomListElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.RemoveElementFromList<System.Boolean> NodeCanvas_Tasks_Actions_RemoveElementFromList_System_Boolean;
@@ -277,6 +301,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.RemoveElementFromList<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_RemoveElementFromList_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.RemoveElementFromList<UnityEngine.Ray> NodeCanvas_Tasks_Actions_RemoveElementFromList_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.RemoveElementFromList<UnityEngine.Space> NodeCanvas_Tasks_Actions_RemoveElementFromList_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.RemoveElementFromList<System.UInt16> NodeCanvas_Tasks_Actions_RemoveElementFromList_System_UInt16;
+		NodeCanvas.Tasks.Actions.RemoveElementFromList<System.UInt64> NodeCanvas_Tasks_Actions_RemoveElementFromList_System_UInt64;
 		NodeCanvas.Tasks.Actions.RemoveElementFromList<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_RemoveElementFromList_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.SendEvent<System.Boolean> NodeCanvas_Tasks_Actions_SendEvent_System_Boolean;
@@ -298,6 +324,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.SendEvent<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_SendEvent_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.SendEvent<UnityEngine.Ray> NodeCanvas_Tasks_Actions_SendEvent_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.SendEvent<UnityEngine.Space> NodeCanvas_Tasks_Actions_SendEvent_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.SendEvent<System.UInt16> NodeCanvas_Tasks_Actions_SendEvent_System_UInt16;
+		NodeCanvas.Tasks.Actions.SendEvent<System.UInt64> NodeCanvas_Tasks_Actions_SendEvent_System_UInt64;
 		NodeCanvas.Tasks.Actions.SendEvent<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_SendEvent_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.SendEventToObjects<System.Boolean> NodeCanvas_Tasks_Actions_SendEventToObjects_System_Boolean;
@@ -319,6 +347,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.SendEventToObjects<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_SendEventToObjects_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.SendEventToObjects<UnityEngine.Ray> NodeCanvas_Tasks_Actions_SendEventToObjects_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.SendEventToObjects<UnityEngine.Space> NodeCanvas_Tasks_Actions_SendEventToObjects_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.SendEventToObjects<System.UInt16> NodeCanvas_Tasks_Actions_SendEventToObjects_System_UInt16;
+		NodeCanvas.Tasks.Actions.SendEventToObjects<System.UInt64> NodeCanvas_Tasks_Actions_SendEventToObjects_System_UInt64;
 		NodeCanvas.Tasks.Actions.SendEventToObjects<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_SendEventToObjects_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.SendMessage<System.Boolean> NodeCanvas_Tasks_Actions_SendMessage_System_Boolean;
@@ -340,6 +370,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.SendMessage<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_SendMessage_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.SendMessage<UnityEngine.Ray> NodeCanvas_Tasks_Actions_SendMessage_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.SendMessage<UnityEngine.Space> NodeCanvas_Tasks_Actions_SendMessage_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.SendMessage<System.UInt16> NodeCanvas_Tasks_Actions_SendMessage_System_UInt16;
+		NodeCanvas.Tasks.Actions.SendMessage<System.UInt64> NodeCanvas_Tasks_Actions_SendMessage_System_UInt64;
 		NodeCanvas.Tasks.Actions.SendMessage<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_SendMessage_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.SetListElement<System.Boolean> NodeCanvas_Tasks_Actions_SetListElement_System_Boolean;
@@ -361,6 +393,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.SetListElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_SetListElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.SetListElement<UnityEngine.Ray> NodeCanvas_Tasks_Actions_SetListElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.SetListElement<UnityEngine.Space> NodeCanvas_Tasks_Actions_SetListElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.SetListElement<System.UInt16> NodeCanvas_Tasks_Actions_SetListElement_System_UInt16;
+		NodeCanvas.Tasks.Actions.SetListElement<System.UInt64> NodeCanvas_Tasks_Actions_SetListElement_System_UInt64;
 		NodeCanvas.Tasks.Actions.SetListElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_SetListElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Actions.SetVariable<System.Boolean> NodeCanvas_Tasks_Actions_SetVariable_System_Boolean;
@@ -382,6 +416,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Actions.SetVariable<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Actions_SetVariable_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Actions.SetVariable<UnityEngine.Ray> NodeCanvas_Tasks_Actions_SetVariable_UnityEngine_Ray;
 		NodeCanvas.Tasks.Actions.SetVariable<UnityEngine.Space> NodeCanvas_Tasks_Actions_SetVariable_UnityEngine_Space;
+		NodeCanvas.Tasks.Actions.SetVariable<System.UInt16> NodeCanvas_Tasks_Actions_SetVariable_System_UInt16;
+		NodeCanvas.Tasks.Actions.SetVariable<System.UInt64> NodeCanvas_Tasks_Actions_SetVariable_System_UInt64;
 		NodeCanvas.Tasks.Actions.SetVariable<UnityEngine.LayerMask> NodeCanvas_Tasks_Actions_SetVariable_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<System.Boolean> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_System_Boolean;
@@ -403,6 +439,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<System.UInt16> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<System.UInt64> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEvent<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckCSharpEvent_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<System.Boolean> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_System_Boolean;
@@ -424,6 +462,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<System.UInt16> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<System.UInt64> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckCSharpEventValue<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckCSharpEventValue_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckEvent<System.Boolean> NodeCanvas_Tasks_Conditions_CheckEvent_System_Boolean;
@@ -445,6 +485,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckEvent<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckEvent_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckEvent<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckEvent_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckEvent<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckEvent_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckEvent<System.UInt16> NodeCanvas_Tasks_Conditions_CheckEvent_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckEvent<System.UInt64> NodeCanvas_Tasks_Conditions_CheckEvent_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckEvent<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckEvent_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckEventValue<System.Boolean> NodeCanvas_Tasks_Conditions_CheckEventValue_System_Boolean;
@@ -466,6 +508,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckEventValue<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckEventValue_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckEventValue<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckEventValue_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckEventValue<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckEventValue_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckEventValue<System.UInt16> NodeCanvas_Tasks_Conditions_CheckEventValue_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckEventValue<System.UInt64> NodeCanvas_Tasks_Conditions_CheckEventValue_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckEventValue<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckEventValue_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckUnityEvent<System.Boolean> NodeCanvas_Tasks_Conditions_CheckUnityEvent_System_Boolean;
@@ -487,6 +531,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckUnityEvent<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckUnityEvent_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckUnityEvent<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckUnityEvent_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckUnityEvent<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckUnityEvent_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckUnityEvent<System.UInt16> NodeCanvas_Tasks_Conditions_CheckUnityEvent_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckUnityEvent<System.UInt64> NodeCanvas_Tasks_Conditions_CheckUnityEvent_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckUnityEvent<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckUnityEvent_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<System.Boolean> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_System_Boolean;
@@ -508,6 +554,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<System.UInt16> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<System.UInt64> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckUnityEventValue<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckUnityEventValue_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.CheckVariable<System.Boolean> NodeCanvas_Tasks_Conditions_CheckVariable_System_Boolean;
@@ -529,6 +577,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.CheckVariable<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_CheckVariable_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.CheckVariable<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_CheckVariable_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.CheckVariable<UnityEngine.Space> NodeCanvas_Tasks_Conditions_CheckVariable_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.CheckVariable<System.UInt16> NodeCanvas_Tasks_Conditions_CheckVariable_System_UInt16;
+		NodeCanvas.Tasks.Conditions.CheckVariable<System.UInt64> NodeCanvas_Tasks_Conditions_CheckVariable_System_UInt64;
 		NodeCanvas.Tasks.Conditions.CheckVariable<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_CheckVariable_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.ListContainsElement<System.Boolean> NodeCanvas_Tasks_Conditions_ListContainsElement_System_Boolean;
@@ -550,6 +600,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.ListContainsElement<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_ListContainsElement_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.ListContainsElement<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_ListContainsElement_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.ListContainsElement<UnityEngine.Space> NodeCanvas_Tasks_Conditions_ListContainsElement_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.ListContainsElement<System.UInt16> NodeCanvas_Tasks_Conditions_ListContainsElement_System_UInt16;
+		NodeCanvas.Tasks.Conditions.ListContainsElement<System.UInt64> NodeCanvas_Tasks_Conditions_ListContainsElement_System_UInt64;
 		NodeCanvas.Tasks.Conditions.ListContainsElement<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_ListContainsElement_UnityEngine_LayerMask;
 
 		NodeCanvas.Tasks.Conditions.TryGetValue<System.Boolean> NodeCanvas_Tasks_Conditions_TryGetValue_System_Boolean;
@@ -571,6 +623,8 @@ namespace ParadoxNotion.Internal{
 		NodeCanvas.Tasks.Conditions.TryGetValue<UnityEngine.RaycastHit2D> NodeCanvas_Tasks_Conditions_TryGetValue_UnityEngine_RaycastHit2D;
 		NodeCanvas.Tasks.Conditions.TryGetValue<UnityEngine.Ray> NodeCanvas_Tasks_Conditions_TryGetValue_UnityEngine_Ray;
 		NodeCanvas.Tasks.Conditions.TryGetValue<UnityEngine.Space> NodeCanvas_Tasks_Conditions_TryGetValue_UnityEngine_Space;
+		NodeCanvas.Tasks.Conditions.TryGetValue<System.UInt16> NodeCanvas_Tasks_Conditions_TryGetValue_System_UInt16;
+		NodeCanvas.Tasks.Conditions.TryGetValue<System.UInt64> NodeCanvas_Tasks_Conditions_TryGetValue_System_UInt64;
 		NodeCanvas.Tasks.Conditions.TryGetValue<UnityEngine.LayerMask> NodeCanvas_Tasks_Conditions_TryGetValue_UnityEngine_LayerMask;
 
 		///----------------------------------------------------------------------------------------------
@@ -595,6 +649,8 @@ namespace ParadoxNotion.Internal{
 			_NodeCanvas_Framework_Blackboard.GetVariable<UnityEngine.RaycastHit2D>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariable<UnityEngine.Ray>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariable<UnityEngine.Space>( (System.String)o );
+			_NodeCanvas_Framework_Blackboard.GetVariable<System.UInt16>( (System.String)o );
+			_NodeCanvas_Framework_Blackboard.GetVariable<System.UInt64>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariable<UnityEngine.LayerMask>( (System.String)o );
 		}
 
@@ -619,6 +675,8 @@ namespace ParadoxNotion.Internal{
 			_NodeCanvas_Framework_Blackboard.GetVariableValue<UnityEngine.RaycastHit2D>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariableValue<UnityEngine.Ray>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariableValue<UnityEngine.Space>( (System.String)o );
+			_NodeCanvas_Framework_Blackboard.GetVariableValue<System.UInt16>( (System.String)o );
+			_NodeCanvas_Framework_Blackboard.GetVariableValue<System.UInt64>( (System.String)o );
 			_NodeCanvas_Framework_Blackboard.GetVariableValue<UnityEngine.LayerMask>( (System.String)o );
 		}
 
@@ -642,6 +700,8 @@ namespace ParadoxNotion.Internal{
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.RaycastHit2D>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (UnityEngine.RaycastHit2D)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.Ray>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (UnityEngine.Ray)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.Space>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (UnityEngine.Space)o );
+			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<System.UInt16>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (System.UInt16)o );
+			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<System.UInt64>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (System.UInt64)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.LayerMask>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o, (UnityEngine.LayerMask)o );
 		}
 
@@ -665,6 +725,8 @@ namespace ParadoxNotion.Internal{
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.RaycastHit2D>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.Ray>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.Space>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<System.UInt16>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<System.UInt64>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.AddVariable<UnityEngine.LayerMask>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 		}
 
@@ -688,6 +750,8 @@ namespace ParadoxNotion.Internal{
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<UnityEngine.RaycastHit2D>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<UnityEngine.Ray>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<UnityEngine.Space>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<System.UInt16>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<System.UInt64>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariableValue<UnityEngine.LayerMask>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 		}
 
@@ -711,6 +775,8 @@ namespace ParadoxNotion.Internal{
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<UnityEngine.RaycastHit2D>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<UnityEngine.Ray>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<UnityEngine.Space>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<System.UInt16>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
+			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<System.UInt64>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 			NodeCanvas.Framework.IBlackboardExtensions.GetVariable<UnityEngine.LayerMask>( (NodeCanvas.Framework.IBlackboard)o, (System.String)o );
 		}
 
@@ -868,6 +934,22 @@ namespace ParadoxNotion.Internal{
 			System.Collections.Generic.IDictionary<System.String, UnityEngine.Space> IDict_UnityEngine_Space;
 			System.Collections.Generic.Dictionary<System.String, UnityEngine.Space> Dict_UnityEngine_Space;
 			///------
+			System.Action<System.UInt16> System_Action_System_UInt16;
+			System.Func<System.UInt16> System_Func_System_UInt16;
+			UnityEngine.Events.UnityAction<System.UInt16> UnityEngine_Events_UnityAction_System_UInt16;
+			System.Collections.Generic.IList<System.UInt16> System_Collections_Generic_IList_System_UInt16;
+			System.Collections.Generic.List<System.UInt16> System_Collections_Generic_List_System_UInt16;
+			System.Collections.Generic.IDictionary<System.String, System.UInt16> IDict_System_UInt16;
+			System.Collections.Generic.Dictionary<System.String, System.UInt16> Dict_System_UInt16;
+			///------
+			System.Action<System.UInt64> System_Action_System_UInt64;
+			System.Func<System.UInt64> System_Func_System_UInt64;
+			UnityEngine.Events.UnityAction<System.UInt64> UnityEngine_Events_UnityAction_System_UInt64;
+			System.Collections.Generic.IList<System.UInt64> System_Collections_Generic_IList_System_UInt64;
+			System.Collections.Generic.List<System.UInt64> System_Collections_Generic_List_System_UInt64;
+			System.Collections.Generic.IDictionary<System.String, System.UInt64> IDict_System_UInt64;
+			System.Collections.Generic.Dictionary<System.String, System.UInt64> Dict_System_UInt64;
+			///------
 			System.Action<UnityEngine.LayerMask> System_Action_UnityEngine_LayerMask;
 			System.Func<UnityEngine.LayerMask> System_Func_UnityEngine_LayerMask;
 			UnityEngine.Events.UnityAction<UnityEngine.LayerMask> UnityEngine_Events_UnityAction_UnityEngine_LayerMask;
@@ -880,5 +962,5 @@ namespace ParadoxNotion.Internal{
 	}
 }
 
-//660 Types | 120 Methods spoofed
+//726 Types | 132 Methods spoofed
 #pragma warning restore 0219, 0168, 0612

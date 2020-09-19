@@ -21,9 +21,10 @@ public class InteractableButcher : Interactable
     public override void Interact()
     {
         base.Interact();
-        StartCoroutine(SmoothLookAt(target));
         playerManager.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
-        interactableAI.enabled = false;
+        interactableAI.isStopped = true;
+        interactableAI.enableRotation = false;
+        StartCoroutine(SmoothLookAt(target));
         conversationController.ConversationBegan();
     }
 
@@ -31,22 +32,23 @@ public class InteractableButcher : Interactable
     {
         playerManager.onInteractablePlayerUnFocusedCallback?.Invoke();
         base.OnDeFocus();
-        interactableAI.enabled = true;
+        interactableAI.isStopped = false;
+        interactableAI.enableRotation = true;
         conversationController.ConversationEnded();
     }
 
     private IEnumerator SmoothLookAt(Transform targetTransform)
     {
-        float inTime = 0.33f;
+        float inTime = 1f;
 
         Vector3 lookDirection = targetTransform.position - this.transform.position;
 
-        Quaternion toRotation = Quaternion.LookRotation(lookDirection);
+        Quaternion toRotation = Quaternion.Euler(0, Quaternion.LookRotation(lookDirection).eulerAngles.y, 0); 
         Quaternion fromRotation = this.transform.rotation;
 
         for (float t = 0; t < inTime; t += Time.deltaTime)
         {
-            this.transform.rotation = Quaternion.Lerp(fromRotation, toRotation, t / inTime);
+            this.transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t / inTime);
             yield return null;
         }
 

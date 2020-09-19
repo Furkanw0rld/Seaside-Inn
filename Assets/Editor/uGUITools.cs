@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class uGUITools : MonoBehaviour
+public class UGUITools : MonoBehaviour
 {
-    [MenuItem("uGUI/Anchors to Corners %1")]
+    [MenuItem("Tools/uGUI/Anchors to Corners %1")]
     static void AnchorsToCorners()
     {
         foreach (Transform trans in Selection.transforms)
@@ -24,7 +24,7 @@ public class uGUITools : MonoBehaviour
         }
     }
 
-    [MenuItem("uGUI/Corners to Anchors %]")]
+    [MenuItem("Tools/uGUI/Corners to Anchors %]")]
     static void CornersToAnchors()
     {
         RectTransform t = Selection.activeTransform as RectTransform;

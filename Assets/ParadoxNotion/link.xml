@@ -7,12 +7,16 @@
 		<type fullname="System.Boolean" preserve="all"/>
 		<type fullname="System.Single" preserve="all"/>
 		<type fullname="System.Int32" preserve="all"/>
+		<type fullname="System.UInt16" preserve="all"/>
+		<type fullname="System.UInt64" preserve="all"/>
 		<type fullname="System.Boolean" preserve="all"/>
 		<type fullname="System.Int32" preserve="all"/>
 		<type fullname="System.Object" preserve="all"/>
 		<type fullname="System.Single" preserve="all"/>
 		<type fullname="System.String" preserve="all"/>
 		<type fullname="System.Type" preserve="all"/>
+		<type fullname="System.UInt16" preserve="all"/>
+		<type fullname="System.UInt64" preserve="all"/>
 	</assembly>
 	<assembly fullname="UnityEngine.CoreModule">
 		<type fullname="UnityEngine.Vector2" preserve="all"/>
@@ -70,6 +74,9 @@
 		<type fullname="UnityEngine.Physics2D" preserve="all"/>
 		<type fullname="UnityEngine.RaycastHit2D" preserve="all"/>
 		<type fullname="UnityEngine.Rigidbody2D" preserve="all"/>
+	</assembly>
+	<assembly fullname="GameTimeSystem">
+		<type fullname="GameTimeManager" preserve="all"/>
 	</assembly>
 	<assembly fullname="AstarPathfindingProject">
 		<type fullname="Pathfinding.AIBase" preserve="all"/>
