@@ -15,6 +15,11 @@ public class HoverOverAI : MonoBehaviour
 
     }
 
+    public void SetCurrentAction(string action)
+    {
+        actionText.text = action;
+    }
+
     public void OnMouseEnter()
     {
         actionText.enabled = true;

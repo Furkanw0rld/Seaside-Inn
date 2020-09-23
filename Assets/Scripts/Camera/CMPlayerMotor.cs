@@ -10,6 +10,7 @@ public class CMPlayerMotor : MonoBehaviour
     public CinemachineVirtualCamera kitchenCamera;
     private Vector2 mouseDelta;
     private PlayerManager playerManager;
+    private InventoryZonesHandler inventoryZones;
 
     private float rotationTimer = 0f;
     private readonly float minimumTimeToHoldToRotate = 0.3f;
@@ -24,12 +25,13 @@ public class CMPlayerMotor : MonoBehaviour
     {
         Camera.main.depthTextureMode = DepthTextureMode.Depth;
         playerManager = PlayerManager.Instance;
+        inventoryZones = InventoryZonesHandler.Instance;
 
         playerManager.onInteractablePlayerFocusedCallback += ZoomedInView;
         playerManager.onInteractablePlayerUnFocusedCallback += ExitZoomedInView;
 
-        playerManager.onPlayerEnterKitchenAreaCallback += KitchenCameraView;
-        playerManager.onPlayerExitKitchenAreaCallback += ExitKitchenCameraView;
+        inventoryZones.onPlayerEnterKitchenAreaCallback += KitchenCameraView;
+        inventoryZones.onPlayerExitKitchenAreaCallback += ExitKitchenCameraView;
     }
 
     private void OnDisable()
@@ -37,8 +39,8 @@ public class CMPlayerMotor : MonoBehaviour
         playerManager.onInteractablePlayerFocusedCallback -= ZoomedInView;
         playerManager.onInteractablePlayerUnFocusedCallback -= ExitZoomedInView;
 
-        playerManager.onPlayerEnterKitchenAreaCallback -= KitchenCameraView;
-        playerManager.onPlayerExitKitchenAreaCallback -= ExitKitchenCameraView;
+        inventoryZones.onPlayerEnterKitchenAreaCallback -= KitchenCameraView;
+        inventoryZones.onPlayerExitKitchenAreaCallback -= ExitKitchenCameraView;
     }
 
     private void KitchenCameraView()

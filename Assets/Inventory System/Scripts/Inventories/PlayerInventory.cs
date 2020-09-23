@@ -9,8 +9,6 @@ public class PlayerInventory : MonoBehaviour
 	public OnInventoryChanged onInventoryChangedCallback;
 
 	private float coins = 1000;
-	private readonly float maximumCoinFillAmount = 250; //This the amount of coins when the UI Gold Bar is filled completely.
-	private PlayerManager manager; //Cache of manager
 	[Header("Player Inventory")]
 	[Tooltip("How many slots does the PLAYER have")] private const int INVENTORY_SPACE = 12;
 	[Tooltip("How many slots does the INN have")] private const int INN_INVENTORY_SPACE = 20;
@@ -20,6 +18,11 @@ public class PlayerInventory : MonoBehaviour
 	[Tooltip("Player Inventory.")] public List<InventorySlotItem> inventory = new List<InventorySlotItem>();
 	[Tooltip("Inn Inventory.")] public List<InventorySlotItem> innInventory = new List<InventorySlotItem>();
 	[Tooltip("Trade Inventory.")] public List<InventorySlotItem> tradeInventory = new List<InventorySlotItem>();
+
+#pragma warning disable 0649
+	[Header("Coin Visuals")]
+	[SerializeField] private PlayerCoinVisualizer coinVisualizer; //Represent Coins over UI
+#pragma warning restore 0649
 
 	[Header("Inn Inventory Starting Items")]
 	public Item ale;
@@ -45,16 +48,14 @@ public class PlayerInventory : MonoBehaviour
 	public float AddCoins(float amount)
 	{
 		coins += amount;
-		manager.coinsText.text = string.Format("{0:0.##}", coins);
-		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
+		coinVisualizer.UpdateVisuals(coins);
 		return coins;
 	}
 
 	public float RemoveCoins(float amount)
 	{
 		coins -= amount;
-		manager.coinsText.text = string.Format("{0:0.##}", coins);
-		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
+		coinVisualizer.UpdateVisuals(coins);
 		return coins;
 	}
 
@@ -1377,11 +1378,6 @@ public class PlayerInventory : MonoBehaviour
 
 	private void Start()
 	{
-		manager = PlayerManager.Instance;
-		manager.coinsText.text = coins.ToString();
-		manager.coinsFill.fillAmount = coins / maximumCoinFillAmount;
-
-
 		//Shelf System, add all shelf areas to the array.
 		innInventoryShelves = new Transform[innInventoryShelfSystem.childCount];
 		for(int i = 0; i < innInventoryShelves.Length; i++)
@@ -1391,6 +1387,7 @@ public class PlayerInventory : MonoBehaviour
 		//Add Shelf Displayer to the callback
 		onInventoryChangedCallback += DisplayItemsAtShelf;
 
+		coinVisualizer.UpdateVisuals(coins);
 	}
 }
 public enum InventoryType

@@ -78,6 +78,9 @@
 	<assembly fullname="GameTimeSystem">
 		<type fullname="GameTimeManager" preserve="all"/>
 	</assembly>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="Interactable" preserve="all"/>
+	</assembly>
 	<assembly fullname="AstarPathfindingProject">
 		<type fullname="Pathfinding.AIBase" preserve="all"/>
 		<type fullname="Pathfinding.RichAI" preserve="all"/>

@@ -13,14 +13,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [HideInInspector] public ItemInformationWindowData informationWindow;
     [HideInInspector] public InventoryType inventoryType;
 
-    private PlayerManager playerManager; //Cached PlayerManager Instance
     private PlayerInventory playerInventory;
+    private InventoryZonesHandler inventoryZones;
 
     private void Start()
     {
-        if (PlayerManager.Instance)
+        if (InventoryZonesHandler.Instance)
         {
-            playerManager = PlayerManager.Instance;
+            inventoryZones = InventoryZonesHandler.Instance;
         }
 
         if (PlayerInventory.Instance)
@@ -63,7 +63,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                if(playerManager.IsPlayerAtInnInventoryArea || playerManager.IsPlayerAtTradeInventoryArea) //Trigger only when player is in these zones, (Move Item will do it's own safety check)
+                if (inventoryZones.IsPlayerAtInnInventoryArea || inventoryZones.IsPlayerAtTradeInventoryArea) //Trigger only when player is in these zones, (Move Item will do it's own safety check)
                 {
                     MoveItem();
                 }
@@ -78,17 +78,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             case InventoryType.PlayerInventory: //Item is in player, Can move to inn or trade
 
-                if (playerManager.IsPlayerAtInnInventoryArea) // Can move to inn
+                if (inventoryZones.IsPlayerAtInnInventoryArea) // Can move to inn
                 {
-                    if(item.itemType == ItemType.Food) //Only accept food
+                    if (item.itemType == ItemType.Food) //Only accept food
                     {
                         playerInventory.MoveItem(item, amount, InventoryType.InnInventory);
                         overlayImage.enabled = false;
                     }
                 }
-                else if (playerManager.IsPlayerAtTradeInventoryArea)
+                else if (inventoryZones.IsPlayerAtTradeInventoryArea)
                 {
-                    if(item.itemType != ItemType.Food && item.itemType != ItemType.Drink)
+                    if (item.itemType != ItemType.Food && item.itemType != ItemType.Drink)
                     {
                         playerInventory.MoveItem(item, amount, InventoryType.TradeInventory);
                         overlayImage.enabled = false;
@@ -103,7 +103,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             case InventoryType.InnInventory: //Item in inventory, Can move to player
 
-                if(playerManager.IsPlayerAtInnInventoryArea) //Can only move food out
+                if (inventoryZones.IsPlayerAtInnInventoryArea) //Can only move food out
                 {
                     if (item.itemType == ItemType.Food) //Player is at the zone to move
                     {
@@ -120,9 +120,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.TradeInventory: //Item in trade, Can move to player
-                if (playerManager.IsPlayerAtTradeInventoryArea)
+                if (inventoryZones.IsPlayerAtTradeInventoryArea)
                 {
-                    if(item.itemType != ItemType.Food)
+                    if (item.itemType != ItemType.Food)
                     {
                         playerInventory.MoveItem(item, amount, InventoryType.PlayerInventory);
                         overlayImage.enabled = false;
@@ -142,10 +142,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         switch (inventoryType)
         {
             case InventoryType.PlayerInventory:
-                if (playerManager.IsPlayerAtInnInventoryArea) 
+                if (inventoryZones.IsPlayerAtInnInventoryArea)
                 {
                     // Player is at Inn, move to inn items
-                    if(item.itemType == ItemType.Food) // Only need to check food since drinks are automatically added
+                    if (item.itemType == ItemType.Food) // Only need to check food since drinks are automatically added
                     {
                         overlayImage.enabled = true;
                     }
@@ -155,10 +155,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     }
 
                 }
-                else if (playerManager.IsPlayerAtTradeInventoryArea)
+                else if (inventoryZones.IsPlayerAtTradeInventoryArea)
                 {
                     //Player at Trade Area, move to trade area items
-                    if(item.itemType != ItemType.Food) // Accept anything but food/drink
+                    if (item.itemType != ItemType.Food) // Accept anything but food/drink
                     {
                         overlayImage.enabled = true;
 
@@ -176,9 +176,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.InnInventory:
-                if (playerManager.IsPlayerAtInnInventoryArea)
+                if (inventoryZones.IsPlayerAtInnInventoryArea)
                 {
-                    if(item.itemType == ItemType.Food)
+                    if (item.itemType == ItemType.Food)
                     {
                         overlayImage.enabled = true;
                     }
@@ -190,7 +190,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
 
             case InventoryType.TradeInventory:
-                if (playerManager.IsPlayerAtTradeInventoryArea)
+                if (inventoryZones.IsPlayerAtTradeInventoryArea)
                 {
                     if (item.itemType != ItemType.Food) // Accept anything but food/drink
                     {

@@ -44,7 +44,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.6.2",
+      "version": "2.6.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -238,7 +238,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.11.2",
+      "version": "1.12.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -312,7 +312,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.4.2",
+      "version": "1.4.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
