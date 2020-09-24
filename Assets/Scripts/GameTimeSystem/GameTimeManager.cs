@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using System;
+using I2.Loc;
 
 public class GameTimeManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameTimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] [Range(-2f, 2f)] private float skyboxRotationSpeed;
+    [SerializeField] private LocalizationParamsManager localDayParamManager;
 #pragma warning restore 0649
 
     private Transform sunTransform;
@@ -291,7 +293,7 @@ public class GameTimeManager : MonoBehaviour
         timeText.text = currentHour.ToString().PadLeft(2, '0') + ":" + currentMinute.ToString().PadLeft(2, '0');
         //dayText.text = "Day " + currentDay.ToString().PadLeft(2, '0');
 
-        //localDayParamManager.SetParameterValue("CURRENT_DAY", currentDay.ToString().PadLeft(2, '0'));
+        localDayParamManager.SetParameterValue("CURRENT_DAY", currentDay.ToString().PadLeft(2, '0'));
 
         //Rotating skybox here, might need to move if realtime cycle is adjusted.
         RenderSettings.skybox.SetFloat("_Rotation", skyboxRotationSpeed * Time.time);

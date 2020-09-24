@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pathfinding;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -55,7 +56,55 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        MovementTick();
     }
+
+    private Vector2 input;
+    private float turnSmoothVelocity;
+    public float turnSmoothTime = 0.3f;
+    float currentSpeed;
+    private float speedSmoothVelocity;
+    public float speedSmoothTime = 0.15f;
+    private void MovementTick()
+    {
+        Vector2 inputDirection = input.normalized;
+
+        if (inputDirection != Vector2.zero)
+        {
+
+            //float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            //transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+
+            //float targetSpeed = motor.ai.maxSpeed * inputDirection.magnitude;
+            //currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+
+            //Vector3 nextPosition = transform.position + transform.TransformDirection(transform.forward * currentSpeed * Time.deltaTime);
+            //GraphNode node = AstarData.active.data.recastGraph.PointOnNavmesh(nextPosition, NNConstraint.Default);
+            //if (node != null)
+            //{
+            //    transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+
+            //    if (focus)
+            //    {
+            //        RemoveFocus();
+            //    }
+            //}
+        }
+
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        input = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        //TODO: Rotate Camera
+        Debug.Log("Rotating Camera");
+    }
+
     private void SetFocus(Interactable newFocus)
     {
         if(newFocus != focus) //If we are focused on a new interactable object

@@ -23,9 +23,10 @@ public class LocalizationRegisterGlobalParameters : MonoBehaviour, ILocalization
         {
             return "0.1.6.9";
         }
+
         if(parameterName == "CURRENT_DAY")
         {
-            return GameTimeManager.Instance.GetCurrentDay().ToString();
+            return GameTimeManager.Instance.GetCurrentDay().ToString().PadLeft(2, '0');
         }
         return null;
     }
