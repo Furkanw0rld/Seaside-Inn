@@ -76,33 +76,37 @@ public class PlayerController : MonoBehaviour
     // TODO: Add Acceleration to player movement override. 
     private void MovementTick()
     {
-        if(movementInput != Vector2.zero)
+        if (movementInput != Vector2.zero)
         {
-            camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
-            camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
-            finalizedMovement = camRelativeMovement * Time.deltaTime * playerMaximumSpeed; //Finalized movement position delta
-
-            nextPosition = transform.position + finalizedMovement;
-
-            positionNode = activeRecastGraphData.PointOnNavmesh(nextPosition, NNConstraint.Default);
-
-            if (positionNode != null)
+            if (movementInput.x >= 0.1f || movementInput.x <= -0.1f || movementInput.y >= 0.1f || movementInput.y <= -0.1f) //Dead-zones
             {
-                // Clear path, and override movement controls to player
-                motor.ai.canSearch = false;
-                motor.ai.SetPath(null); 
-                motor.ai.Move(finalizedMovement);
+                camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
+                camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
+                finalizedMovement = camRelativeMovement * Time.deltaTime * playerMaximumSpeed; //Finalized movement position delta
 
-                if (camRelativeMovement != Vector3.zero)
-                {
-                    transform.forward = camRelativeMovement;
-                }
+                nextPosition = transform.position + finalizedMovement;
 
-                if (focus)
+                positionNode = activeRecastGraphData.PointOnNavmesh(nextPosition, NNConstraint.Default);
+
+                if (positionNode != null)
                 {
-                    RemoveFocus();
+                    // Clear path, and override movement controls to player
+                    motor.ai.canSearch = false;
+                    motor.ai.SetPath(null);
+                    motor.ai.Move(finalizedMovement);
+
+                    if (camRelativeMovement != Vector3.zero)
+                    {
+                        transform.forward = camRelativeMovement;
+                    }
+
+                    if (focus)
+                    {
+                        RemoveFocus();
+                    }
                 }
             }
+
         }
     }
 

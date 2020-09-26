@@ -116,7 +116,6 @@ public class CMPlayerMotor : MonoBehaviour
         if(inputValue != Vector2.zero)
         {
             inputValue *= 0.5f;
-            inputValue *= 0.1f;
             freeLookCamera.m_XAxis.m_InputAxisValue = inputValue.x;
             freeLookCamera.m_YAxis.m_InputAxisValue = inputValue.y;
         }
