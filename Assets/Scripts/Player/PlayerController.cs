@@ -16,15 +16,29 @@ public class PlayerController : MonoBehaviour
     private PlayerAIMotor motor; //The Player-Movement Driver
 
     public Interactable focus;
+
+    // Player Movement Override (MovementTick) Variables
+    private float playerMaximumSpeed; // This value is cached from motor.
+    private RecastGraph activeRecastGraphData; // Cached Player Movement Graph
+    private Vector2 movementInput; // Stores the players current keyboard/joystick input per frame
+    private Vector3 finalizedMovement; //Stores the final movement-position delta per frame.
+    private Vector3 camForward; // Camera Forward Direction per frame
+    private Vector3 camRelativeMovement; // Camera Relative Movement per frame
+    private Vector3 nextPosition; // Stores the next position per frame
+    private GraphNode positionNode; // Stores the next node to check against
+
     void Start()
     {
         cam = Camera.main;
         motor = GetComponent<PlayerAIMotor>();
+        playerMaximumSpeed = motor.ai.maxSpeed;
+        activeRecastGraphData = AstarData.active.data.recastGraph;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        MovementTick();
+
         if (EventSystem.current.IsPointerOverGameObject()) //If we are interacting with UI
         {
             return;
@@ -56,53 +70,45 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
-        MovementTick();
     }
 
-    private Vector2 input;
-    private float turnSmoothVelocity;
-    public float turnSmoothTime = 0.3f;
-    float currentSpeed;
-    private float speedSmoothVelocity;
-    public float speedSmoothTime = 0.15f;
+    // Movement Tick overrides player movement with input via Keyboard/Joystick. However, both options are still accessible to player and can be used interchangably. 
+    // TODO: Add Acceleration to player movement override. 
     private void MovementTick()
     {
-        Vector2 inputDirection = input.normalized;
-
-        if (inputDirection != Vector2.zero)
+        if(movementInput != Vector2.zero)
         {
+            camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
+            camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
+            finalizedMovement = camRelativeMovement * Time.deltaTime * playerMaximumSpeed; //Finalized movement position delta
 
-            //float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-            //transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            nextPosition = transform.position + finalizedMovement;
 
-            //float targetSpeed = motor.ai.maxSpeed * inputDirection.magnitude;
-            //currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+            positionNode = activeRecastGraphData.PointOnNavmesh(nextPosition, NNConstraint.Default);
 
-            //Vector3 nextPosition = transform.position + transform.TransformDirection(transform.forward * currentSpeed * Time.deltaTime);
-            //GraphNode node = AstarData.active.data.recastGraph.PointOnNavmesh(nextPosition, NNConstraint.Default);
-            //if (node != null)
-            //{
-            //    transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+            if (positionNode != null)
+            {
+                // Clear path, and override movement controls to player
+                motor.ai.canSearch = false;
+                motor.ai.SetPath(null); 
+                motor.ai.Move(finalizedMovement);
 
-            //    if (focus)
-            //    {
-            //        RemoveFocus();
-            //    }
-            //}
+                if (camRelativeMovement != Vector3.zero)
+                {
+                    transform.forward = camRelativeMovement;
+                }
+
+                if (focus)
+                {
+                    RemoveFocus();
+                }
+            }
         }
-
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        input = context.ReadValue<Vector2>();
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        //TODO: Rotate Camera
-        Debug.Log("Rotating Camera");
+        movementInput = context.ReadValue<Vector2>();
     }
 
     private void SetFocus(Interactable newFocus)

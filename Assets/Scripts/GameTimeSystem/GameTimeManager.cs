@@ -222,11 +222,11 @@ public class GameTimeManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameClock();
         sunTransform = sunSource.transform;
         moonTransform = moonSource.transform;
         StartCoroutine(TimeController());
         StartCoroutine(WorldTimeReminderInvoker());
+        StartCoroutine(UpdateClockUI());
     }
 
     private IEnumerator TimeController()
@@ -280,23 +280,22 @@ public class GameTimeManager : MonoBehaviour
                 }
             }
 
-            UpdateGameClock();
+            RenderSettings.skybox.SetFloat("_Rotation", skyboxRotationSpeed * Time.time);
             yield return null;
         }
 
     }
 
-    private void UpdateGameClock()
+    private IEnumerator UpdateClockUI()
     {
-        currentHour = Mathf.FloorToInt(currentTime / 60);
-        currentMinute = Mathf.FloorToInt(currentTime - (currentHour * 60));
-        timeText.text = currentHour.ToString().PadLeft(2, '0') + ":" + currentMinute.ToString().PadLeft(2, '0');
-        //dayText.text = "Day " + currentDay.ToString().PadLeft(2, '0');
-
-        localDayParamManager.SetParameterValue("CURRENT_DAY", currentDay.ToString().PadLeft(2, '0'));
-
-        //Rotating skybox here, might need to move if realtime cycle is adjusted.
-        RenderSettings.skybox.SetFloat("_Rotation", skyboxRotationSpeed * Time.time);
+        while (true)
+        {
+            currentHour = Mathf.FloorToInt(currentTime / 60);
+            currentMinute = Mathf.FloorToInt(currentTime - (currentHour * 60));
+            timeText.text = currentHour.ToString().PadLeft(2, '0') + ":" + currentMinute.ToString().PadLeft(2, '0');
+            localDayParamManager.SetParameterValue("CURRENT_DAY", currentDay.ToString().PadLeft(2, '0'));
+            yield return new WaitForSeconds(1f);
+        }
     }
 
 }

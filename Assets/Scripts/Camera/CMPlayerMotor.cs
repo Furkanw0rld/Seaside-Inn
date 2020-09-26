@@ -102,10 +102,29 @@ public class CMPlayerMotor : MonoBehaviour
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                freeLookCamera.m_XAxis.m_InputAxisValue = 0;
-                freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+                freeLookCamera.m_XAxis.m_InputAxisValue = 0f;
+                freeLookCamera.m_YAxis.m_InputAxisValue = 0f;
             }
 
         }
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Vector2 inputValue = context.ReadValue<Vector2>();
+
+        if(inputValue != Vector2.zero)
+        {
+            inputValue *= 0.5f;
+            inputValue *= 0.1f;
+            freeLookCamera.m_XAxis.m_InputAxisValue = inputValue.x;
+            freeLookCamera.m_YAxis.m_InputAxisValue = inputValue.y;
+        }
+        else
+        {
+            freeLookCamera.m_XAxis.m_InputAxisValue = 0f;
+            freeLookCamera.m_YAxis.m_InputAxisValue = 0f;
+        }
+
     }
 }
