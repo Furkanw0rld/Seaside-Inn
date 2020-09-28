@@ -5,9 +5,14 @@ using UnityEngine.InputSystem;
 
 public class CMPlayerMotor : MonoBehaviour
 {
+    [Header("CM Camera References")]
     public CinemachineFreeLook freeLookCamera;
     public CinemachineVirtualCamera zoomedInCamera;
     public CinemachineVirtualCamera kitchenCamera;
+
+    [Space] [Header("Camera Gamepad Settings")]
+    [SerializeField] [Range(0.05f, 1f)] private float cameraGamepadSensitivity = 0.5f;
+
     private Vector2 mouseDelta;
     private PlayerManager playerManager;
     private InventoryZonesHandler inventoryZones;
@@ -115,7 +120,7 @@ public class CMPlayerMotor : MonoBehaviour
 
         if(inputValue != Vector2.zero)
         {
-            inputValue *= 0.5f;
+            inputValue *= cameraGamepadSensitivity;
             freeLookCamera.m_XAxis.m_InputAxisValue = inputValue.x;
             freeLookCamera.m_YAxis.m_InputAxisValue = inputValue.y;
         }

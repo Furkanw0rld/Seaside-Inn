@@ -19,20 +19,24 @@ public class PlayerController : MonoBehaviour
 
     // Player Movement Override (MovementTick) Variables
     private float playerMaximumSpeed; // This value is cached from motor.
-    private RecastGraph activeRecastGraphData; // Cached Player Movement Graph
     private Vector2 movementInput; // Stores the players current keyboard/joystick input per frame
     private Vector3 finalizedMovement; //Stores the final movement-position delta per frame.
     private Vector3 camForward; // Camera Forward Direction per frame
     private Vector3 camRelativeMovement; // Camera Relative Movement per frame
-    private Vector3 nextPosition; // Stores the next position per frame
-    private GraphNode positionNode; // Stores the next node to check against
+
+    private float playerAccelerationRate; // Cached acceleration rate
+    private float elapsedAccelerationTime = 0f; // Stores the elapsed time while accelerating
+    private float timeForMaximumSpeed; // Stores acceleration time
+    private float currentSpeed; // Stores the speed while player accelerates
 
     void Start()
     {
         cam = Camera.main;
         motor = GetComponent<PlayerAIMotor>();
+
         playerMaximumSpeed = motor.ai.maxSpeed;
-        activeRecastGraphData = AstarData.active.data.recastGraph;
+        playerAccelerationRate = motor.ai.acceleration;
+        timeForMaximumSpeed = playerMaximumSpeed / playerAccelerationRate;
     }
 
     void Update()
@@ -73,38 +77,53 @@ public class PlayerController : MonoBehaviour
     }
 
     // Movement Tick overrides player movement with input via Keyboard/Joystick. However, both options are still accessible to player and can be used interchangably. 
-    // TODO: Add Acceleration to player movement override. 
     private void MovementTick()
     {
         if (movementInput != Vector2.zero)
         {
-            if (movementInput.x >= 0.1f || movementInput.x <= -0.1f || movementInput.y >= 0.1f || movementInput.y <= -0.1f) //Dead-zones
+            if (movementInput.x >= 0.1f || movementInput.x <= -0.1f || movementInput.y >= 0.1f || movementInput.y <= -0.1f) //Dead-zones of gamepad
             {
+
+                if (elapsedAccelerationTime < timeForMaximumSpeed)
+                {
+                    elapsedAccelerationTime += Time.deltaTime;
+                    currentSpeed = playerAccelerationRate * elapsedAccelerationTime;
+                }
+                else
+                {
+                    currentSpeed = playerMaximumSpeed;
+                }
+
                 camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
                 camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
-                finalizedMovement = camRelativeMovement * Time.deltaTime * playerMaximumSpeed; //Finalized movement position delta
+                finalizedMovement = camRelativeMovement * Time.deltaTime * currentSpeed; //Finalized movement position delta
 
-                nextPosition = transform.position + finalizedMovement;
+                // Clear path, and override movement controls to player
+                motor.ai.canSearch = false;
+                motor.ai.SetPath(null);
+                motor.ai.Move(finalizedMovement);
 
-                positionNode = activeRecastGraphData.PointOnNavmesh(nextPosition, NNConstraint.Default);
-
-                if (positionNode != null)
+                if (camRelativeMovement != Vector3.zero)
                 {
-                    // Clear path, and override movement controls to player
-                    motor.ai.canSearch = false;
-                    motor.ai.SetPath(null);
-                    motor.ai.Move(finalizedMovement);
-
-                    if (camRelativeMovement != Vector3.zero)
+                    if (motor.ai.enableRotation)
                     {
-                        transform.forward = camRelativeMovement;
+                        motor.ai.enableRotation = false;
                     }
 
-                    if (focus)
-                    {
-                        RemoveFocus();
-                    }
+                    transform.rotation = motor.ai.SimulateRotationTowards(camRelativeMovement, 360f * Time.deltaTime);
                 }
+
+                if (focus)
+                {
+                    RemoveFocus();
+                }
+            }
+        }
+        else
+        {
+            if(elapsedAccelerationTime > 0)
+            {
+                elapsedAccelerationTime = 0f; // Set time to zero when there is no input.
             }
 
         }
@@ -127,9 +146,7 @@ public class PlayerController : MonoBehaviour
             this.focus = newFocus;
             motor.FollowTarget(newFocus);
         }
- 
         newFocus.OnFocus(this.transform);
-
     }
 
     public void RemoveFocus()

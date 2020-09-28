@@ -21,6 +21,11 @@ public class PlayerAIMotor : MonoBehaviour
 
     public void MoveToPoint(Vector3 point)
     {
+        if (!ai.enableRotation)
+        {
+            ai.enableRotation = true;
+        }
+
         ai.canSearch = true;
         seeker.StartPath(transform.position, point);
         ai.SearchPath();
@@ -28,6 +33,11 @@ public class PlayerAIMotor : MonoBehaviour
 
     public void FollowTarget(Interactable interactable)
     {
+        if (!ai.enableRotation)
+        {
+            ai.enableRotation = true;
+        }
+
         target = interactable.interactionPoint;
         stopDistance = interactable.objectRadius;
         ai.canSearch = true;
