@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         motor = GetComponent<PlayerAIMotor>();
 
-        playerMaximumSpeed = motor.ai.maxSpeed;
-        playerAccelerationRate = motor.ai.acceleration;
+        playerMaximumSpeed = 4.25f; // motor.ai.maxSpeed;
+        playerAccelerationRate = 15f;  //motor.ai.acceleration;
         timeForMaximumSpeed = playerMaximumSpeed / playerAccelerationRate;
     }
 
@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
                 {
                     RemoveFocus();
                 }
-
                 motor.MoveToPoint(hit.point);
             }
         }
@@ -123,7 +122,7 @@ public class PlayerController : MonoBehaviour
         {
             if(elapsedAccelerationTime > 0)
             {
-                elapsedAccelerationTime = 0f; // Set time to zero when there is no input.
+                elapsedAccelerationTime = 0f;
             }
 
         }
