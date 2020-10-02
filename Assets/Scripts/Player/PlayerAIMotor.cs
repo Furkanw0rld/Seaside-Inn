@@ -39,7 +39,7 @@ public class PlayerAIMotor : MonoBehaviour
         }
 
         target = interactable.interactionPoint;
-        stopDistance = interactable.objectRadius;
+        stopDistance = Mathf.Abs(interactable.objectRadius - 0.5f);
         ai.canSearch = true;
         seeker.StartPath(transform.position, target.position);
         lastPathPosition = target.position;

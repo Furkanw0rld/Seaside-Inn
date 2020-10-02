@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7506033174916096366}
   - component: {fileID: 2770738271349710298}
   - component: {fileID: 2405807329366107183}
+  - component: {fileID: 3195252348212592180}
   m_Layer: 0
   m_Name: barrel_low
   m_TagString: Untagged
@@ -81,6 +82,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3195252348212592180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308100310455731838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220345cbaa167417bbe806f230f68615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  dynamic: 0
+  solid: 0
+  surfaceID: 1
+  mode: 1
 --- !u!1 &3032722072826328894
 GameObject:
   m_ObjectHideFlags: 0

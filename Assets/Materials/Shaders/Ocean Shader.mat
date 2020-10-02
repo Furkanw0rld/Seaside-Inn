@@ -16,7 +16,7 @@ MonoBehaviour:
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -111,7 +111,7 @@ Material:
     - _IntersectionFoamDepth: 1.6
     - _IntersectionFoamScale: 0.277
     - _IntersectionFoamShadowProjection: 15
-    - _IntersectionWaterBlend: 0.55
+    - _IntersectionWaterBlend: 1
     - _LightingHardness: 0.5
     - _LightingSmoothness: 0.75
     - _Metallic: 0
@@ -136,8 +136,8 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _SurfaceFoamBlend: 1
-    - _SurfaceFoamHeightMask: 0.302
-    - _SurfaceFoamHeightMaskSmoothness: 0.401
+    - _SurfaceFoamHeightMask: 0.283
+    - _SurfaceFoamHeightMaskSmoothness: 0
     - _SurfaceFoamShadowProjection: 15
     - _UnderwaterRefractionStrength: 0.198
     - _WaterColorDepth: 1.75
@@ -159,13 +159,13 @@ Material:
     - _SurfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.6039216}
     - _SurfaceFoamColor2: {r: 1, g: 1, b: 1, a: 0.7882353}
     - _SurfaceFoamMovement: {r: 0.715, g: 0.044, b: 0.805, a: 0.019}
-    - _SurfaceFoamSampling: {r: 0.614, g: 1.34, b: 0, a: 0}
+    - _SurfaceFoamSampling: {r: 0.619, g: 1.39, b: 0, a: 0}
     - _SurfaceFoamTilingAndOffset: {r: 0.488, g: 0.812, b: 0.551, a: 0.285}
-    - _WaterColorDeep: {r: 0.16255853, g: 0.2507474, b: 0.43147787, a: 1}
-    - _WaterColorHorizon: {r: 0.0242969, g: 0.08196024, b: 0.24347079, a: 1}
-    - _WaterColorShallow: {r: 0.20523903, g: 0.55190015, b: 0.6132076, a: 0.5019608}
+    - _WaterColorDeep: {r: 0.16244265, g: 0.2506252, b: 0.43135563, a: 1}
+    - _WaterColorHorizon: {r: 0.0242969, g: 0.08185773, b: 0.24334857, a: 1}
+    - _WaterColorShallow: {r: 0.20512316, g: 0.55190015, b: 0.6132076, a: 0.5019608}
     - _WaterColorUnderwater: {r: 0.7104397, g: 0.9321135, b: 0.9716981, a: 1}
     - _WaveColor: {r: 0, g: 0, b: 0, a: 0}
     - _WaveDirections: {r: 0.051, g: 0.638, b: 0.979, a: 0.396}
-    - _WaveVisuals: {r: 0.1, g: 8.5, b: 0.55, a: 0}
+    - _WaveVisuals: {r: 0.131, g: 4.31, b: 0.55, a: 0}
   m_BuildTextureStacks: []

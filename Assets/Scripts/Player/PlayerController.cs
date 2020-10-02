@@ -82,6 +82,10 @@ public class PlayerController : MonoBehaviour
         {
             if (movementInput.x >= 0.1f || movementInput.x <= -0.1f || movementInput.y >= 0.1f || movementInput.y <= -0.1f) //Dead-zones of gamepad
             {
+                if (focus)
+                {
+                    RemoveFocus();
+                }
 
                 if (elapsedAccelerationTime < timeForMaximumSpeed)
                 {
@@ -110,11 +114,6 @@ public class PlayerController : MonoBehaviour
                     }
 
                     transform.rotation = motor.ai.SimulateRotationTowards(camRelativeMovement, 360f * Time.deltaTime);
-                }
-
-                if (focus)
-                {
-                    RemoveFocus();
                 }
             }
         }
