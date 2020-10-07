@@ -8,17 +8,20 @@ public class InteractableBarChair : Interactable
     public Transform exitPoint = null;
     public bool IsOccupied { get; private set; }
 
+    private ISittingAnimator sittingAnim;
+
     public override void Interact()
     {
         IsOccupied = true;
         base.Interact();
+        sittingAnim = target.GetComponent<ISittingAnimator>();
         Sitting();
     }
 
     private void Sitting()
     {
         targetAI.enabled = false;
-        playerAnimator.Sitting(true);
+        sittingAnim.Sitting(true);
         target.position = this.interactionPoint.position;
         target.rotation = Quaternion.LookRotation(transform.forward);
 
@@ -28,6 +31,7 @@ public class InteractableBarChair : Interactable
     {
         if (hasInteracted)
         {
+
             if (exitPoint)
             {
                 target.position = exitPoint.position;
@@ -36,15 +40,16 @@ public class InteractableBarChair : Interactable
             {
                 target.position = (Vector3)AstarData.active.data.recastGraph.GetNearest(this.interactionPoint.position).node.position;
             }
+
+            if (isFocused)
+            {
+                targetAI.enabled = true;
+                sittingAnim.Sitting(false);
+
+            }
+
             IsOccupied = false;
         }
-
-        if (isFocused)
-        {
-            targetAI.enabled = true;
-            playerAnimator.Sitting(false);
-        }
-
         base.OnDeFocus();
     }
 }

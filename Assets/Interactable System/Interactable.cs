@@ -10,7 +10,6 @@ public class Interactable : MonoBehaviour
     protected bool isFocused = false;
     // Targets--
     protected Transform target;
-    protected PlayerAnimator playerAnimator;
     protected RichAI targetAI;
 
     protected bool hasInteracted = false;
@@ -53,7 +52,6 @@ public class Interactable : MonoBehaviour
         isFocused = true;
         target = playerTransform;
         targetAI = playerTransform.GetComponent<RichAI>();
-        playerAnimator = playerTransform.GetComponent<PlayerAnimator>();
         hasInteracted = false;
     }
 
@@ -62,7 +60,6 @@ public class Interactable : MonoBehaviour
         isFocused = false;
         target = null;
         targetAI = null;
-        playerAnimator = null;
         hasInteracted = false;
     }
 

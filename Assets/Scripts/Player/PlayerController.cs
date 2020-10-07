@@ -1,9 +1,10 @@
 ﻿using Pathfinding;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerAIMotor))]
+[RequireComponent(typeof(PlayerAIMotor))][RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Tooltip("Layers player can walk (hit) upon")] public LayerMask movementLayerMask; //Layers we can walk upon
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hit;
 
     private PlayerAIMotor motor; //The Player-Movement Driver
+    private CharacterController characterController;
 
     public Interactable focus;
 
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         cam = Camera.main;
         motor = GetComponent<PlayerAIMotor>();
+        characterController = GetComponent<CharacterController>();
 
         playerMaximumSpeed = 4.25f; // motor.ai.maxSpeed;
         playerAccelerationRate = 15f;  //motor.ai.acceleration;
@@ -41,7 +44,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MovementTick();
+
+        if (MovementTick())
+        {
+            return;
+        }
 
         if (EventSystem.current.IsPointerOverGameObject()) //If we are interacting with UI
         {
@@ -51,11 +58,13 @@ public class PlayerController : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.leftButton.isPressed) //Move Player 
         {
             ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if(Physics.Raycast(ray, out hit, clickDistance, movementLayerMask)) 
+            if (Physics.Raycast(ray, out hit, clickDistance, movementLayerMask))
             {
                 if (focus)
                 {
+                    characterController.enabled = false;
                     RemoveFocus();
+                    characterController.enabled = true;
                 }
                 motor.MoveToPoint(hit.point);
             }
@@ -75,8 +84,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
     // Movement Tick overrides player movement with input via Keyboard/Joystick. However, both options are still accessible to player and can be used interchangably. 
-    private void MovementTick()
+    private bool MovementTick()
     {
         if (movementInput != Vector2.zero)
         {
@@ -84,37 +95,44 @@ public class PlayerController : MonoBehaviour
             {
                 if (focus)
                 {
+                    characterController.enabled = false;
                     RemoveFocus();
-                }
-
-                if (elapsedAccelerationTime < timeForMaximumSpeed)
-                {
-                    elapsedAccelerationTime += Time.deltaTime;
-                    currentSpeed = playerAccelerationRate * elapsedAccelerationTime;
+                    characterController.enabled = true;
+                    return true;
                 }
                 else
                 {
-                    currentSpeed = playerMaximumSpeed;
-                }
-
-                camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
-                camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
-                finalizedMovement = camRelativeMovement * Time.deltaTime * currentSpeed; //Finalized movement position delta
-
-                // Clear path, and override movement controls to player
-                motor.ai.canSearch = false;
-                motor.ai.SetPath(null);
-                motor.ai.Move(finalizedMovement);
-
-                if (camRelativeMovement != Vector3.zero)
-                {
-                    if (motor.ai.enableRotation)
+                    if (elapsedAccelerationTime < timeForMaximumSpeed)
                     {
-                        motor.ai.enableRotation = false;
+                        elapsedAccelerationTime += Time.deltaTime;
+                        currentSpeed = playerAccelerationRate * elapsedAccelerationTime;
+                    }
+                    else
+                    {
+                        currentSpeed = playerMaximumSpeed;
                     }
 
-                    transform.rotation = motor.ai.SimulateRotationTowards(camRelativeMovement, 360f * Time.deltaTime);
+                    camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; //Camera-Forward Direction
+                    camRelativeMovement = (movementInput.x * cam.transform.right) + (movementInput.y * camForward); //Camera relative movement direction
+                    finalizedMovement = camRelativeMovement * currentSpeed * Time.deltaTime; //Finalized movement position delta
+
+                    // Clear path, and override movement controls to player
+                    motor.ai.canSearch = false;
+                    motor.ai.SetPath(null);
+                    motor.ai.Move(finalizedMovement);
+
+                    if (camRelativeMovement != Vector3.zero)
+                    {
+                        if (motor.ai.enableRotation)
+                        {
+                            motor.ai.enableRotation = false;
+                        }
+
+                        transform.rotation = motor.ai.SimulateRotationTowards(camRelativeMovement, 360f * Time.deltaTime);
+                    }
                 }
+
+                return true;
             }
         }
         else
@@ -123,8 +141,9 @@ public class PlayerController : MonoBehaviour
             {
                 elapsedAccelerationTime = 0f;
             }
-
         }
+
+        return false;
     }
 
     public void OnMove(InputAction.CallbackContext context)
