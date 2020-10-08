@@ -20,7 +20,7 @@ public class InventoryButcher : NPCInventorySystem
         gameTimeManager = GameTimeManager.Instance;
     }
 
-    public IEnumerator ProduceItems()
+    public override IEnumerator ProduceItems()
     {
         for(int i = 0; i < itemsToProduce.Length; i++)
         {
@@ -37,19 +37,6 @@ public class InventoryButcher : NPCInventorySystem
 
             yield return null;
         }
-    }
-
-    private int FindItemInInventory(Food_Item item)
-    {
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            if (inventorySlots[i].item.name == item.name)
-            {
-                return i;
-            }
-        }
-
-        return -1;
     }
 
     public override void OpenShop()

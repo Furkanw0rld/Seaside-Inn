@@ -8,8 +8,8 @@ public class InteractableButcher : Interactable
     private RichAI interactableAI;
     private PlayerManager playerManager;
     private ConversationController conversationController;
+    private Vector3 agentNextDestination; // Stored next position, to be followed after interaction ends.
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
@@ -17,13 +17,13 @@ public class InteractableButcher : Interactable
         playerManager = PlayerManager.Instance;
         conversationController = GetComponent<ConversationControllerButcher>();
     }
-
+   
     public override void Interact()
     {
+        agentNextDestination = interactableAI.destination;
+        interactableAI.enabled = false;
         base.Interact();
         playerManager.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
-        interactableAI.isStopped = true;
-        interactableAI.enableRotation = false;
         StartCoroutine(SmoothLookAt(target));
         conversationController.ConversationBegan();
     }
@@ -32,9 +32,11 @@ public class InteractableButcher : Interactable
     {
         playerManager.onInteractablePlayerUnFocusedCallback?.Invoke();
         base.OnDeFocus();
-        interactableAI.isStopped = false;
-        interactableAI.enableRotation = true;
         conversationController.ConversationEnded();
+        interactableAI.enabled = true;
+        interactableAI.canMove = true;
+        interactableAI.destination = agentNextDestination;
+        interactableAI.SearchPath();
     }
 
     private IEnumerator SmoothLookAt(Transform targetTransform)

@@ -10,6 +10,8 @@ public class InteractableBaker : Interactable
     private PlayerManager playerManager;
     private ConversationController conversationController;
 
+    private Vector3 agentNextDestination; // Stored next position, to be followed after interaction ends.
+
     protected override void Start()
     {
         base.Start();
@@ -19,8 +21,10 @@ public class InteractableBaker : Interactable
         conversationController = GetComponent<ConversationControllerBaker>();
     }
 
+
     public override void Interact()
     {
+        agentNextDestination = interactableAI.destination;
         playerManager.onInteractablePlayerFocusedCallback?.Invoke(this.transform);
         interactableAI.enabled = false;
         StartCoroutine(SmoothLookAt(target));
@@ -34,6 +38,9 @@ public class InteractableBaker : Interactable
         conversationController.ConversationEnded();
         base.OnDeFocus();
         interactableAI.enabled = true;
+        interactableAI.canMove = true;
+        interactableAI.destination = agentNextDestination;
+        interactableAI.SearchPath();
     }
 
     private IEnumerator SmoothLookAt(Transform targetTransform)

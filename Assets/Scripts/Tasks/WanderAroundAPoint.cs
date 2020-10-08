@@ -70,7 +70,9 @@ public class WanderAroundAPoint : ActionTask<RichAI>
         waitingForNextPath = true;
         if (delay)
         {
+            agent.isStopped = true;
             yield return new WaitForSeconds(Random.Range(minimumDelay, maximumDelay));
+            agent.isStopped = false;
             SetPath();
             waitingForNextPath = false;
         }

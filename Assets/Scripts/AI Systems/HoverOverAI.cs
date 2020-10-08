@@ -20,14 +20,30 @@ public class HoverOverAI : MonoBehaviour
         actionText.text = action;
     }
 
+    private void OnDisable()
+    {
+        actionText.enabled = false;
+        characterNameText.enabled = false;
+    }
+
     public void OnMouseEnter()
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         actionText.enabled = true;
         characterNameText.enabled = true;
     }
 
     public void OnMouseOver()
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         actionText.transform.rotation = Quaternion.LookRotation(actionText.transform.position - Camera.main.transform.position);
         characterNameText.transform.rotation = Quaternion.LookRotation(characterNameText.transform.position - Camera.main.transform.position);
     }

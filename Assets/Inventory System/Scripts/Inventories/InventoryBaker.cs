@@ -1,12 +1,38 @@
-﻿using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryBaker : NPCInventorySystem
 {
+#pragma warning disable 0649
+    [Header("Production Items")]
+    [SerializeField] private Food_Item[] itemsToProduce;
+#pragma warning restore 0649
 
     private void Start()
     {
         shopInventory = ShopInventoryManager.Instance;
         playerInventory = PlayerInventory.Instance;
+        gameTimeManager = GameTimeManager.Instance;
+    }
+
+    public override IEnumerator ProduceItems()
+    {
+        for (int i = 0; i < itemsToProduce.Length; i++)
+        {
+            int index = FindItemInInventory(itemsToProduce[i]);
+
+            if (index >= 0 && inventorySlots[index].amount <= 8) //Found the item and we can add to it
+            {
+                inventorySlots[index].amount += Random.Range(2, 6);
+            }
+            else if (index < 0) //The character doesn't have the items, add to a new slot
+            {
+                inventorySlots.Add(new InventorySlotItem(itemsToProduce[i], Random.Range(0, 5)));
+            }
+
+            yield return null;
+        }
     }
 
     public override void OpenShop()
