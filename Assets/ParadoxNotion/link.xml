@@ -75,11 +75,8 @@
 		<type fullname="UnityEngine.RaycastHit2D" preserve="all"/>
 		<type fullname="UnityEngine.Rigidbody2D" preserve="all"/>
 	</assembly>
-	<assembly fullname="GameTimeSystem">
-		<type fullname="GameTimeManager" preserve="all"/>
-	</assembly>
 	<assembly fullname="Assembly-CSharp">
-		<type fullname="Interactable" preserve="all"/>
+		<type fullname="GameTimeManager" preserve="all"/>
 	</assembly>
 	<assembly fullname="AstarPathfindingProject">
 		<type fullname="Pathfinding.AIBase" preserve="all"/>

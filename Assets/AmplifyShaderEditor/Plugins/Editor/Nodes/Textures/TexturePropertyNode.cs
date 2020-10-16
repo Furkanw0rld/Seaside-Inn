@@ -106,6 +106,8 @@ namespace AmplifyShaderEditor
 
 		protected bool m_isEditingPicker;
 
+		private bool m_forceSamplingMacrosGen = false;
+
 		public TexturePropertyNode() : base() { }
 		public TexturePropertyNode( int uniqueId, float x, float y, float width, float height ) : base( uniqueId, x, y, width, height ) { }
 		protected override void CommonInit( int uniqueId )
@@ -742,8 +744,15 @@ namespace AmplifyShaderEditor
 		public string BaseGenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
 			base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
+			string generatedSamplerState = string.Empty;
+
+			if( outputId > 0 || m_forceSamplingMacrosGen )
+			{
+				generatedSamplerState = GeneratorUtils.GenerateSamplerState( ref dataCollector, UniqueId, PropertyName );
+			}
+
 			if( outputId > 0 )
-				return GeneratorUtils.GenerateSamplerState( ref dataCollector, UniqueId, PropertyName );
+				return generatedSamplerState;
 			else
 				return PropertyName;
 		}
@@ -1100,5 +1109,6 @@ namespace AmplifyShaderEditor
 		{
 			get { return m_autocastMode; }
 		}
+		public bool ForceSamplingMacrosGen { set { m_forceSamplingMacrosGen = value; } }
 	}
 }

@@ -632,7 +632,10 @@ namespace AmplifyShaderEditor
 					string finalVarName = m_currentTemplateData.FragmentFunctionData.InVarName + "." + availableInterp.VarNameWithSwizzle;
 					m_availableFragData.Add( TemplateHelperFunctions.IntToUVChannelInfo[ UVChannel ], new InterpDataHelper( size, finalVarName ) );
 					if( size != originalSize )
-						finalVarName = m_currentTemplateData.FragmentFunctionData.InVarName + "." + availableInterp.VarName+ UIUtils.GetAutoSwizzle( originalSize );
+					{
+						//finalVarName = m_currentTemplateData.FragmentFunctionData.InVarName + "." + availableInterp.VarName + UIUtils.GetAutoSwizzle( originalSize );
+						finalVarName = m_availableFragData[ TemplateHelperFunctions.IntToUVChannelInfo[ UVChannel ] ].VarName  + UIUtils.GetAutoSwizzle( originalSize );
+					}
 					return finalVarName;
 				}
 			}

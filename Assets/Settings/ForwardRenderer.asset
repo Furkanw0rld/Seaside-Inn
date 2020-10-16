@@ -21,9 +21,9 @@ MonoBehaviour:
     scale: 5
     speed: 0.045
     waterLevel: -2.5
-    depth: {x: 0, y: 7.6976347}
+    depth: {x: 0, y: 7.7}
     fade: 1
-    renderPassEvent: 550
+    renderPassEvent: 500
     debug: 0
 --- !u!114 &11400000
 MonoBehaviour:
