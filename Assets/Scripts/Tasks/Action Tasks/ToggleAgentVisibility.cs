@@ -28,12 +28,15 @@ public class ToggleAgentVisibility : ActionTask<Transform>
             agent.GetComponent<RichAI>().enabled = false;
             yield return null;
 
-            agent.GetComponent<Interactable>().enabled = false;
+            if(agent.TryGetComponent(out Interactable interactable))
+            {
+                interactable.enabled = false;
+            }
             agent.GetComponent<HoverOverAI>().enabled = false;
             yield return null;
 
             agent.GetComponent<RVOController>().enabled = false;
-            agent.GetComponent<BakerAgent>().meshRenderer.enabled = false;
+            agent.GetComponent<ISkinnedMeshReference>().MeshRenderer.enabled = false;
             yield return null;
         }
         else
@@ -43,12 +46,15 @@ public class ToggleAgentVisibility : ActionTask<Transform>
             agent.GetComponent<RichAI>().enabled = true;
             yield return null;
 
-            agent.GetComponent<Interactable>().enabled = true;
+            if (agent.TryGetComponent(out Interactable interactable))
+            {
+                interactable.enabled = true;
+            }
             agent.GetComponent<HoverOverAI>().enabled = true;
             yield return null;
 
             agent.GetComponent<RVOController>().enabled = true;
-            agent.GetComponent<BakerAgent>().meshRenderer.enabled = true;
+            agent.GetComponent<ISkinnedMeshReference>().MeshRenderer.enabled = true;
             yield return null;
         }
 

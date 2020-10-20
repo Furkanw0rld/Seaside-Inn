@@ -26,7 +26,7 @@ public class MoveToObject : ActionTask<RichAI>
         {
             agent.canMove = true;
             agent.destination = target.value.position;
-            agent.SearchPath();
+            //agent.SearchPath();
         }
     }
 
