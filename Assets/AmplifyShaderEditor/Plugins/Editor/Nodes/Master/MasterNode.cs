@@ -997,7 +997,8 @@ namespace AmplifyShaderEditor
 			set
 			{
 				m_samplingMacros = value;
-				ContainerGraph.SamplingMacros = value;
+				if( IsLODMainMasterNode )
+					ContainerGraph.SamplingMacros = value;
 			}
 		}
 	}

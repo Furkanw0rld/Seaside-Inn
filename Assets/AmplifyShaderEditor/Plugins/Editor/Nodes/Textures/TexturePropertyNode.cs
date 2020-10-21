@@ -741,6 +741,19 @@ namespace AmplifyShaderEditor
 			GUI.Label( newRect, string.Empty, UIUtils.GetCustomStyle( CustomStyle.SamplerFrame ) );
 		}
 
+		public override void CheckIfAutoRegister( ref MasterNodeDataCollector dataCollector )
+		{
+			// Also testing inside shader function because node can be used indirectly over a custom expression and directly over a Function Output node 
+			// That isn't being used externaly making it to not be registered ( since m_connStatus it set to Connected by being connected to an output node
+			if( CurrentParameterType != PropertyType.Constant && m_autoRegister && ( m_connStatus != NodeConnectionStatus.Connected || InsideShaderFunction ) )
+			{
+				RegisterProperty( ref dataCollector );
+				if( m_autoRegister && m_containerGraph.ParentWindow.OutsideGraph.SamplingMacros )
+				{
+					GeneratorUtils.GenerateSamplerState( ref dataCollector, UniqueId, PropertyName );
+				}
+			}
+		}
 		public string BaseGenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
 			base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
