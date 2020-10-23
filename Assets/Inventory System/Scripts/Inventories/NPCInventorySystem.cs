@@ -4,8 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public abstract class NPCInventorySystem : MonoBehaviour
 {
-
+    [Header("Active Inventory")]
     public List<InventorySlotItem> inventorySlots = new List<InventorySlotItem>();
+
+#pragma warning disable 0649
+    [Header("Production Items")]
+    [SerializeField] protected Item[] itemsToProduce;
+#pragma warning restore 0649
+
     protected ShopInventoryManager shopInventory;
     protected PlayerInventory playerInventory;
     protected GameTimeManager gameTimeManager;
@@ -19,7 +25,7 @@ public abstract class NPCInventorySystem : MonoBehaviour
         yield return null;
     }
 
-    protected int FindItemInInventory(Food_Item item)
+    protected int FindItemInInventory(Item item)
     {
         if(inventorySlots.Count < 1)
         {

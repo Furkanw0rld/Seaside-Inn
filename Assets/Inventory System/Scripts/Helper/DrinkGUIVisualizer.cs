@@ -76,14 +76,6 @@ public class DrinkGUIVisualizer : MonoBehaviour
     {
         informationWindow.SetActive(false);
     }
-
-    private enum DrinkName //These IDs Follow the Drink's Position in the Inn Inventory. 
-    {
-        Ale = 0,
-        Cider = 1,
-        Mead = 2,
-        Wine = 3
-    }
 }
 
 

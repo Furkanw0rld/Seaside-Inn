@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ConversationControllerBaker : ConversationController
 {
     private readonly string bakerGreetingsLocation = "Characters/Baker/Dialogues/Greetings_";
-    private readonly int amountOfGreetings = 4; //Starts at 0
+    private readonly int amountOfGreetings = 4; //Starts at 0, explicit
     private InventoryBaker bakerInventory;
     private InteractableBaker interactableBaker;
 

@@ -6,13 +6,6 @@ using UnityEngine.UI;
 
 public class InventoryButcher : NPCInventorySystem
 {
-
-#pragma warning disable 0649
-    [Header("Production Items")]
-    [SerializeField] private Food_Item[] itemsToProduce;
-#pragma warning restore 0649
-
-    // Start is called before the first frame update
     void Start()
     {
         shopInventory = ShopInventoryManager.Instance;

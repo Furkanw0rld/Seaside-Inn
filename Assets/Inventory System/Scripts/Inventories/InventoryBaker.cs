@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class InventoryBaker : NPCInventorySystem
 {
-#pragma warning disable 0649
-    [Header("Production Items")]
-    [SerializeField] private Food_Item[] itemsToProduce;
-#pragma warning restore 0649
 
     private void Start()
     {

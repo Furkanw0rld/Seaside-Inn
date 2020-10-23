@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
 
 	[Header("Inn Inventory Starting Items")]
 	public Item ale;
-	public Item cider;
+	public Item rum;
 	public Item mead;
 	public Item wine;
 
@@ -88,30 +88,34 @@ public class PlayerInventory : MonoBehaviour
 				}
 				switch (drinkItem.name) // Drink items are known as these, anything not matching these names, are not drink items.
 				{
-					case "Ale":
+					case nameof(DrinkName.Ale):
 						if(innInventory[0].InventorySpaceRemaining() > 0)
 						{
 							return 0;
 						}
 						break;
-					case "Cider":
+
+					case nameof(DrinkName.Rum):
 						if(innInventory[1].InventorySpaceRemaining() > 0)
 						{
 							return 1;
 						}
 						break;
-					case "Mead":
+
+					case nameof(DrinkName.Mead):
 						if(innInventory[2].InventorySpaceRemaining() > 0)
 						{
 							return 2;
 						}
 						break;
-					case "Wine":
+
+					case nameof(DrinkName.Wine):
 						if(innInventory[3].InventorySpaceRemaining() > 0)
 						{
 							return 3;
 						}
 						break;
+
 					default:
 						return -1;
 				}
@@ -1370,10 +1374,10 @@ public class PlayerInventory : MonoBehaviour
 		}
 
 		// Add the starting items to inventory.
-		innInventory.Add(new InventorySlotItem(Instantiate(ale), 7));
-		innInventory.Add(new InventorySlotItem(Instantiate(cider), 12));
-		innInventory.Add(new InventorySlotItem(Instantiate(mead), 23));
-		innInventory.Add(new InventorySlotItem(Instantiate(wine), 38));
+		innInventory.Add(new InventorySlotItem(Instantiate(ale), 5));
+		innInventory.Add(new InventorySlotItem(Instantiate(rum), 5));
+		innInventory.Add(new InventorySlotItem(Instantiate(mead), 5));
+		innInventory.Add(new InventorySlotItem(Instantiate(wine), 5));
 	}
 
 	private void Start()

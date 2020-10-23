@@ -32,7 +32,7 @@ public class MoveToObject : ActionTask<RichAI>
 
     protected override void OnUpdate()
     {
-        if (!agent.pathPending && (agent.reachedEndOfPath || !agent.hasPath))
+        if (!agent.pathPending && (agent.reachedEndOfPath || !agent.hasPath) && Vector3.Distance(agent.position, agent.destination) < 1f)
         {
             EndAction(true);
         }

@@ -216,13 +216,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySlots:
-  - item: {fileID: 11400000, guid: 3ef5b03c08aaa3d48a7b6281e0613f56, type: 2}
+  - item: {fileID: 11400000, guid: af36efa3e47cde14897f01a229c9dc7b, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: 234d97194e8ca0e49a271d4e97cad1fe, type: 2}
+  - item: {fileID: 11400000, guid: 186d1cf3c9c73544bba5f06404d2f364, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: dad5a1fc273053f45af9ed57096bb8b5, type: 2}
+  - item: {fileID: 11400000, guid: c23ad16f7859463468682aaf3abdd656, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: 6ffbc964bff16b24b999754d08449bbe, type: 2}
+  - item: {fileID: 11400000, guid: 627abc088bf21e44588d11528afc50ac, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: f43e14e109a59c14eb59431fecb2b6f9, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: e04e75da13ec2314cbc00fd5c748c808, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 94f95e714ac718443ab3d479430b0f96, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: b4d8a4e63421692419fe2d992bbe1ae0, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 98e62d80e70791545b4e120568465af9, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 8d044b118dfb4284ea77cdf65ceb840d, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 259d5df2585fb7848b18686f636f12ce, type: 2}
     amount: 100
   - item: {fileID: 11400000, guid: da992c168136dfe438842bae7cb6e2b5, type: 2}
     amount: 100
@@ -257,6 +271,14 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 627abc088bf21e44588d11528afc50ac, type: 2}
     amount: 100
   - item: {fileID: 11400000, guid: c23ad16f7859463468682aaf3abdd656, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 3ef5b03c08aaa3d48a7b6281e0613f56, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 234d97194e8ca0e49a271d4e97cad1fe, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: dad5a1fc273053f45af9ed57096bb8b5, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 6ffbc964bff16b24b999754d08449bbe, type: 2}
     amount: 100
 --- !u!136 &6896285856407630701
 CapsuleCollider:

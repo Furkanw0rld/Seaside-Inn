@@ -6,6 +6,7 @@ public class InteractableDrinks : Interactable
 
     private InventorySlotItem drinkSlot;
     private PlayerInventory playerInventory;
+    private DisplayMessageUI displayMessageUI;
 
     private new void Start()
     {
@@ -14,12 +15,12 @@ public class InteractableDrinks : Interactable
             playerInventory = PlayerInventory.Instance;
             drinkSlot = playerInventory.innInventory[(int)drinkName];
         }
+
+        displayMessageUI = DisplayMessageUI.Instance;
     }
 
     public override void Interact()
     {
-        base.Interact();
-
         if(drinkSlot.amount > 0)
         {
             drinkSlot.RemoveAmount(1);
@@ -27,15 +28,15 @@ public class InteractableDrinks : Interactable
         }
         else
         {
-            Debug.Log(drinkName.ToString() + " is empty!");
+            displayMessageUI.DisplayMessage("<color=#ffde00>" + drinkName.ToString() + "</color> is empty!");
         }
     }
+}
 
-    private enum DrinkName //These IDs Follow the Drink's Position in the Inn Inventory. 
-    {
-        Ale = 0,
-        Cider = 1,
-        Mead = 2,
-        Wine = 3
-    }
+public enum DrinkName //These IDs Follow the Drink's Position in the Inn Inventory. 
+{
+    Ale = 0,
+    Rum = 1,
+    Mead = 2,
+    Wine = 3
 }

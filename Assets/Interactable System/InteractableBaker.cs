@@ -2,11 +2,10 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(RichAI), typeof(HoverOverAI), typeof(ConversationControllerBaker))]
+[RequireComponent(typeof(RichAI), typeof(ConversationControllerBaker))]
 public class InteractableBaker : Interactable
 {
     private RichAI interactableAI; //Cached AI Component
-    private HoverOverAI hoverOverAI; //Cached Information
     private PlayerManager playerManager;
     private ConversationController conversationController;
 
@@ -16,9 +15,8 @@ public class InteractableBaker : Interactable
     {
         base.Start();
         interactableAI = GetComponent<RichAI>();
-        hoverOverAI = GetComponent<HoverOverAI>();
         playerManager = PlayerManager.Instance;
-        conversationController = GetComponent<ConversationControllerBaker>();
+        conversationController = GetComponent<ConversationController>();
     }
 
 

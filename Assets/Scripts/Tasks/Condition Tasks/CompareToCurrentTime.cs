@@ -18,7 +18,7 @@ public class CompareToCurrentTime : ConditionTask
 
     protected override string OnInit()
     {
-        gameTime = blackboard.GetVariable<GameTimeManager>("gameTimeManager").value;
+        gameTime = GameTimeManager.Instance;
         return null;
     }
 
